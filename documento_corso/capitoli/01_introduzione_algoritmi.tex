@@ -17,10 +17,11 @@
 \section{Che cos'è un Algoritmo?}
 % ------------------------------------------------------------------------------
 
-Nel linguaggio comune siamo abituati a risolvere problemi ogni giorno senza pensare in modo analitico alle singole azioni che compiamo. Tuttavia, quando vogliamo delegare la risoluzione di un problema a un calcolatore (o spiegare a un'altra persona come agire senza margini d'errore), abbiamo bisogno di un metodo rigoroso.
+Nel linguaggio comune siamo abituati a risolvere problemi ogni giorno senza pensare alle singole azioni che compiamo. 
+Quando però vogliamo affidare la risoluzione di un problema a un computer (o spiegare a un'altra persona come agire senza margini d'errore), abbiamo bisogno di un metodo rigoroso.
 
 \begin{concetto}[Definizione di Algoritmo]
-Un \textbf{algoritmo} è una sequenza finita e ordinata di istruzioni elementari, chiare e non ambigue, la cui esecuzione porta alla risoluzione di un determinato problema in un tempo finito.
+Un \textbf{algoritmo} è una sequenza finita e ordinata di istruzioni elementari, chiare e non ambigue, la cui esecuzione porta alla risoluzione di un determinato problema in un tempo finito (altrimenti parleremo di loop, argomento di cui ci occuperemo più avanti).
 \end{concetto}
 
 In informatica ogni problema viene formalizzato attraverso il modello fondamentale di elaborazione:
@@ -61,11 +62,11 @@ Non ogni elenco di frasi o istruzioni può essere definito un algoritmo valido. 
 \begin{enumerate}
   \item \textbf{Finitezza:} L'algoritmo deve necessariamente terminare dopo aver eseguito un numero finito di istruzioni. Un procedimento che gira all'infinito senza mai giungere a una conclusione non è un algoritmo.
   
-  \item \textbf{Definitezza (Non ambiguità):} Ogni istruzione deve essere univoca e comprensibile senza alcuna interpretazione soggettiva. Frasi come ``mescola un po'\,'' o ``aspetta qualche secondo'' sono inaccettabili in un algoritmo informatico: bisogna specificare ``mescola per 3 minuti a velocità 2'' oppure ``attendi 5 secondi''.
+  \item \textbf{Definitezza (Non ambiguità):} Ogni istruzione deve essere univoca e comprensibile senza alcuna interpretazione soggettiva. Frasi come ``mescola un po'\,'' o ``aspetta qualche secondo'' non sono adatte a un algoritmo informatico: bisogna specificare ``mescola per 3 minuti a velocità 2'' o ``attendi 5 secondi''.
   
-  \item \textbf{Efficienza:} L'algoritmo deve risolvere il compito impiegando una quantità ragionevole di tempo e di memoria. 
-  \begin{consiglio}[Nota Didattica per la Prima Annualità]
-  Nel corso di quest'anno la priorità assoluta sarà comprendere la \textbf{logica} e raggiungere la \textbf{correttezza}; la misurazione scientifica dell'efficienza (complessità computazionale) sarà affrontata negli anni successivi.
+  \item \textbf{Efficienza:} L'algoritmo deve risolvere il compito impiegando una quantità *ragionevole* di tempo e di memoria. 
+  \begin{consiglio}[Nota]
+  Nel corso di quest'anno la priorità assoluta sarà comprendere la \textbf{logica} e raggiungere il \textbf{corretto funzionamento}; la misurazione scientifica dell'efficienza (complessità computazionale) sarà affrontata negli anni successivi.
   \end{consiglio}
 
   \item \textbf{Generalità:} L'algoritmo non deve risolvere un singolo caso specifico e isolato, ma deve essere in grado di risolvere \textbf{qualsiasi problema appartenente a quella specifica classe}.
@@ -82,9 +83,9 @@ Non ogni elenco di frasi o istruzioni può essere definito un algoritmo valido. 
 \section{Esercizio Guidato: Attraversamento Pedonale}
 % ------------------------------------------------------------------------------
 
-Mettiamoci alla prova formulando un algoritmo esatto per un problema che affrontiamo ogni giorno.
+Proviamo a scrivere un algoritmo esatto per un problema che affrontiamo ogni giorno.
 
-\begin{esercizio}[Attraversare la strada in presenza di un semaforo]
+\begin{esercizio}[Attraversare una strada con un semaforo]
 Scrivere l'algoritmo passo-passo, il più rigoroso e aderente possibile alle quattro proprietà esaminate, per risolvere il seguente problema:\\
 \textbf{Problema:} Mi trovo sul marciapiede davanti alle strisce pedonali e devo attraversare la strada in presenza di un semaforo pedonale. Cosa faccio?
 \end{esercizio}
@@ -116,15 +117,8 @@ Ecco la formalizzazione dell'algoritmo divisa in istruzioni elementari:
 \begin{itemize}
   \item Se dimentichiamo la condizione ``\textbf{FINCHÉ} non arrivo dall'altra parte'', una persona programmata come un computer continuerebbe a camminare dritto all'infinito anche dopo aver superato la strada!
   \item Se omettiamo di dire cosa fare nel caso il semaforo sia rosso, il calcolatore si bloccherebbe per mancanza di istruzioni.
+  \item Notiamo come questo algoritmo funzioni con qualsiasi strada che abbia un semaforo in cui c'è almeno il verde.
 \end{itemize}
 \end{attenzione}
 
-% ------------------------------------------------------------------------------
-\section{Verso le Prossime Lezioni}
-% ------------------------------------------------------------------------------
 
-Nelle prossime lezioni trasformeremo questo modo di pensare in due linguaggi formali utilizzati universalmente dai programmatori di tutto il mondo:
-\begin{itemize}
-  \item I \textbf{Diagrammi di Flusso (Flowchart):} La rappresentazione grafica degli algoritmi tramite blocchi geometrici (rettangoli per le azioni, rombi per le condizioni, frecce per la direzione).
-  \item Lo \textbf{Pseudocodice:} Un linguaggio a metà strada tra la lingua naturale e i linguaggi di programmazione reali (come Python e C), che ci permetterà di scrivere logiche complesse prima di passare alla tastiera del computer.
-\end{itemize}
