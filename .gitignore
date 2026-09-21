@@ -1,0 +1,16 @@
+# Documentazione ufficiale e interna
+docs/
+
+# Assicura il tracciamento della presentazione
+!presentazione/
+
+# File di sistema e cache
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Python cache ed ambienti
+__pycache__/
+*.py[cod]
+.venv/
+venv/
