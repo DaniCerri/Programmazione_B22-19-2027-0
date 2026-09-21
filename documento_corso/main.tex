@@ -1,0 +1,130 @@
+\documentclass[11pt,a4paper,openany]{book}
+
+% Stile personalizzato Piazza dei Mestieri
+\usepackage{stile}
+
+\begin{document}
+
+% ==============================================================================
+% COPERTINA MODERNA ED ELEGANTE
+% ==============================================================================
+\begin{titlepage}
+  \newgeometry{top=3cm,bottom=3cm,left=3cm,right=3cm}
+  \pagecolor{PiazzaPaper}
+
+  \begin{flushleft}
+    {\fontsize{13}{16}\selectfont\bfseries\color{PiazzaPrimary}PIAZZA DEI MESTIERI -- TORINO}\\[0.25em]
+    {\fontsize{10}{13}\selectfont\color{PiazzaGray}IeFP -- Operatore Informatico | Prima Annualità (Classe B22-19-20270)}
+  \end{flushleft}
+
+  \vspace{3.5cm}
+
+  \noindent{\color{PiazzaPrimary}\rule{\textwidth}{3pt}}
+  \vspace{1.5cm}
+
+  \begin{flushleft}
+    {\fontsize{34}{40}\selectfont\bfseries\color{PiazzaDark}PROGRAMMAZIONE 1}\\[0.5em]
+    {\fontsize{18}{22}\selectfont\color{PiazzaGray}Fondamenti di Logica, Algoritmi e Sviluppo Software}\\[1.5em]
+    {\fontsize{11}{14}\selectfont\color{PiazzaPrimary}\bfseries Manuale Didattico Ufficiale del Corso di Laboratorio (80 ore)}
+  \end{flushleft}
+
+  \vspace{1.5cm}
+  \noindent{\color{PiazzaPrimary!40}\rule{\textwidth}{1pt}}
+
+  \vfill
+
+  \begin{flushleft}
+    \textbf{\color{PiazzaDark}Docente:}\hspace{1.5em}{\color{PiazzaDark}Daniele Cerrina}\\
+    \textbf{\color{PiazzaDark}Email:}\hspace{2.4em}{\small\texttt{daniele.cerrina@immaginazioneelavoro.it}}\\
+    \textbf{\color{PiazzaDark}Anno Formativo:}\hspace{0.5em}2026 / 2027
+  \end{flushleft}
+
+  \restoregeometry
+\end{titlepage}
+\pagecolor{white}
+
+% ==============================================================================
+% PARTE INTRODUTTIVA (FRONTMATTER)
+% ==============================================================================
+\frontmatter
+
+% Pagina del Colophon / Info sul corso
+\thispagestyle{empty}
+\vspace*{12cm}
+\begin{flushleft}
+  \small\color{PiazzaGray}
+  \textbf{Programmazione 1 -- Fondamenti e Laboratorio}\\
+  Percorso triennale IeFP per la Qualifica di Operatore Informatico.\\
+  \textcopyright~2026--2027 Piazza dei Mestieri / Immaginazione e Lavoro.\\
+  Docente: Daniele Cerrina.\\
+  \vspace{0.8em}
+  Documento didattico in continuo aggiornamento durante l'anno formativo.\\
+  Compilato con \LaTeX\ e \textsf{pdflatex}.
+\end{flushleft}
+
+\clearpage
+
+% Introduzione e Presentazione del Corso
+\chapter*{Presentazione del Libro}
+\addcontentsline{toc}{chapter}{Presentazione del Libro}
+
+Questo volume rappresenta il punto di riferimento e il libro di testo per il corso di \textbf{Programmazione 1} (80 ore di laboratorio) presso la Piazza dei Mestieri di Torino.
+
+L'approccio adottato è fortemente pratico e incrementale: ogni lezione svolta in aula e in laboratorio viene consolidata e integrata all'interno di questo testo, fornendo agli allievi:
+\begin{itemize}
+  \item Le spiegazioni teoriche chiare dei concetti chiave.
+  \item Gli esempi concreti e analogie vicine all'esperienza quotidiana e videoludica.
+  \item Gli schemi logici ed esercizi svolti e da svolgere.
+  \item Il percorso di sviluppo del \textbf{gioco guida annuale} votato dalla classe.
+\end{itemize}
+
+\vspace{1em}
+\noindent\textbf{Come consultare questo documento:}
+Il documento è provvisto di un \textbf{indice ipertestuale e cliccabile}. Cliccando su qualsiasi capitolo o sezione nell'Indice Generale o nei segnalibri del lettore PDF, verrai indirizzato direttamente alla pagina corrispondente.
+
+\clearpage
+
+% INDICE GENERALE CLICCABILE
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents
+\clearpage
+
+% ==============================================================================
+% PARTE PRINCIPALE (MAINMATTER)
+% ==============================================================================
+\mainmatter
+
+% ------------------------------------------------------------------------------
+% MODULO 1: IL PENSIERO COMPUTAZIONALE E GLI ALGORITMI
+% ------------------------------------------------------------------------------
+\part{Pensiero Computazionale e Algoritmi}
+
+% Capitolo 1: Prima lezione del 21 Settembre 2026
+\input{capitoli/01_introduzione_algoritmi}
+
+% ------------------------------------------------------------------------------
+% SEZIONI FUTURE (Man mano che il corso prosegue, scommenta o aggiungi qui i file)
+% ------------------------------------------------------------------------------
+% \input{capitoli/02_diagrammi_di_flusso}
+% \input{capitoli/03_variabili_e_tipi}
+
+% \part{Costrutti di Controllo e Flusso di Esecuzione}
+% \input{capitoli/04_strutture_condizionali}
+% \input{capitoli/05_cicli_e_iterazioni}
+
+% \part{Modularità e Strutture Dati}
+% \input{capitoli/06_funzioni_e_procedure}
+% \input{capitoli/07_vettori_e_collezioni}
+
+% \part{Il Gioco Guida Annuale}
+% \input{capitoli/08_progetto_videogioco}
+
+% ==============================================================================
+% PARTE CONCLUSIVA (BACKMATTER)
+% ==============================================================================
+\backmatter
+
+\chapter{Guida Rapida alla Sintassi}
+\noindent In questa appendice finale verranno raccolti durante l'anno i promemoria di sintassi, le parole chiave e i comandi più utilizzati in laboratorio.
+
+\end{document}

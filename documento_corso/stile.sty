@@ -1,0 +1,271 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{stile}[2026/09/21 Stile Libro Didattico di Programmazione - Piazza dei Mestieri]
+
+% ==============================================================================
+% PACCHETTI FONDAMENTALI E GEOMETRIA
+% ==============================================================================
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{microtype}
+
+\RequirePackage{geometry}
+\geometry{
+  a4paper,
+  top=2.5cm,
+  bottom=2.5cm,
+  left=2.8cm,
+  right=2.5cm,
+  headheight=15pt,
+  footskip=1.2cm
+}
+
+% ==============================================================================
+% COLORI ISTITUZIONALI E TAVOLOZZA DIDATTICA
+% ==============================================================================
+\RequirePackage{xcolor}
+
+% Palette Piazza dei Mestieri
+\definecolor{PiazzaPrimary}{HTML}{BE123C}   % Rosso ciliegia istituzionale
+\definecolor{PiazzaDark}{HTML}{0F172A}      % Slate 900 (testo principale e titoli)
+\definecolor{PiazzaGray}{HTML}{475569}      % Slate 600 (sottotitoli e intestazioni)
+\definecolor{PiazzaLightGray}{HTML}{94A3B8} % Slate 400
+\definecolor{PiazzaCardBg}{HTML}{F8FAFC}    % Sfondo card (Slate 50)
+\definecolor{PiazzaPaper}{HTML}{FBF9F5}     % Tonalità carta calda
+\definecolor{PiazzaBorder}{HTML}{E2E8F0}    % Bordi delicati
+
+% Colori tematici per i box
+\definecolor{BoxBlue}{HTML}{1D4ED8}         % Esempi pratici
+\definecolor{BoxAmber}{HTML}{B45309}        % Esercizi e sfide
+\definecolor{BoxGreen}{HTML}{15803D}        % Soluzioni e buone pratiche
+\definecolor{BoxRed}{HTML}{B91C1C}          % Errori comuni e attenzioni
+\definecolor{BoxPurple}{HTML}{7E22CE}       % Curiosità e approfondimenti
+\definecolor{CodeBg}{HTML}{F1F5F9}          % Sfondo blocchi di codice
+
+% ==============================================================================
+% LOCALIZZAZIONE ITALIANA (compatibile senza dipendenze esterne di lingua)
+% ==============================================================================
+\renewcommand{\contentsname}{Indice Generale}
+\renewcommand{\chaptername}{Capitolo}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabella}
+\renewcommand{\appendixname}{Appendice}
+
+% ==============================================================================
+% TITOLI E STRUTTURA DEL DOCUMENTO
+% ==============================================================================
+\RequirePackage{titlesec}
+
+% Formattazione capitolo elegante
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}
+  {\filleft\fontsize{52}{56}\selectfont\color{PiazzaPrimary!30}\thechapter}
+  {0ex}
+  {{\color{PiazzaPrimary}\titlerule[2pt]}\vspace{1.5ex}\huge\color{PiazzaDark}}
+  [\vspace{1ex}{\color{PiazzaBorder}\titlerule[1pt]}]
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{PiazzaPrimary}}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{PiazzaDark}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{PiazzaGray}}
+  {\thesubsubsection}{1em}{}
+
+% ==============================================================================
+% INTESTAZIONI E PIÈ DI PAGINA (FANCYHDR)
+% ==============================================================================
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\footnotesize\bfseries\color{PiazzaDark}\thepage}
+\fancyhead[RE]{\footnotesize\color{PiazzaGray}\nouppercase{\leftmark}}
+\fancyhead[LO]{\footnotesize\color{PiazzaGray}\nouppercase{\rightmark}}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{PiazzaPrimary}\leaders\hrule height \headrulewidth\hfill}}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\footnotesize\bfseries\color{PiazzaDark}\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% ==============================================================================
+% BOX E CARTELLI DIDATTICI (TCOLORBOX)
+% ==============================================================================
+\RequirePackage[most]{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Box Concetto Chiave / Definizione
+\newtcolorbox{concetto}[1][Definizione Fondamentale]{
+  enhanced,
+  breakable,
+  colback=PiazzaCardBg,
+  colframe=PiazzaPrimary,
+  arc=2.5mm,
+  boxrule=1.2pt,
+  fonttitle=\bfseries\color{white},
+  colbacktitle=PiazzaPrimary,
+  title={#1},
+  attach boxed title to top left={yshift=-2.5mm, xshift=4mm},
+  boxed title style={arc=1.5mm},
+  top=4.5mm,
+  bottom=3.5mm,
+  left=4mm,
+  right=4mm,
+  shadow={1mm}{-1mm}{0mm}{black!8}
+}
+
+% Box Esempio Pratico
+\newtcolorbox{esempio}[1][Esempio Pratico]{
+  enhanced,
+  breakable,
+  colback=PiazzaCardBg,
+  colframe=BoxBlue,
+  arc=2.5mm,
+  boxrule=1.2pt,
+  fonttitle=\bfseries\color{white},
+  colbacktitle=BoxBlue,
+  title={#1},
+  attach boxed title to top left={yshift=-2.5mm, xshift=4mm},
+  boxed title style={arc=1.5mm},
+  top=4.5mm,
+  bottom=3.5mm,
+  left=4mm,
+  right=4mm,
+  shadow={1mm}{-1mm}{0mm}{black!8}
+}
+
+% Box Esercizio per gli Studenti
+\newtcolorbox{esercizio}[1][Esercizio in Aula]{
+  enhanced,
+  breakable,
+  colback=PiazzaCardBg,
+  colframe=BoxAmber,
+  arc=2.5mm,
+  boxrule=1.2pt,
+  fonttitle=\bfseries\color{white},
+  colbacktitle=BoxAmber,
+  title={#1},
+  attach boxed title to top left={yshift=-2.5mm, xshift=4mm},
+  boxed title style={arc=1.5mm},
+  top=4.5mm,
+  bottom=3.5mm,
+  left=4mm,
+  right=4mm,
+  shadow={1mm}{-1mm}{0mm}{black!8}
+}
+
+% Box Soluzione Guidata
+\newtcolorbox{soluzione}[1][Soluzione Guidata]{
+  enhanced,
+  breakable,
+  colback=PiazzaCardBg,
+  colframe=BoxGreen,
+  arc=2.5mm,
+  boxrule=1.2pt,
+  fonttitle=\bfseries\color{white},
+  colbacktitle=BoxGreen,
+  title={#1},
+  attach boxed title to top left={yshift=-2.5mm, xshift=4mm},
+  boxed title style={arc=1.5mm},
+  top=4.5mm,
+  bottom=3.5mm,
+  left=4mm,
+  right=4mm,
+  shadow={1mm}{-1mm}{0mm}{black!8}
+}
+
+% Box Attenzione ed Errori Comuni
+\newtcolorbox{attenzione}[1][Attenzione! Errore Comune]{
+  enhanced,
+  breakable,
+  colback=red!4!white,
+  colframe=BoxRed,
+  arc=2.5mm,
+  boxrule=1.2pt,
+  fonttitle=\bfseries\color{white},
+  colbacktitle=BoxRed,
+  title={#1},
+  attach boxed title to top left={yshift=-2.5mm, xshift=4mm},
+  boxed title style={arc=1.5mm},
+  top=4.5mm,
+  bottom=3.5mm,
+  left=4mm,
+  right=4mm,
+  shadow={1mm}{-1mm}{0mm}{black!8}
+}
+
+% Box Suggerimento del Docente
+\newtcolorbox{consiglio}[1][Nota Didattica]{
+  enhanced,
+  breakable,
+  colback=purple!4!white,
+  colframe=BoxPurple,
+  arc=2.5mm,
+  boxrule=1.2pt,
+  fonttitle=\bfseries\color{white},
+  colbacktitle=BoxPurple,
+  title={#1},
+  attach boxed title to top left={yshift=-2.5mm, xshift=4mm},
+  boxed title style={arc=1.5mm},
+  top=4.5mm,
+  bottom=3.5mm,
+  left=4mm,
+  right=4mm,
+  shadow={1mm}{-1mm}{0mm}{black!8}
+}
+
+% ==============================================================================
+% LISTATI DI CODICE (LISTINGS)
+% ==============================================================================
+\RequirePackage{listings}
+\lstset{
+  backgroundcolor=\color{CodeBg},
+  basicstyle=\ttfamily\small\color{PiazzaDark},
+  keywordstyle=\bfseries\color{PiazzaPrimary},
+  commentstyle=\itshape\color{PiazzaGray},
+  stringstyle=\color{BoxGreen},
+  identifierstyle=\color{PiazzaDark},
+  numbers=left,
+  numberstyle=\tiny\color{PiazzaLightGray},
+  numbersep=9pt,
+  frame=single,
+  rulecolor=\color{PiazzaBorder},
+  frameround=tttt,
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b,
+  xleftmargin=12pt,
+  framexleftmargin=8pt
+}
+
+% ==============================================================================
+% INDICE CLICCABILE E COLLEGAMENTI IPERTESTUALI (HYPERREF)
+% ==============================================================================
+\RequirePackage{bookmark}
+\RequirePackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=PiazzaPrimary,       % Cliccando sull'indice si naviga al capitolo col colore primario
+  anchorcolor=PiazzaDark,
+  citecolor=BoxGreen,
+  filecolor=BoxBlue,
+  menucolor=PiazzaPrimary,
+  runcolor=PiazzaPrimary,
+  urlcolor=BoxBlue,
+  linktoc=all,                   % Sia il titolo che il numero di pagina sono cliccabili!
+  pdfstartview={FitH},
+  pdfpagelayout={SinglePage},
+  pdfborder={0 0 0},
+  bookmarksnumbered=true,
+  bookmarksopen=true
+}
+
+\endinput

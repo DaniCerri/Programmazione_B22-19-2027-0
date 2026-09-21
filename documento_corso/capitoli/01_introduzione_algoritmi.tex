@@ -1,0 +1,130 @@
+\chapter{Introduzione agli Algoritmi e Pensiero Computazionale}
+\label{chap:intro-algoritmi}
+
+\begin{quote}
+\itshape
+\small
+``Un algoritmo deve essere visto per essere creduto, ma soprattutto per essere compreso: è il ponte invisibile che trasforma un problema disordinato in una soluzione esatta.''
+\end{quote}
+\vspace{1em}
+
+\noindent\textbf{Riferimento Lezione:} 21 Settembre 2026 -- Prima Lezione di Laboratorio\\
+\textbf{Competenze chiave:} Comprensione del modello Input/Output, identificazione delle proprietà di un algoritmo, formulazione di istruzioni non ambigue.
+
+\vspace{1.5em}
+
+% ------------------------------------------------------------------------------
+\section{Che cos'è un Algoritmo?}
+% ------------------------------------------------------------------------------
+
+Nel linguaggio comune siamo abituati a risolvere problemi ogni giorno senza pensare in modo analitico alle singole azioni che compiamo. Tuttavia, quando vogliamo delegare la risoluzione di un problema a un calcolatore (o spiegare a un'altra persona come agire senza margini d'errore), abbiamo bisogno di un metodo rigoroso.
+
+\begin{concetto}[Definizione di Algoritmo]
+Un \textbf{algoritmo} è una sequenza finita e ordinata di istruzioni elementari, chiare e non ambigue, la cui esecuzione porta alla risoluzione di un determinato problema in un tempo finito.
+\end{concetto}
+
+In informatica ogni problema viene formalizzato attraverso il modello fondamentale di elaborazione:
+
+\begin{itemize}
+  \item \textbf{Input (Dati di ingresso):} Rappresenta l'informazione o la condizione iniziale fornita all'algoritmo. È ciò che ``entra'' nel processo.
+  \item \textbf{Elaborazione:} L'insieme ordinato di istruzioni elementari applicate ai dati di ingresso.
+  \item \textbf{Output (Risultato):} Il dato finale o l'azione risultante al termine dell'elaborazione. È ciò che ``esce'' dal processo.
+\end{itemize}
+
+\vspace{1em}
+\begin{center}
+\begin{tcolorbox}[colback=white,colframe=PiazzaGray!40,width=0.88\textwidth,arc=2mm,halign=center]
+\textbf{INPUT} (Dati / Problema) $\longrightarrow$ \colorbox{PiazzaPrimary!10}{\textbf{~[ ALGORITMO ]~}} $\longrightarrow$ \textbf{OUTPUT} (Risultato / Soluzione)
+\end{tcolorbox}
+\end{center}
+
+% ------------------------------------------------------------------------------
+\subsection{Esempi dal Quotidiano e dal Mondo Digitale}
+% ------------------------------------------------------------------------------
+
+Gli algoritmi non appartengono solo al codice sorgente: li sperimentiamo quotidianamente in molteplici contesti:
+
+\begin{esempio}[Algoritmi nella vita reale]
+\begin{enumerate}
+  \item \textbf{Tutorial per costruire una casa in Minecraft:} Un elenco ordinato di azioni (1. Raccogli 64 blocchi di legno, 2. Costruisci una base $6 \times 6$, 3. Innalza i muri per 4 blocchi, 4. Posiziona la porta e le torce). Se inverti i passaggi (ad esempio posizionare il tetto prima dei muri), l'obiettivo fallisce.
+  \item \textbf{Ricetta di cucina (es. Torta al cioccolato):} L'elenco degli ingredienti rappresenta l'\textbf{Input}; la sequenza dei passaggi (pesare, mescolare, infornare a 180 gradi per 35 minuti) costituisce l'\textbf{Algoritmo}; il dolce pronto è l'\textbf{Output}.
+  \item \textbf{Istruzioni di montaggio (LEGO o mobili IKEA):} Diagrammi e numeri sequenziali guidano la costruzione partendo dai singoli pezzi fino all'oggetto completo.
+\end{enumerate}
+\end{esempio}
+
+% ------------------------------------------------------------------------------
+\section{Le Quattro Proprietà Fondamentali}
+% ------------------------------------------------------------------------------
+
+Non ogni elenco di frasi o istruzioni può essere definito un algoritmo valido. Per essere considerato formalmente \textbf{corretto}, un algoritmo deve soddisfare quattro caratteristiche essenziali:
+
+\begin{enumerate}
+  \item \textbf{Finitezza:} L'algoritmo deve necessariamente terminare dopo aver eseguito un numero finito di istruzioni. Un procedimento che gira all'infinito senza mai giungere a una conclusione non è un algoritmo.
+  
+  \item \textbf{Definitezza (Non ambiguità):} Ogni istruzione deve essere univoca e comprensibile senza alcuna interpretazione soggettiva. Frasi come ``mescola un po'\,'' o ``aspetta qualche secondo'' sono inaccettabili in un algoritmo informatico: bisogna specificare ``mescola per 3 minuti a velocità 2'' oppure ``attendi 5 secondi''.
+  
+  \item \textbf{Efficienza:} L'algoritmo deve risolvere il compito impiegando una quantità ragionevole di tempo e di memoria. 
+  \begin{consiglio}[Nota Didattica per la Prima Annualità]
+  Nel corso di quest'anno la priorità assoluta sarà comprendere la \textbf{logica} e raggiungere la \textbf{correttezza}; la misurazione scientifica dell'efficienza (complessità computazionale) sarà affrontata negli anni successivi.
+  \end{consiglio}
+
+  \item \textbf{Generalità:} L'algoritmo non deve risolvere un singolo caso specifico e isolato, ma deve essere in grado di risolvere \textbf{qualsiasi problema appartenente a quella specifica classe}.
+\end{enumerate}
+
+\begin{concetto}[Il Principio della Generalità]
+\textbf{Il nostro obiettivo annuale è imparare a risolvere qualsiasi problema della categoria che stiamo affrontando.}
+
+\vspace{0.5em}
+\textbf{Esempio pratico:} Se progettiamo un algoritmo per calcolare la media aritmetica di 7 numeri, l'algoritmo deve funzionare correttamente sia con la sequenza $[1, 2, 3, 4, 5, 6, 7]$, sia con $[9, 8, 7, 6, 5, 4, 3]$, sia con qualsiasi altra combinazione di 7 valori numerici, inclusi numeri decimali o negativi.
+\end{concetto}
+
+% ------------------------------------------------------------------------------
+\section{Esercizio Guidato: Attraversamento Pedonale}
+% ------------------------------------------------------------------------------
+
+Mettiamoci alla prova formulando un algoritmo esatto per un problema che affrontiamo ogni giorno.
+
+\begin{esercizio}[Attraversare la strada in presenza di un semaforo]
+Scrivere l'algoritmo passo-passo, il più rigoroso e aderente possibile alle quattro proprietà esaminate, per risolvere il seguente problema:\\
+\textbf{Problema:} Mi trovo sul marciapiede davanti alle strisce pedonali e devo attraversare la strada in presenza di un semaforo pedonale. Cosa faccio?
+\end{esercizio}
+
+\begin{soluzione}[Algoritmo con Scelta Condizionale e Ripetizione]
+Ecco la formalizzazione dell'algoritmo divisa in istruzioni elementari:
+
+\begin{enumerate}
+  \item \textbf{Osservazione:} Guardo il semaforo pedonale.
+  \item \textbf{Controllo condizionale:}
+  \begin{itemize}
+    \item \textbf{SE} il semaforo è \textbf{VERDE}:
+    \begin{enumerate}
+      \item Inizio ad attraversare a passo costante sulle strisce pedonali.
+      \item Faccio un passo dopo l'altro \textbf{FINCHÉ} non ho raggiunto il marciapiede opposto.
+      \item Fine dell'algoritmo (Obiettivo raggiunto con successo!).
+    \end{enumerate}
+    \item \textbf{ALTRIMENTI} (il semaforo è rosso o giallo):
+    \begin{enumerate}
+      \item Resto fermo sul marciapiede di partenza in sicurezza.
+      \item Aspetto che il semaforo cambi stato.
+      \item \textbf{Torno al punto 1} (ripeto l'osservazione).
+    \end{enumerate}
+  \end{itemize}
+\end{enumerate}
+\end{soluzione}
+
+\begin{attenzione}[Attenzione all'ambiguità e ai cicli infiniti!]
+\begin{itemize}
+  \item Se dimentichiamo la condizione ``\textbf{FINCHÉ} non arrivo dall'altra parte'', una persona programmata come un computer continuerebbe a camminare dritto all'infinito anche dopo aver superato la strada!
+  \item Se omettiamo di dire cosa fare nel caso il semaforo sia rosso, il calcolatore si bloccherebbe per mancanza di istruzioni.
+\end{itemize}
+\end{attenzione}
+
+% ------------------------------------------------------------------------------
+\section{Verso le Prossime Lezioni}
+% ------------------------------------------------------------------------------
+
+Nelle prossime lezioni trasformeremo questo modo di pensare in due linguaggi formali utilizzati universalmente dai programmatori di tutto il mondo:
+\begin{itemize}
+  \item I \textbf{Diagrammi di Flusso (Flowchart):} La rappresentazione grafica degli algoritmi tramite blocchi geometrici (rettangoli per le azioni, rombi per le condizioni, frecce per la direzione).
+  \item Lo \textbf{Pseudocodice:} Un linguaggio a metà strada tra la lingua naturale e i linguaggi di programmazione reali (come Python e C), che ci permetterà di scrivere logiche complesse prima di passare alla tastiera del computer.
+\end{itemize}
