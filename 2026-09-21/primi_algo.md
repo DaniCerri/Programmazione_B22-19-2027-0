@@ -23,4 +23,6 @@ Scrivere l'algoritmo (l'elenco di passaggi) il più aderente possibile alle cara
 Devo attraversare la strada e c'è un semaforo, che faccio?
 
 **Soluzione**
-
+1. Guardo il semaforo
+2. **SE** il semaforo è verde **ALLORA** cammino -> faccio un passo dopo l'altro **FINCHÈ** non arrivo dall'altra parte
+3. **ALTRIMENTI** mi fermo e aspetto che diventi verde -> **torno al punto 2**
