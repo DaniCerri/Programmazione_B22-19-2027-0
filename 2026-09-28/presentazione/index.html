@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gli Algoritmi | Corso di Programmazione 1 - Piazza dei Mestieri</title>
+  
+  <!-- Tipografia: Outfit (Testo) & Bricolage Grotesque (Titoli e Accenti) & Roboto Mono (Codice) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Google Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="m3-paper">
+
+  <!-- Progress Bar Superiore -->
+  <div class="m3-progress-container">
+    <div id="progressBar" class="m3-progress-bar"></div>
+  </div>
+
+  <!-- Barra Superiore Istituzionale -->
+  <header class="m3-top-app-bar">
+    <div class="app-bar-leading">
+      <span class="material-symbols-outlined icon-main">account_tree</span>
+      <div class="app-bar-title-group">
+        <span class="app-bar-title">Corso di Programmazione 1</span>
+        <span class="app-bar-subtitle">Operatore Informatico &bull; Lezione 02: Gli Algoritmi e la Sequenza &bull; Piazza dei Mestieri</span>
+      </div>
+    </div>
+
+    <div class="app-bar-actions">
+      <button id="btnOverview" class="m3-icon-button" title="Indice delle slide (O)">
+        <span class="material-symbols-outlined">grid_view</span>
+      </button>
+      <button id="btnNotes" class="m3-icon-button" title="Note Docente (N)">
+        <span class="material-symbols-outlined">notes</span>
+      </button>
+      <button id="btnExportPdf" class="m3-icon-button" title="Esporta slide in PDF (P)">
+        <span class="material-symbols-outlined">picture_as_pdf</span>
+      </button>
+      <button id="btnFullscreen" class="m3-icon-button" title="Schermo intero (F)">
+        <span class="material-symbols-outlined">fullscreen</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Slide Deck Main Container -->
+  <main class="deck-container">
+
+    <!-- SLIDE 1: COPERTINA -->
+    <section class="slide active" data-slide="1">
+      <div class="slide-content cover-slide-layout">
+        <h1 class="main-title">
+          Gli <span class="cherry-text">Algoritmi</span>:<br>La Logica della Sequenza
+        </h1>
+        <p class="main-lead" style="font-size: 1.45rem; line-height: 1.5; max-width: 900px;">
+          Cosa sono, come si progettano e come una sequenza ordinata di istruzioni elementari trasforma un problema in una soluzione esatta.
+        </p>
+
+        <div class="cover-specs-row" style="margin-top: 10px;">
+          <div class="spec-cell">
+            <span class="spec-label">LEZIONE</span>
+            <span class="spec-value" style="font-size: 1.25rem;">02 &bull; 28 Settembre 2026</span>
+          </div>
+          <div class="spec-cell">
+            <span class="spec-label">DOCENTE</span>
+            <span class="spec-value" style="font-size: 1.25rem;">Daniele Cerrina</span>
+          </div>
+          <div class="spec-cell">
+            <span class="spec-label">EMAIL DOCENTE</span>
+            <span class="spec-value spec-email" style="font-size: 1.15rem;">daniele.cerrina@immaginazioneelavoro.it</span>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Dare il benvenuto alla seconda lezione di laboratorio. Introdurre il tema: prima di toccare la tastiera, dobbiamo imparare a pensare come un programmatore, formalizzando sequenze di istruzioni passo dopo passo.
+      </div>
+    </section>
+
+    <!-- SLIDE 2: LA MENTE UMANA -->
+    <section class="slide" data-slide="2">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">COME RAGIONIAMO NOI</span>
+          <h2>La Mente Umana: Flessibile e Intuitiva</h2>
+          <p class="section-lead">Noi esseri umani siamo abituati a comunicare dando tantissime cose per scontate.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <div class="lim-title">
+            <span class="material-symbols-outlined">psychology</span>
+            <span>Intuito, Esperienza e Tolleranza</span>
+          </div>
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">check_circle</span>
+              <span><strong>Capiamo il contesto non detto:</strong> se dici a un compagno <em>"passami quella cosa sul banco"</em>, lui intuisce subito l'oggetto guardando i tuoi occhi.</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">check_circle</span>
+              <span><strong>Colmiamo i vuoti logici:</strong> usiamo l'esperienza quotidiana per correggere istruzioni imperfette senza mai bloccarci.</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">check_circle</span>
+              <span><strong>Tolleriamo l'imprecisione:</strong> capiamo al volo espressioni vaghe come <em>"fai un po' di spazio"</em> o <em>"aspetta un attimo"</em>.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Far riflettere la classe su quanta informazione implicita usiamo ogni secondo quando parliamo tra umani.
+      </div>
+    </section>
+
+    <!-- SLIDE 3: IL CALCOLATORE -->
+    <section class="slide" data-slide="3">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">COME LAVORA LA MACCHINA</span>
+          <h2>Il Calcolatore: Rigido ed Esecutore Cieco</h2>
+          <p class="section-lead">Il computer possiede una velocità impressionante, ma non ha un briciolo di intuito.</p>
+        </div>
+
+        <div class="lim-focus-card" style="border-color: var(--cherry-primary); background-color: #fffafb;">
+          <div class="lim-title" style="color: var(--cherry-primary);">
+            <span class="material-symbols-outlined">precision_manufacturing</span>
+            <span>Zero Buonsenso: Esegue solo alla Lettera</span>
+          </div>
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon" style="color: #ef4444;">cancel</span>
+              <span><strong>Non pensa e non improvvisa:</strong> se riceve un comando incompleto, non prova a indovinare cosa intendevi.</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon" style="color: #ef4444;">cancel</span>
+              <span><strong>Esegue ordini ciechi:</strong> se gli dici di bere da una bottiglia d'acqua senza dirgli di svitare il tappo, cercherà di bere dalla bottiglia chiusa!</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon" style="color: var(--cherry-primary);">priority_high</span>
+              <span><strong>Il compito del programmatore:</strong> dobbiamo spiegare la soluzione scomponendola in passi elementari, esatti e ordinati.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Sottolineare che quando un programma sbaglia, l'errore è sempre nostro che abbiamo dato un'istruzione imperfetta o incompleta.
+      </div>
+    </section>
+
+    <!-- SLIDE 4: DEFINIZIONE DI ALGORITMO -->
+    <section class="slide" data-slide="4">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">CONCETTO CHIAVE</span>
+          <h2>Che cos'è esattamente un Algoritmo?</h2>
+          <p class="section-lead">Il termine deriva dal matematico persiano al-Khuwarizmi ed è la base di tutta l'informatica.</p>
+        </div>
+
+        <div class="lim-banner-big">
+          &ldquo;Un <strong>algoritmo</strong> è una sequenza <strong>finita</strong> e <strong>ordinata</strong> di istruzioni elementari, chiare e <strong>non ambigue</strong>, la cui esecuzione porta alla risoluzione esatta di un determinato problema.&rdquo;
+        </div>
+
+        <div class="lim-focus-card" style="margin-top: 14px;">
+          <p class="lim-lead-text" style="margin-bottom: 0;">
+            <strong>Nota fondamentale:</strong> un algoritmo non è ancora codice Python! È la <strong>strategia logica della soluzione</strong>, descrivibile su un foglio di carta, a parole o con disegni prima ancora di toccare la tastiera.
+          </p>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Leggere la definizione scandendo le parole: sequenza, finita, ordinata, elementari, non ambigue.
+      </div>
+    </section>
+
+    <!-- SLIDE 5: I TRE PILASTRI -->
+    <section class="slide" data-slide="5">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">STRUTTURA ESSENZIALE</span>
+          <h2>I 3 Pilastri di Ogni Algoritmo</h2>
+          <p class="section-lead">Tre caratteristiche indispensabili che ogni sequenza deve possedere per funzionare.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="lim-step-badge">1</span>
+              <div>
+                <strong style="font-size: 1.35rem; color: var(--text-primary);">Sequenza Ordinata:</strong><br>
+                <span>L'ordine cronologico è vincolante. Infilarsi le scarpe prima dei calzini non porta allo stesso risultato!</span>
+              </div>
+            </li>
+            <li>
+              <span class="lim-step-badge">2</span>
+              <div>
+                <strong style="font-size: 1.35rem; color: var(--text-primary);">Istruzioni Elementari:</strong><br>
+                <span>Ogni singolo passo deve essere atomico, semplice e comprensibile senza margini di interpretazione.</span>
+              </div>
+            </li>
+            <li>
+              <span class="lim-step-badge">3</span>
+              <div>
+                <strong style="font-size: 1.35rem; color: var(--text-primary);">Obiettivo Concreto:</strong><br>
+                <span>L'algoritmo non è un elenco casuale di mosse: persegue uno scopo preciso e produce un risultato verificabile.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Far notare l'ordine: scambiare anche solo due passi distrugge l'intero procedimento.
+      </div>
+    </section>
+
+    <!-- SLIDE 6: IL MODELLO I-P-O -->
+    <section class="slide" data-slide="6">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">ARCHITETTURA DELL'INFORMAZIONE</span>
+          <h2>Il Modello Universale: Input &bull; Elaborazione &bull; Output</h2>
+          <p class="section-lead">Qualsiasi programma informatico al mondo risponde a questo schema a tre fasi.</p>
+        </div>
+
+        <div class="ipo-flow-container" style="margin: 20px 0;">
+          <div class="ipo-block" style="padding: 24px;">
+            <span class="ipo-tag" style="font-size: 0.85rem;">FASE 1</span>
+            <div class="ipo-title" style="font-size: 1.6rem;">
+              <span class="material-symbols-outlined" style="font-size: 32px;">input</span>
+              <span>INPUT</span>
+            </div>
+            <p class="ipo-desc" style="font-size: 1.15rem; line-height: 1.45;">I dati o gli ingredienti di partenza forniti al sistema.</p>
+          </div>
+
+          <div class="ipo-connector">
+            <span class="material-symbols-outlined" style="font-size: 36px;">arrow_forward</span>
+          </div>
+
+          <div class="ipo-block ipo-process" style="padding: 24px;">
+            <span class="ipo-tag" style="font-size: 0.85rem;">FASE 2</span>
+            <div class="ipo-title" style="font-size: 1.6rem;">
+              <span class="material-symbols-outlined" style="font-size: 32px;">memory</span>
+              <span>ELABORAZIONE</span>
+            </div>
+            <p class="ipo-desc" style="font-size: 1.15rem; line-height: 1.45;">La sequenza ordinata di calcoli o azioni dell'algoritmo.</p>
+          </div>
+
+          <div class="ipo-connector">
+            <span class="material-symbols-outlined" style="font-size: 36px;">arrow_forward</span>
+          </div>
+
+          <div class="ipo-block" style="padding: 24px;">
+            <span class="ipo-tag" style="font-size: 0.85rem;">FASE 3</span>
+            <div class="ipo-title" style="font-size: 1.6rem;">
+              <span class="material-symbols-outlined" style="font-size: 32px;">output</span>
+              <span>OUTPUT</span>
+            </div>
+            <p class="ipo-desc" style="font-size: 1.15rem; line-height: 1.45;">Il risultato finale restituito a schermo o sul piatto.</p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Spiegare il flusso: ciò che entra (Input) viene trasformato (Elaborazione) per produrre ciò che esce (Output).
+      </div>
+    </section>
+
+    <!-- SLIDE 7: ESEMPIO I-P-O MATEMATICO -->
+    <section class="slide" data-slide="7">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">IL MODELLO I-P-O IN PRATICA</span>
+          <h2>Esempio Concreto: Il Perimetro del Rettangolo</h2>
+          <p class="section-lead">Applichiamo le tre fasi a un problema geometrico elementare.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <ul class="lim-bullet-list" style="gap: 20px;">
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon" style="color: #0284c7;">input</span>
+              <div>
+                <strong style="font-size: 1.35rem; color: #0369a1;">1. INPUT (Dati in ingresso):</strong><br>
+                <span>Conosciamo la misura dei due lati: <strong>base = 10 cm</strong> e <strong>altezza = 5 cm</strong>.</span>
+              </div>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon" style="color: var(--cherry-primary);">memory</span>
+              <div>
+                <strong style="font-size: 1.35rem; color: var(--cherry-dark);">2. ELABORAZIONE (La sequenza dei calcoli):</strong><br>
+                <span>Sommiamo base e altezza (10 + 5 = 15 cm) e moltiplichiamo per due (15 &times; 2 = 30 cm).</span>
+              </div>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon" style="color: #16a34a;">output</span>
+              <div>
+                <strong style="font-size: 1.35rem; color: #15803d;">3. OUTPUT (Risultato finale):</strong><br>
+                <span>Comunichiamo il perimetro finale calcolato: <strong>30 cm</strong>.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Far notare: se l'Input cambia (es. base 20 e altezza 8), l'algoritmo di calcolo resta lo stesso e produce l'output corretto.
+      </div>
+    </section>
+
+    <!-- SLIDE 8: PROPRIETÀ 1 (FINITEZZA) -->
+    <section class="slide" data-slide="8">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">REQUISITI DI CORRETTEZZA &bull; 1 DI 4</span>
+          <h2>1ª Proprietà: La Finitezza</h2>
+          <p class="section-lead">Un algoritmo deve sempre arrivare a una conclusione: non può continuare per sempre.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <div class="lim-title">
+            <span class="material-symbols-outlined">timer</span>
+            <span>Numero Finito di Operazioni</span>
+          </div>
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">check_circle</span>
+              <span><strong>Deve sempre fermarsi:</strong> l'esecuzione deve terminare dopo aver compiuto un numero calcolabile di passi.</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon" style="color: #ef4444;">warning</span>
+              <span><strong>Il pericolo del loop infinito:</strong> un procedimento che gira all'infinito senza mai fermarsi blocca il computer o manda in crash il programma.</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">verified</span>
+              <span><strong>Nelle sequenze di oggi:</strong> la finitezza è garantita al 100%. Se ci sono 8 passi, dopo l'ottavo passo il programma ha finito con successo!</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Spiegare che un algoritmo che non finisce mai è inutile per definizione.
+      </div>
+    </section>
+
+    <!-- SLIDE 9: PROPRIETÀ 2 (DEFINITEZZA) -->
+    <section class="slide" data-slide="9">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">REQUISITI DI CORRETTEZZA &bull; 2 DI 4</span>
+          <h2>2ª Proprietà: La Definitezza (Zero Ambiguità)</h2>
+          <p class="section-lead">Ogni istruzione deve essere chiara, precisa e interpretabile in un solo modo possibile.</p>
+        </div>
+
+        <div class="lim-two-boxes">
+          <div class="lim-box" style="background-color: #fef2f2; border-color: #fecaca;">
+            <div class="compare-badge" style="background-color: #fee2e2; color: #991b1b; font-size: 0.95rem;">
+              <span class="material-symbols-outlined" style="font-size: 20px;">block</span>
+              <span>LINGUAGGIO AMBIGUO (NO)</span>
+            </div>
+            <ul class="clean-bullet-list" style="margin-top: 10px; font-size: 1.15rem; gap: 12px;">
+              <li><em>"Aggiungi un po' di sale"</em> (quanto sale?)</li>
+              <li><em>"Scalda l'acqua per qualche minuto"</em> (quanti minuti?)</li>
+              <li><em>"Fai un pezzetto di strada in avanti"</em> (quanti passi?)</li>
+            </ul>
+          </div>
+
+          <div class="lim-box" style="background-color: #f0fdf4; border-color: #bbf7d0;">
+            <div class="compare-badge" style="background-color: #dcfce7; color: #166534; font-size: 0.95rem;">
+              <span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+              <span>LINGUAGGIO DEFINITO (SÌ)</span>
+            </div>
+            <ul class="clean-bullet-list" style="margin-top: 10px; font-size: 1.15rem; gap: 12px;">
+              <li><strong>"Aggiungi 4 grammi di sale"</strong></li>
+              <li><strong>"Scalda l'acqua a 100°C per 3 minuti"</strong></li>
+              <li><strong>"Compi esattamente 10 passi in avanti"</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Insistere: per il computer non esiste "un po'", esistono numeri, grammi, pixel, secondi.
+      </div>
+    </section>
+
+    <!-- SLIDE 10: PROPRIETÀ 3 (GENERALITÀ) -->
+    <section class="slide" data-slide="10">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">IL CUORE DEL NOSTRO ANNO &bull; 3 DI 4</span>
+          <h2>3ª Proprietà: La Generalità</h2>
+          <p class="section-lead">Non scriviamo algoritmi per risolvere un solo calcolo a memoria: creiamo regole universali.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <div class="lim-title">
+            <span class="material-symbols-outlined">all_inclusive</span>
+            <span>Risolvere l'Intera Classe di Problemi</span>
+          </div>
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">check_circle</span>
+              <span><strong>Valido per qualsiasi dato:</strong> l'algoritmo del perimetro deve funzionare con lati piccoli come 3 e 4, ma anche con lati enormi come 15.000 e 8.000!</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon" style="color: #ef4444;">error</span>
+              <span><strong>Divieto di risposte "cablate" (hardcoded):</strong> non si scrive a mano il risultato numerico finale! Si scrive la formula generale che calcola il risultato a partire da qualunque input.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Spiegare che la generalità è la vera magia dell'informatica: scrivi il codice una sola volta e lo usi per miliardi di dati diversi.
+      </div>
+    </section>
+
+    <!-- SLIDE 11: PROPRIETÀ 4 (EFFICIENZA) -->
+    <section class="slide" data-slide="11">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">REQUISITI DI CORRETTEZZA &bull; 4 DI 4</span>
+          <h2>4ª Proprietà: L'Efficienza</h2>
+          <p class="section-lead">Risolvere il problema impiegando una quantità sensata di passaggi e di tempo.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <div class="lim-title">
+            <span class="material-symbols-outlined">speed</span>
+            <span>Il Nostro Patto per la Prima Superiore</span>
+          </div>
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">verified</span>
+              <span><strong>Priorità alla Correttezza:</strong> in prima superiore il nostro obiettivo principale è che l'algoritmo sia <strong>corretto</strong> (produca il risultato giusto senza intoppi).</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">trending_up</span>
+              <span><strong>Niente passaggi inutili:</strong> evitiamo azioni superflue o giri infiniti per fare cose semplici.</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">school</span>
+              <span><strong>Negli anni successivi:</strong> impareremo a misurare con formule matematiche l'algoritmo più veloce del mondo.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Rassicurare: prima impariamo a fare programmi che funzionano, poi penseremo a renderli velocissimi.
+      </div>
+    </section>
+
+    <!-- SLIDE 12: LA SEQUENZA PURA -->
+    <section class="slide" data-slide="12">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LA STRUTTURA FONDAMENTALE</span>
+          <h2>La Sequenza: L'Ordine è Legge</h2>
+          <p class="section-lead">Oggi lavoriamo sul primo mattone: le istruzioni eseguite una dietro l'altra dall'alto verso il basso.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="lim-step-badge">1</span>
+              <div>
+                <strong style="font-size: 1.35rem; color: var(--text-primary);">Esecuzione Rigida:</strong><br>
+                <span>Il calcolatore esegue il passo 1. Solo quando è terminato, passa al passo 2, poi al passo 3.</span>
+              </div>
+            </li>
+            <li>
+              <span class="lim-step-badge">2</span>
+              <div>
+                <strong style="font-size: 1.35rem; color: var(--text-primary);">Nessun Salto:</strong><br>
+                <span>Il percorso è una linea retta dall'inizio alla fine: nessuna deviazione o bivio strano.</span>
+              </div>
+            </li>
+            <li>
+              <span class="lim-step-badge">3</span>
+              <div>
+                <strong style="font-size: 1.35rem; color: var(--cherry-primary);">Se scambi due passi crolla tutto:</strong><br>
+                <span>Non puoi mai usare un dato prima di averlo calcolato o letto!</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Insistere: scambiare l'ordine è l'errore logico più comune.
+      </div>
+    </section>
+
+    <!-- SLIDE 13: MINECRAFT (OBIETTIVO & INVENTARIO) -->
+    <section class="slide" data-slide="13">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">ESEMPIO GUIDATO 1 &bull; GAMING (PARTE 1)</span>
+          <h2>Rifugio di Terra 3&times;3 in Minecraft: L'Inventario</h2>
+          <p class="section-lead">Il sole sta tramontando: dobbiamo costruire un rifugio sicuro per superare la prima notte.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <div class="lim-title">
+            <span class="material-symbols-outlined">inventory_2</span>
+            <span>Input: Risorse Disponibili nell'Inventario</span>
+          </div>
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">construction</span>
+              <span><strong>33 blocchi di terra</strong> (per perimetro, muri e tetto)</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">door_front</span>
+              <span><strong>1 porta di legno</strong> e <strong>1 torcia</strong> (fa luce ed evita lo spawn dei mob)</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">bed</span>
+              <span><strong>1 letto</strong> (per dormire e impostare lo spawn point), <strong>1 fornace</strong> e <strong>1 banco da lavoro</strong></span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon" style="color: var(--cherry-primary);">warning</span>
+              <span><strong>Perché l'ordine è tassativo:</strong> se provi a piazzare la torcia prima dei muri, cade nel vuoto! Se metti il letto fuori prima di aver chiuso la porta, verrai eliminato dai mostri!</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Coinvolgere la classe su Minecraft: chiedere perché non possiamo piazzare il letto prima di aver fatto la casa.
+      </div>
+    </section>
+
+    <!-- SLIDE 14: MINECRAFT (I 10 PASSI) -->
+    <section class="slide" data-slide="14">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">ESEMPIO GUIDATO 1 &bull; GAMING (PARTE 2)</span>
+          <h2>Rifugio di Terra 3&times;3: La Sequenza dei 10 Passi</h2>
+          <p class="section-lead">Ecco l'algoritmo ordinato per completare la costruzione in tempo per la notte.</p>
+        </div>
+
+        <div class="lim-step-list">
+          <div class="lim-step-item"><span class="lim-step-badge">1</span> Piazza 8 blocchi di terra a terra (lascia 1 buco libero per l'ingresso)</div>
+          <div class="lim-step-item"><span class="lim-step-badge">2</span> Innalza i muri posizionando un secondo strato di 8 blocchi di terra</div>
+          <div class="lim-step-item"><span class="lim-step-badge">3</span> Innalza i muri con un terzo strato di 8 blocchi di terra</div>
+          <div class="lim-step-item"><span class="lim-step-badge">4</span> Copri il soffitto piazzando 9 blocchi di terra per chiudere il tetto</div>
+          <div class="lim-step-item"><span class="lim-step-badge">5</span> Posiziona la porta di legno nel varco dell'ingresso</div>
+          <div class="lim-step-item"><span class="lim-step-badge">6</span> Attacca la torcia sulla parete interna per illuminare la stanza</div>
+          <div class="lim-step-item"><span class="lim-step-badge">7</span> Posiziona il letto in un angolo della stanza</div>
+          <div class="lim-step-item"><span class="lim-step-badge">8</span> Posiziona la fornace accanto al letto</div>
+          <div class="lim-step-item"><span class="lim-step-badge">9</span> Posiziona il banco da lavoro (crafting table)</div>
+          <div class="lim-step-item"><span class="lim-step-badge">10</span> Chiudi la porta di legno dall'interno e dormi fino all'alba!</div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Far leggere i passi ad alta voce. Notare come siano tutti espressi in linguaggio chiaro, senza comandi strani o parentesi.
+      </div>
+    </section>
+
+    <!-- SLIDE 15: IL TOAST (INGREDIENTI & REGOLE) -->
+    <section class="slide" data-slide="15">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">ESEMPIO GUIDATO 2 &bull; VITA REALE (PARTE 1)</span>
+          <h2>Preparare un Toast alla Piastra: Gli Ingredienti</h2>
+          <p class="section-lead">Una ricetta di cucina è l'esempio più tangibile e gustoso di un algoritmo sequenziale.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <div class="lim-title">
+            <span class="material-symbols-outlined">restaurant</span>
+            <span>Input: Ingredienti e Strumenti Necessari</span>
+          </div>
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">bakery_dining</span>
+              <span><strong>2 fette di pane da toast</strong>, <strong>2 fette di formaggio</strong>, <strong>1 fetta di prosciutto cotto</strong></span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">kitchen</span>
+              <span><strong>1 piastra elettrica per toast</strong> e <strong>1 piatto</strong> da portata</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">done_all</span>
+              <span><strong>Output:</strong> Toast caldo, dorato con formaggio fuso pronto sul piatto.</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon" style="color: var(--cherry-primary);">warning</span>
+              <span><strong>Perché l'ordine è fondamentale:</strong> se metti il formaggio sulla piastra prima del pane, il formaggio brucia e fa fumo! Se metti il toast prima di accendere la piastra, il pane resta crudo.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Chiedere alla classe: chi ha mai provato a fare un toast mettendo gli ingredienti nell'ordine sbagliato?
+      </div>
+    </section>
+
+    <!-- SLIDE 16: IL TOAST (LA RICETTA DEI 10 PASSI) -->
+    <section class="slide" data-slide="16">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">ESEMPIO GUIDATO 2 &bull; VITA REALE (PARTE 2)</span>
+          <h2>Preparare un Toast: I 10 Passi della Ricetta</h2>
+          <p class="section-lead">La sequenza ordinata per ottenere un toast cotto a puntino.</p>
+        </div>
+
+        <div class="lim-step-list">
+          <div class="lim-step-item"><span class="lim-step-badge">1</span> Appoggia le due fette di pane sul tagliere pulito</div>
+          <div class="lim-step-item"><span class="lim-step-badge">2</span> Adagia la prima fetta di formaggio sulla fetta di pane inferiore</div>
+          <div class="lim-step-item"><span class="lim-step-badge">3</span> Aggiungi la fetta di prosciutto cotto sopra il formaggio</div>
+          <div class="lim-step-item"><span class="lim-step-badge">4</span> Adagia la seconda fetta di formaggio sopra il prosciutto</div>
+          <div class="lim-step-item"><span class="lim-step-badge">5</span> Chiudi il toast sovrapponendo la seconda fetta di pane</div>
+          <div class="lim-step-item"><span class="lim-step-badge">6</span> Accendi la piastra elettrica e attendi che sia calda</div>
+          <div class="lim-step-item"><span class="lim-step-badge">7</span> Posiziona il toast sulla piastra e chiudi il coperchio</div>
+          <div class="lim-step-item"><span class="lim-step-badge">8</span> Attendi 3 minuti per la tostatura</div>
+          <div class="lim-step-item"><span class="lim-step-badge">9</span> Apri la piastra e preleva il toast con una paletta</div>
+          <div class="lim-step-item"><span class="lim-step-badge">10</span> Adagia il toast dorato sul piatto e servilo caldo!</div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Evidenziare come ogni passo sia comprensibile da chiunque senza margini di dubbio (definitezza).
+      </div>
+    </section>
+
+    <!-- SLIDE 17: ESERCIZIO 1 (LA SFIDA SU CARTA) -->
+    <section class="slide" data-slide="17">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">SFIDA IN CLASSE &bull; ESERCIZIO 1 (SU CARTA)</span>
+          <h2>Esercizio 1: Calcolo della Media di 3 Voti</h2>
+          <p class="section-lead">Prendete penna e foglio: formalizziamo sul quaderno la sequenza di calcolo.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <div class="lim-title">
+            <span class="material-symbols-outlined">edit_note</span>
+            <span>La Consegna da Svolgere sul Foglio</span>
+          </div>
+          <p class="lim-lead-text">
+            Uno studente ha svolto tre verifiche e ha ottenuto tre voti: <strong style="font-size: 1.55rem; color: var(--cherry-primary);">7</strong>, <strong style="font-size: 1.55rem; color: var(--cherry-primary);">8</strong>, <strong style="font-size: 1.55rem; color: var(--cherry-primary);">6</strong>.
+          </p>
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">check</span>
+              <span><strong>1. Scrivi qual è l'Input</strong> (i dati di partenza).</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">check</span>
+              <span><strong>2. Scrivi la sequenza di passi</strong> per calcolare la somma e poi la media.</span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">check</span>
+              <span><strong>3. Scrivi qual è l'Output</strong> finale comunicato allo studente.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Lasciare 3 minuti di orologio agli studenti per scrivere la sequenza sul quaderno prima di passare alla slide successiva con la soluzione.
+      </div>
+    </section>
+
+    <!-- SLIDE 18: ESERCIZIO 1 (SOLUZIONE) -->
+    <section class="slide" data-slide="18">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">CORREZIONE GUIDATA &bull; ESERCIZIO 1</span>
+          <h2>Esercizio 1: La Soluzione del Docente</h2>
+          <p class="section-lead">Confrontate quanto avete scritto sul foglio con la soluzione corretta.</p>
+        </div>
+
+        <div class="lim-focus-card" style="border-color: #16a34a; background-color: #f7fdf9;">
+          <ul class="lim-bullet-list" style="gap: 16px;">
+            <li>
+              <span class="lim-step-badge" style="background-color: #dcfce7; color: #15803d;">IN</span>
+              <div>
+                <strong>Input di partenza:</strong> i tre voti (voto 1 = 7, voto 2 = 8, voto 3 = 6).
+              </div>
+            </li>
+            <li>
+              <span class="lim-step-badge">1</span>
+              <div>
+                <strong>Passo 1 (Somma):</strong> Somma i tre voti tra loro: <code>7 + 8 + 6 = 21</code>.
+              </div>
+            </li>
+            <li>
+              <span class="lim-step-badge">2</span>
+              <div>
+                <strong>Passo 2 (Divisione):</strong> Dividi la somma ottenuta per 3: <code>21 : 3 = 7.0</code>.
+              </div>
+            </li>
+            <li>
+              <span class="lim-step-badge">3</span>
+              <div>
+                <strong>Passo 3 (Comunicazione):</strong> Scrivi sul foglio il risultato finale: <em>"Media = 7.0"</em>.
+              </div>
+            </li>
+            <li>
+              <span class="lim-step-badge" style="background-color: #dcfce7; color: #15803d;">OUT</span>
+              <div>
+                <strong>Output finale:</strong> il numero <strong>7.0</strong> comunicato allo studente.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Chiedere chi ha fatto esattamente così. Far notare che la somma deve obbligatoriamente precedere la divisione.
+      </div>
+    </section>
+
+    <!-- SLIDE 19: ESERCIZIO 2 (LA SFIDA SU CARTA) -->
+    <section class="slide" data-slide="19">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">SFIDA IN CLASSE &bull; ESERCIZIO 2 (SU CARTA)</span>
+          <h2>Esercizio 2: Il Robot Disegnatore</h2>
+          <p class="section-lead">Programmiamo sul foglio un automa che comprende solo due semplici istruzioni in italiano.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <div class="lim-title">
+            <span class="material-symbols-outlined">smart_toy</span>
+            <span>I 2 Comandi che il Robot Comprende</span>
+          </div>
+          <ul class="lim-bullet-list">
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">straight</span>
+              <span><strong>"Avanza di 100 passi tracciando una linea dritta"</strong></span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined lim-bullet-icon">turn_right</span>
+              <span><strong>"Gira a destra di 90 gradi"</strong></span>
+            </li>
+          </ul>
+          <div class="lim-banner-big" style="margin-top: 18px; font-size: 1.25rem;">
+            <strong>Compito sul quaderno:</strong> Scrivete l'elenco ordinato degli <strong>8 passi esatti</strong> per far disegnare al robot un quadrato chiuso e farlo tornare orientato come in partenza!
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Dare 3 minuti agli studenti per scrivere gli 8 passi sul quaderno.
+      </div>
+    </section>
+
+    <!-- SLIDE 20: ESERCIZIO 2 (SOLUZIONE) -->
+    <section class="slide" data-slide="20">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">CORREZIONE GUIDATA &bull; ESERCIZIO 2</span>
+          <h2>Esercizio 2: La Soluzione del Docente</h2>
+          <p class="section-lead">Ecco la sequenza pura di 8 passi per completare il quadrato.</p>
+        </div>
+
+        <div class="lim-step-list">
+          <div class="lim-step-item"><span class="lim-step-badge">1</span> Avanza di 100 passi tracciando una linea dritta (1° lato del quadrato)</div>
+          <div class="lim-step-item"><span class="lim-step-badge">2</span> Gira a destra di 90 gradi</div>
+          <div class="lim-step-item"><span class="lim-step-badge">3</span> Avanza di 100 passi tracciando una linea dritta (2° lato del quadrato)</div>
+          <div class="lim-step-item"><span class="lim-step-badge">4</span> Gira a destra di 90 gradi</div>
+          <div class="lim-step-item"><span class="lim-step-badge">5</span> Avanza di 100 passi tracciando una linea dritta (3° lato del quadrato)</div>
+          <div class="lim-step-item"><span class="lim-step-badge">6</span> Gira a destra di 90 gradi</div>
+          <div class="lim-step-item"><span class="lim-step-badge">7</span> Avanza di 100 passi tracciando una linea dritta (4° lato del quadrato)</div>
+          <div class="lim-step-item"><span class="lim-step-badge">8</span> Gira a destra di 90 gradi (orientamento iniziale ripristinato)</div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Far notare: la coppia "avanza + gira" si ripete identica per 4 volte. Anticipare che nelle prossime lezioni scopriremo una struttura (il ciclo) per non riscriverla 4 volte a mano!
+      </div>
+    </section>
+
+    <!-- SLIDE 21: ERRORI COMUNI (PARTE 1) -->
+    <section class="slide" data-slide="21">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">TRAPPOLE TIPICHE &bull; PARTE 1</span>
+          <h2>I Bug della Sequenza: Omissioni e Inversioni</h2>
+          <p class="section-lead">Due degli errori logici più frequenti commessi da chi inizia a programmare.</p>
+        </div>
+
+        <div class="lim-two-boxes">
+          <div class="lim-box">
+            <div class="bug-icon-wrap" style="width: 48px; height: 48px; margin-bottom: 12px;">
+              <span class="material-symbols-outlined" style="font-size: 28px;">visibility_off</span>
+            </div>
+            <h3 style="color: var(--cherry-primary);">1. Dare per scontato l'ovvio</h3>
+            <p>Il computer non ha buonsenso. Se non specifichi di accendere la piastra o di estrarre la bustina di tè, la macchina non lo farà mai da sola!</p>
+          </div>
+
+          <div class="lim-box">
+            <div class="bug-icon-wrap" style="width: 48px; height: 48px; margin-bottom: 12px;">
+              <span class="material-symbols-outlined" style="font-size: 28px;">swap_vertical_circle</span>
+            </div>
+            <h3 style="color: var(--cherry-primary);">2. Passi Invertiti</h3>
+            <p>Eseguire le azioni nell'ordine cronologico sbagliato: mettere il formaggio sulla piastra prima del pane, o calcolare la media prima di aver fatto la somma!</p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Sottolineare che la verifica passo dopo passo su carta è il modo migliore per scovare questi errori prima che diventino codice.
+      </div>
+    </section>
+
+    <!-- SLIDE 22: ERRORI COMUNI (PARTE 2) -->
+    <section class="slide" data-slide="22">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">TRAPPOLE TIPICHE &bull; PARTE 2</span>
+          <h2>I Bug della Sequenza: Ambiguità e Hardcoding</h2>
+          <p class="section-lead">Altri due errori fondamentali da evitare quando progettiamo un algoritmo.</p>
+        </div>
+
+        <div class="lim-two-boxes">
+          <div class="lim-box">
+            <div class="bug-icon-wrap" style="width: 48px; height: 48px; margin-bottom: 12px;">
+              <span class="material-symbols-outlined" style="font-size: 28px;">help_outline</span>
+            </div>
+            <h3 style="color: var(--cherry-primary);">3. Istruzioni Ambigue</h3>
+            <p>Usare parole vaghe come <em>"scalda un po'"</em> o <em>"fai qualche passo"</em> invece di misure e tempi esatti (100 passi, 3 minuti, 4 grammi).</p>
+          </div>
+
+          <div class="lim-box">
+            <div class="bug-icon-wrap" style="width: 48px; height: 48px; margin-bottom: 12px;">
+              <span class="material-symbols-outlined" style="font-size: 28px;">lock</span>
+            </div>
+            <h3 style="color: var(--cherry-primary);">4. Risposte Cablate ("Hardcoding")</h3>
+            <p>Scrivere sul foglio direttamente il risultato già calcolato a mente (es. <em>"media = 7"</em>) anziché scrivere il procedimento generale valido per qualsiasi voto!</p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Concludere ricordando che la precisione e la generalità sono le qualità che distinguono un bravo programmatore.
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Barra Inferiore di Navigazione -->
+  <footer class="m3-bottom-bar">
+    <div class="bottom-bar-left">
+      <button id="btnPrev" class="m3-btn m3-btn-outlined" title="Slide Precedente (&larr;)">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Indietro</span>
+      </button>
+      <button id="btnNext" class="m3-btn m3-btn-filled" title="Slide Successiva (&rarr; / Spazio)">
+        <span>Avanti</span>
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+    </div>
+
+    <div class="bottom-bar-center">
+      <div class="m3-counter-display">
+        Slide <span id="currentSlideNum">1</span> / <span id="totalSlidesNum">22</span>
+      </div>
+    </div>
+
+    <div class="bottom-bar-right">
+      <span class="shortcut-tip">Usa <kbd>&larr;</kbd> <kbd>&rarr;</kbd> o <kbd>Spazio</kbd> &bull; <kbd>O</kbd> Indice &bull; <kbd>N</kbd> Note &bull; <kbd>P</kbd> Esporta PDF</span>
+    </div>
+  </footer>
+
+  <!-- Modale Panoramica (Indice delle Slide) -->
+  <div id="overviewModal" class="m3-modal-backdrop hidden">
+    <div class="m3-dialog">
+      <div class="dialog-header">
+        <div class="dialog-title-group">
+          <span class="material-symbols-outlined">grid_view</span>
+          <h3>Indice delle Diapositive</h3>
+        </div>
+        <div class="dialog-actions">
+          <button id="btnModalExportPdf" class="m3-btn m3-btn-outlined m3-btn-sm" title="Esporta tutte le slide in PDF">
+            <span class="material-symbols-outlined" style="font-size: 19px;">picture_as_pdf</span>
+            <span>Esporta in PDF</span>
+          </button>
+          <button id="btnCloseOverview" class="m3-icon-button" title="Chiudi">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div id="overviewGrid" class="overview-grid">
+        <!-- Generato dinamicamente da app.js -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
