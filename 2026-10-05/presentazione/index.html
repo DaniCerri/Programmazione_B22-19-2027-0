@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Condizioni negli Algoritmi | Corso di Programmazione 1 - Piazza dei Mestieri</title>
+
+  <!-- Tipografia: Outfit (Testo) & Bricolage Grotesque (Titoli e Accenti) & Roboto Mono (Codice) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Google Material Symbols Outlined -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="m3-paper">
+
+  <!-- Progress Bar Superiore -->
+  <div class="m3-progress-container">
+    <div id="progressBar" class="m3-progress-bar"></div>
+  </div>
+
+  <!-- Barra Superiore Istituzionale -->
+  <header class="m3-top-app-bar">
+    <div class="app-bar-leading">
+      <span class="material-symbols-outlined icon-main">apartment</span>
+      <div class="app-bar-title-group">
+        <span class="app-bar-title">Corso di Programmazione 1</span>
+        <span class="app-bar-subtitle">Operatore Informatico &bull; Lezione 03: Le Condizioni nel City Builder Marziano
+          &bull; Piazza dei Mestieri</span>
+      </div>
+    </div>
+
+    <div class="app-bar-actions">
+      <button id="btnOverview" class="m3-icon-button" title="Indice delle slide (O)">
+        <span class="material-symbols-outlined">grid_view</span>
+      </button>
+      <button id="btnNotes" class="m3-icon-button" title="Note Docente (N)">
+        <span class="material-symbols-outlined">notes</span>
+      </button>
+      <button id="btnExportPdf" class="m3-icon-button" title="Esporta slide in PDF (P)">
+        <span class="material-symbols-outlined">picture_as_pdf</span>
+      </button>
+      <button id="btnFullscreen" class="m3-icon-button" title="Schermo intero (F)">
+        <span class="material-symbols-outlined">fullscreen</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Slide Deck Main Container -->
+  <main class="deck-container">
+
+    <!-- SLIDE 1: COPERTINA -->
+    <section class="slide active" data-slide="1">
+      <div class="slide-content cover-slide-layout" style="max-width: 1180px;">
+        <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; align-items: center; width: 100%;">
+          <div>
+            <div
+              style="display: inline-flex; align-items: center; gap: 8px; background: var(--cherry-container); color: var(--cherry-text); padding: 6px 14px; border-radius: 9999px; font-weight: 700; font-size: 0.85rem; margin-bottom: 8px;">
+              <span class="material-symbols-outlined" style="font-size: 18px;">domain</span>
+              <span>PROGRAMMAZIONE 1 &bull; PRIMA SUPERIORE</span>
+            </div>
+            <h1 class="main-title" style="font-size: 3.4rem; line-height: 1.08; margin-bottom: 12px;">
+              Le <span class="cherry-text">Condizioni</span>:<br>La Logica del City Builder
+            </h1>
+            <p class="main-lead" style="font-size: 1.25rem; line-height: 1.45; max-width: 580px; margin-bottom: 16px;">
+              Come insegnare al nostro gestionale su Marte a prendere decisioni su risorse, costruzioni ed eventi della
+              colonia con la struttura <code>SE ... ALLORA ... ALTRIMENTI</code>.
+            </p>
+
+            <div class="cover-specs-row" style="margin-top: 10px;">
+              <div class="spec-cell">
+                <span class="spec-label">LEZIONE</span>
+                <span class="spec-value" style="font-size: 1.15rem;">03 &bull; 05 Ottobre 2026</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">DOCENTE</span>
+                <span class="spec-value" style="font-size: 1.15rem;">Daniele Cerrina</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">PROGETTO ANNUALE</span>
+                <span class="spec-value" style="font-size: 1.15rem; color: var(--cherry-primary); font-weight: 700;">Mars
+                  City Builder (Lite)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pixel-art-card" style="box-shadow: 0 8px 24px rgba(190, 18, 60, 0.12); border-color: var(--cherry-primary);">
+            <div class="pixel-art-img-wrap" style="aspect-ratio: 16/9; max-height: 330px;">
+              <img src="immagini/mappa.jpeg" alt="Panoramica Mars City Builder 16-bit" class="pixel-art-img">
+            </div>
+            <div class="pixel-art-caption">
+              <span>Mars City Builder &bull; Colonia Alpha-1</span>
+              <span class="pixel-tag">16-BIT RETRO SIM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Benvenuti alla terza lezione. Oggi applichiamo la logica delle scelte direttamente al nostro gioco: un city
+        builder marziano leggero dove gestiamo coloni, risorse, energia e costruzioni.
+      </div>
+    </section>
+
+    <!-- SLIDE 2: DAL BINARIO UNICO AL GESTIONALE -->
+    <section class="slide" data-slide="2">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">IL MOTORE DI UN GESTIONALE</span>
+          <h2>Perché un City Builder ha Bisogno di Bivi?</h2>
+          <p class="section-lead">In un simulatore di colonia le risorse cambiano ogni secondo: non possiamo fare sempre
+            la stessa cosa.</p>
+        </div>
+
+        <div class="lim-two-boxes">
+          <div class="lim-box">
+            <div
+              style="display: flex; align-items: center; gap: 8px; color: var(--text-secondary); margin-bottom: 8px;">
+              <span class="material-symbols-outlined" style="font-size: 28px;">linear_scale</span>
+              <strong style="font-size: 1.15rem;">Sequenza Pura (Senza Decisioni)</strong>
+            </div>
+            <p>Esegue i comandi alla cieca: clicchi su "Costruisci Serra" e il gioco costruisce la serra anche se hai
+              zero metallo in magazzino!</p>
+            <div
+              style="background: var(--paper-bg); padding: 12px; border-radius: 8px; margin-top: 12px; font-family: var(--font-mono); font-size: 0.9rem;">
+              1. Clic su Costruisci Serra<br>
+              2. Piazza edificio sulla mappa<br>
+              3. Metallo va a -50 (BUG!)
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);"><em>Risultato: risorse negative,
+                gioco rotto in 10 secondi!</em></p>
+          </div>
+
+          <div class="lim-box" style="border-color: var(--cherry-primary); background: var(--cherry-tint);">
+            <div
+              style="display: flex; align-items: center; gap: 8px; color: var(--cherry-primary); margin-bottom: 8px;">
+              <span class="material-symbols-outlined" style="font-size: 28px;">alt_route</span>
+              <strong style="font-size: 1.15rem;">La Selezione Condizionale</strong>
+            </div>
+            <p>Il gioco <strong>controlla lo stato del magazzino</strong> prima di fare qualsiasi mossa. Se hai le
+              risorse costruisce, altrimenti ti avvisa!</p>
+            <div
+              style="background: var(--paper-surface); padding: 12px; border-radius: 8px; margin-top: 12px; font-family: var(--font-mono); font-size: 0.9rem; border-left: 3px solid var(--cherry-primary);">
+              SE metallo &gt;= 50 ALLORA<br>
+              &nbsp;&nbsp;&bull; Costruisci Serra &amp; sottrai 50<br>
+              ALTRIMENTI<br>
+              &nbsp;&nbsp;&bull; Mostra "Metallo insufficiente!"
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--cherry-text);"><em>Il gioco è coerente, solido e
+                divertente da giocare!</em></p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Far riflettere: in SimCity o nei city builder su mobile, ogni volta che tocchi un edificio il gioco fa
+        esattamente questo controllo booleano.
+      </div>
+    </section>
+
+    <!-- SLIDE 3: COS'È UNA CONDIZIONE? -->
+    <section class="slide" data-slide="3">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">FONDAMENTI LOGICI</span>
+          <h2>Cos'è una Condizione? Solo VERO o FALSO!</h2>
+          <p class="section-lead">Una condizione è una verifica che ha solo due possibili risposte matematiche (Logica
+            Booleana).</p>
+        </div>
+
+        <div class="lim-three-cols">
+          <div class="lim-box" style="border-top: 4px solid #10b981;">
+            <div style="display: flex; align-items: center; gap: 8px; color: #047857; margin-bottom: 8px;">
+              <span class="material-symbols-outlined">check_circle</span>
+              <strong>VERO (True / 1)</strong>
+            </div>
+            <p>La condizione nel gioco si è verificata:</p>
+            <ul style="margin-top: 8px; padding-left: 18px; font-size: 0.95rem; line-height: 1.5;">
+              <li><code>crediti &gt;= 50</code> con crediti = 120</li>
+              <li><code>energia &gt; consumo</code> con 100 &gt; 80</li>
+              <li><code>posti_letto == coloni</code> con 10 == 10</li>
+            </ul>
+          </div>
+
+          <div class="lim-box" style="border-top: 4px solid #f43f5e;">
+            <div style="display: flex; align-items: center; gap: 8px; color: #be123c; margin-bottom: 8px;">
+              <span class="material-symbols-outlined">cancel</span>
+              <strong>FALSO (False / 0)</strong>
+            </div>
+            <p>La condizione NON si è verificata:</p>
+            <ul style="margin-top: 8px; padding-left: 18px; font-size: 0.95rem; line-height: 1.5;">
+              <li><code>crediti &gt;= 50</code> con crediti = 30</li>
+              <li><code>energia &gt; consumo</code> con 40 &gt; 80</li>
+              <li><code>posti_letto == coloni</code> con 6 == 10</li>
+            </ul>
+          </div>
+
+          <div class="lim-box" style="border-top: 4px solid var(--amber-secondary);">
+            <div style="display: flex; align-items: center; gap: 8px; color: var(--amber-text); margin-bottom: 8px;">
+              <span class="material-symbols-outlined">psychology_alt</span>
+              <strong>NON è una Condizione</strong>
+            </div>
+            <p>Gusti, desideri o azioni:</p>
+            <ul style="margin-top: 8px; padding-left: 18px; font-size: 0.95rem; line-height: 1.5;">
+              <li><em>"La colonia è carina?"</em></li>
+              <li><em>"Migliora la serra"</em></li>
+              <li><em>"I coloni sono stanchi?"</em></li>
+            </ul>
+            <p style="margin-top: 8px; font-size: 0.85rem; color: var(--text-muted);">Il motore del gioco capisce solo
+              numeri e confronti esatti!</p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Spiegare che la memoria del computer non valuta sentimenti: controlla se il numero nella variabile è maggiore,
+        minore o uguale alla soglia.
+      </div>
+    </section>
+
+    <!-- SLIDE 4: GLI OPERATORI DI CONFRONTO -->
+    <section class="slide" data-slide="4">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">IL LINGUAGGIO DELLE REGOLE</span>
+          <h2>I 6 Operatori Relazionali di Confronto</h2>
+          <p class="section-lead">I simboli che utilizziamo per confrontare le risorse e i parametri della colonia.</p>
+        </div>
+
+        <div class="operators-grid">
+          <div class="op-card">
+            <span class="op-symbol">&gt;</span>
+            <span class="op-name">Maggiore di</span>
+            <span class="op-example">produzione &gt; consumo</span>
+          </div>
+
+          <div class="op-card">
+            <span class="op-symbol">&lt;</span>
+            <span class="op-name">Minore di</span>
+            <span class="op-example">scorte_cibo &lt; 10</span>
+          </div>
+
+          <div class="op-card">
+            <span class="op-symbol">&gt;=</span>
+            <span class="op-name">Maggiore o Uguale</span>
+            <span class="op-example">metallo &gt;= costo_cupola</span>
+          </div>
+
+          <div class="op-card">
+            <span class="op-symbol">&lt;=</span>
+            <span class="op-name">Minore o Uguale</span>
+            <span class="op-example">coloni &lt;= posti_letto</span>
+          </div>
+
+          <div class="op-card" style="border: 2px solid var(--cherry-primary); background: var(--cherry-tint);">
+            <span class="op-symbol">==</span>
+            <span class="op-name">Uguale a (Confronto)</span>
+            <span class="op-example">coloni == 0</span>
+          </div>
+
+          <div class="op-card">
+            <span class="op-symbol">!=</span>
+            <span class="op-name">Diverso da</span>
+            <span class="op-example">stato_centrale != "SPENTA"</span>
+          </div>
+        </div>
+
+        <div class="note-box"
+          style="margin-top: 16px; background: var(--paper-surface-muted); padding: 12px 20px; border-radius: 10px; border-left: 4px solid var(--cherry-primary); font-size: 0.95rem;">
+          <strong>Regola per il quaderno:</strong> <code>&gt;=</code> e <code>&lt;=</code> si scrivono sempre con il
+          segno uguale a destra. Non inventare simboli come <code>=&gt;</code> o <code>&lt;&gt;</code>!
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Esempio alla classe: se ho 50 di metallo e il costo è 50, `metallo >= 50` è VERO! Con `metallo > 50` sarebbe
+        stato FALSO.
+      </div>
+    </section>
+
+    <!-- SLIDE 5: ASSEGNAZIONE VS CONFRONTO -->
+    <section class="slide" data-slide="5">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LA TRAPPOLA #1 DEGLI SVILUPPATORI</span>
+          <h2>Attenzione al Bug: = (Assegna) vs == (Confronta)</h2>
+          <p class="section-lead">Nel gestionale svolgono due compiti completamente diversi sulla memoria.</p>
+        </div>
+
+        <div class="lim-two-boxes">
+          <div class="lim-box" style="border-left: 5px solid var(--amber-secondary);">
+            <div
+              style="font-family: var(--font-mono); font-size: 1.8rem; font-weight: 700; color: var(--amber-secondary); margin-bottom: 6px;">
+              = (Un solo uguale)
+            </div>
+            <h3 style="margin-bottom: 8px;">L'Assegnazione (Comando: Deposita/Modifica)</h3>
+            <p>Significa: <em>"Modifica la risorsa! Metti questo nuovo valore dentro la scatola in RAM!"</em></p>
+            <div
+              style="background: var(--paper-bg); border-radius: 8px; padding: 12px; margin-top: 14px; font-family: var(--font-mono);">
+              <strong>crediti = 100</strong><br>
+              <span style="font-size: 0.85rem; color: var(--text-secondary);">&rarr; Sovrascrive il conto bancario con
+                100 crediti.</span>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--amber-text);"><strong>Azione: cambia la
+                partita!</strong></p>
+          </div>
+
+          <div class="lim-box" style="border-left: 5px solid var(--cherry-primary);">
+            <div
+              style="font-family: var(--font-mono); font-size: 1.8rem; font-weight: 700; color: var(--cherry-primary); margin-bottom: 6px;">
+              == (Doppio uguale)
+            </div>
+            <h3 style="margin-bottom: 8px;">Il Confronto (Domanda: È uguale a...?)</h3>
+            <p>Significa: <em>"Il giocatore ha esattamente questa quantità? Rispondimi solo VERO o FALSO!"</em></p>
+            <div
+              style="background: var(--paper-bg); border-radius: 8px; padding: 12px; margin-top: 14px; font-family: var(--font-mono);">
+              <strong>crediti == 100</strong><br>
+              <span style="font-size: 0.85rem; color: var(--text-secondary);">&rarr; Restituisce VERO se ha 100, FALSO
+                se ne ha 99 o 101.</span>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--cherry-text);"><strong>Domanda: non altera la
+                memoria!</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Scrivere alla lavagna `energia = 0` (spegni tutto!) vs `energia == 0` (chiediti se l'energia è finita). Errore
+        classico che tutti fanno all'inizio.
+      </div>
+    </section>
+
+    <!-- SLIDE 6: LA STRUTTURA SE - ALLORA - ALTRIMENTI -->
+    <section class="slide" data-slide="6">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">SINTASSI ALGORITMICA</span>
+          <h2>La Selezione a Due Vie: SE ... ALLORA ... ALTRIMENTI</h2>
+          <p class="section-lead">La struttura universale con cui il gioco sceglie quale strada percorrere.</p>
+        </div>
+
+        <div class="lim-split">
+          <div class="code-column">
+            <div class="code-box-header">
+              <span class="material-symbols-outlined">terminal</span>
+              <span>SCHEMA PSEUDOCODICE</span>
+            </div>
+            <pre class="code-area"><code><span class="kw-cherry">SE</span> &lt;condizione booleana&gt; <span class="kw-cherry">ALLORA</span>
+    <span class="comment">// Strada 1: eseguita SOLO se VERO</span>
+    istruzione_A1
+    istruzione_A2
+<span class="kw-cherry">ALTRIMENTI</span>
+    <span class="comment">// Strada 2: eseguita SOLO se FALSO</span>
+    istruzione_B1
+    istruzione_B2
+<span class="kw-cherry">FINE SE</span></code></pre>
+          </div>
+
+          <div class="branch-container" style="display: flex; flex-direction: column; gap: 12px; margin-top: 0;">
+            <div class="branch-card true-branch" style="padding: 16px;">
+              <div class="branch-header" style="margin-bottom: 8px; padding-bottom: 6px;">
+                <span class="branch-badge badge-true">
+                  <span class="material-symbols-outlined" style="font-size: 16px;">check</span>
+                  Ramo VERO (ALLORA)
+                </span>
+              </div>
+              <p style="font-size: 0.95rem;">Si attiva se il test è <strong>VERO</strong> (es. hai abbastanza risorse).
+                Il ramo ALTRIMENTI viene saltato all'istante.</p>
+            </div>
+
+            <div class="branch-card false-branch" style="padding: 16px;">
+              <div class="branch-header" style="margin-bottom: 8px; padding-bottom: 6px;">
+                <span class="branch-badge badge-false">
+                  <span class="material-symbols-outlined" style="font-size: 16px;">close</span>
+                  Ramo FALSO (ALTRIMENTI)
+                </span>
+              </div>
+              <p style="font-size: 0.95rem;">Si attiva se il test è <strong>FALSO</strong> (es. risorse insufficienti).
+                Il ramo ALLORA viene ignorato.</p>
+            </div>
+
+            <div
+              style="background: var(--paper-surface-muted); padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; color: var(--text-secondary);">
+              &bull; <strong>Mutua Esclusione:</strong> Il gioco non prenderà MAI entrambe le strade nello stesso turno!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Mostrare l'indentazione. Dopo FINE SE, il programma continua normalmente verso il basso (es. aggiorna la grafica
+        dello schermo).
+      </div>
+    </section>
+
+    <!-- SLIDE 7: LA SELEZIONE A UNA VIA -->
+    <section class="slide" data-slide="7">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">VARIANTE GESTIONALE</span>
+          <h2>La Selezione a Una Via: SE ... ALLORA (Senza Else)</h2>
+          <p class="section-lead">Quando l'azione avviene solo in un caso speciale (es. un bonus o una penalità
+            facoltativa).</p>
+        </div>
+
+        <div class="lim-two-boxes">
+          <div class="lim-box">
+            <h3 style="color: var(--cherry-primary); margin-bottom: 8px;">Esempio Bonus di Fine Giornata</h3>
+            <div
+              style="background: var(--paper-bg); border-radius: 8px; padding: 14px; font-family: var(--font-mono); font-size: 0.95rem; line-height: 1.6;">
+              <span style="color: var(--cherry-primary); font-weight: 700;">SE</span> colonia_felice == VERO <span
+                style="color: var(--cherry-primary); font-weight: 700;">ALLORA</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;crediti = crediti + 20<br>
+              <span style="color: var(--cherry-primary); font-weight: 700;">FINE SE</span><br><br>
+              salva_partita()
+            </div>
+          </div>
+
+          <div class="lim-box">
+            <h3 style="margin-bottom: 8px;">Cosa succede nel gioco?</h3>
+            <ul class="lim-bullet-list" style="margin-top: 10px;">
+              <li>
+                <span class="material-symbols-outlined lim-bullet-icon" style="color: #10b981;">check</span>
+                <span><strong>Se la colonia è felice (VERO):</strong> incassa il bonus di 20 crediti e poi salva la
+                  partita.</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined lim-bullet-icon" style="color: #f43f5e;">close</span>
+                <span><strong>Se la colonia non è felice (FALSO):</strong> non succede nulla, non perde soldi: salva la
+                  partita e prosegue dritto!</span>
+              </li>
+            </ul>
+            <div
+              style="margin-top: 16px; padding: 10px 14px; background: var(--amber-container); border-radius: 8px; font-size: 0.85rem; color: var(--amber-text);">
+              <strong>Regola:</strong> L'<code>ALTRIMENTI</code> si scrive solo quando la condizione falsa richiede
+              un'azione alternativa.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Spiegare che un `SE` senza `ALTRIMENTI` è come un checkpoint: fai qualcosa in più solo se te lo sei meritato.
+      </div>
+    </section>
+
+    <!-- SLIDE 8: IL PATTERN DEL CITY BUILDER -->
+    <section class="slide" data-slide="8">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">PATTERN DI GIOCO FONDAMENTALE</span>
+          <h2>Lo Schema Classico del City Builder: Verifica &amp; Spesa</h2>
+          <p class="section-lead">Ogni volta che il giocatore vuole costruire un edificio, il gioco segue sempre 3 passi
+            logici.</p>
+        </div>
+
+        <div class="lim-focus-card">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 6px;">
+
+            <div
+              style="background: var(--paper-bg); border-radius: 12px; padding: 16px; border: 1px solid var(--paper-border-strong);">
+              <div
+                style="display: flex; align-items: center; gap: 8px; color: var(--cherry-primary); margin-bottom: 8px; font-weight: 700;">
+                <span class="material-symbols-outlined">rule</span>
+                <span>1. VERIFICA</span>
+              </div>
+              <p style="font-size: 0.95rem; line-height: 1.5;">
+                Il gioco confronta le risorse in magazzino con il costo dell'edificio:
+                <br><code>SE risorsa &gt;= costo</code>
+              </p>
+            </div>
+
+            <div style="background: #ecfdf5; border-radius: 12px; padding: 16px; border: 1px solid #a7f3d0;">
+              <div
+                style="display: flex; align-items: center; gap: 8px; color: #047857; margin-bottom: 8px; font-weight: 700;">
+                <span class="material-symbols-outlined">paid</span>
+                <span>2. SCALA RISORSA</span>
+              </div>
+              <p style="font-size: 0.95rem; line-height: 1.5;">
+                Se sono sufficienti, piazza l'edificio e sottrae il costo dal totale:
+                <br><code>risorsa = risorsa - costo</code>
+              </p>
+            </div>
+
+            <div style="background: #fff1f2; border-radius: 12px; padding: 16px; border: 1px solid #fecdd3;">
+              <div
+                style="display: flex; align-items: center; gap: 8px; color: #be123c; margin-bottom: 8px; font-weight: 700;">
+                <span class="material-symbols-outlined">chat_bubble</span>
+                <span>3. FEEDBACK</span>
+              </div>
+              <p style="font-size: 0.95rem; line-height: 1.5;">
+                Comunica sempre un messaggio a video al giocatore (costruzione avvenuta o fondi insufficienti).
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Questo schema (Verifica -> Spesa -> Feedback) è il cuore di qualsiasi gioco gestionale e lo ritroveranno in
+        tutti gli esercizi di oggi.
+      </div>
+    </section>
+
+    <!-- SLIDE 9: INTRODUZIONE AI FLOW CHART -->
+    <section class="slide" data-slide="9">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">RAPPRESENTAZIONE GRAFICA</span>
+          <h2>I Diagrammi a Blocchi (Flow Chart)</h2>
+          <p class="section-lead">Le forme geometriche standard per disegnare il flusso dell'algoritmo prima di scrivere codice.</p>
+        </div>
+
+        <div class="fc-grid-4">
+          <!-- PARALLELOGRAMMA: INPUT / OUTPUT -->
+          <div class="fc-card">
+            <svg viewBox="0 0 160 50" class="fc-shape-svg">
+              <polygon points="25,5 155,5 135,45 5,45" fill="#fef3c7" stroke="#d97706" stroke-width="2.5" stroke-linejoin="round"/>
+              <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#92400e">LEGGI / SCRIVI</text>
+            </svg>
+            <div class="fc-shape-title">Parallelogramma</div>
+            <span class="fc-shape-badge" style="background: #fef3c7; color: #92400e;">INPUT / OUTPUT</span>
+            <p class="fc-shape-desc">
+              Ingresso dati da tastiera o sensori (<strong>LEGGI</strong>) e comunicazione a video al giocatore (<strong>SCRIVI</strong>).
+            </p>
+            <div class="fc-example-pill">LEGGI metallo / SCRIVI msg</div>
+          </div>
+
+          <!-- RETTANGOLO: OPERAZIONI / ASSEGNAZIONI -->
+          <div class="fc-card">
+            <svg viewBox="0 0 160 50" class="fc-shape-svg">
+              <rect x="10" y="5" width="140" height="40" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="2.5"/>
+              <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#065f46">OPERAZIONE (=)</text>
+            </svg>
+            <div class="fc-shape-title">Rettangolo</div>
+            <span class="fc-shape-badge" style="background: #ecfdf5; color: #065f46;">AZIONE / CALCOLO</span>
+            <p class="fc-shape-desc">
+              Calcoli matematici, decremento risorse, aggiornamento variabili e assegnazioni di testo.
+            </p>
+            <div class="fc-example-pill">metallo = metallo - 50</div>
+          </div>
+
+          <!-- ROMBO / ESAGONO: CONDIZIONE / BIVIO -->
+          <div class="fc-card">
+            <svg viewBox="0 0 160 50" class="fc-shape-svg">
+              <polygon points="80,5 155,25 80,45 5,25" fill="#fff1f2" stroke="#be123c" stroke-width="2.5" stroke-linejoin="round"/>
+              <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="'Outfit', sans-serif" font-weight="700" font-size="11" fill="#9f1239">CONDIZIONE ?</text>
+            </svg>
+            <div class="fc-shape-title">Rombo / Esagono</div>
+            <span class="fc-shape-badge" style="background: #fff1f2; color: #9f1239;">BIVIO (VERO / FALSO)</span>
+            <p class="fc-shape-desc">
+              Test booleano di decisione. Ha <strong>1 freccia in ingresso</strong> e <strong>2 frecce in uscita</strong> etichettate <em>SÌ/VERO</em> e <em>NO/FALSO</em>.
+            </p>
+            <div class="fc-example-pill">metallo &gt;= 50 ?</div>
+          </div>
+
+          <!-- OVALE: INIZIO / FINE -->
+          <div class="fc-card">
+            <svg viewBox="0 0 160 50" class="fc-shape-svg">
+              <rect x="20" y="5" width="120" height="40" rx="20" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2.5"/>
+              <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#3730a3">INIZIO / FINE</text>
+            </svg>
+            <div class="fc-shape-title">Ovale (Ellisse)</div>
+            <span class="fc-shape-badge" style="background: #e0e7ff; color: #3730a3;">START &amp; STOP</span>
+            <p class="fc-shape-desc">
+              Delimita i punti di partenza e di arrivo obbligatori dell'algoritmo: nessun flusso può rimanere sospeso.
+            </p>
+            <div class="fc-example-pill">INIZIO &bull; FINE</div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Spiegare agli studenti le quattro forme geometriche standard: parallelogramma (I/O), rettangolo (operazioni),
+        rombo (scelte/bivi con uscite etichettate VERO e FALSO), ovale (apertura e chiusura).
+      </div>
+    </section>
+
+    <!-- SLIDE 10: ESEMPIO SVOLTO (1/2) - IL PROBLEMA -->
+    <section class="slide" data-slide="10">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">ESEMPIO GUIDATO &bull; CITY BUILDER (1/2)</span>
+          <h2>Esempio Svolto: Costruzione della Cupola Idroponica</h2>
+          <p class="section-lead">Il giocatore vuole costruire una serra idroponica per produrre cibo per la colonia.</p>
+        </div>
+
+        <div class="slide-split-with-img">
+          <div class="lim-focus-card" style="border-left: 6px solid var(--cherry-primary); margin: 0;">
+            <div class="lim-title" style="color: var(--cherry-primary);">
+              <span class="material-symbols-outlined">agriculture</span>
+              <span>Regole di Costruzione</span>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.5; color: var(--text-primary); margin-top: 8px;">
+              Ogni <strong>Cupola Idroponica</strong> costa esattamente <strong>50 unità di metallo</strong>.
+            </p>
+            <div
+              style="background: var(--paper-bg); border-radius: 10px; padding: 12px 14px; margin-top: 10px; border: 1px dashed var(--paper-border-strong); font-size: 0.95rem;">
+              <p style="font-weight: 600; color: var(--text-primary);">Specifiche dell'Algoritmo:</p>
+              <ul style="margin-top: 6px; padding-left: 18px; line-height: 1.5;">
+                <li>Input: quantità di <code>metallo</code> disponibile nel magazzino.</li>
+                <li>Se il metallo basta (almeno 50): costruisci la serra, sottrai 50 al magazzino e notifica successo.</li>
+                <li>Altrimenti: non costruire nulla e avvisa che le risorse sono insufficienti.</li>
+                <li>Output: messaggio finale per il giocatore e saldo di metallo rimasto.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pixel-art-card">
+            <div class="pixel-art-img-wrap" style="aspect-ratio: 16/9; max-height: 290px;">
+              <img src="immagini/serra.jpeg" alt="Cupola Idroponica Pixel Art" class="pixel-art-img">
+            </div>
+            <div class="pixel-art-caption">
+              <span>Cupola Idroponica (Serra)</span>
+              <span class="pixel-tag">COSTO: 50 METALLO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Presentare il problema. Chiedere alla classe: se abbiamo esattamente 50 di metallo, possiamo costruire la serra?
+        Sì, grazie al maggiore o uguale.
+      </div>
+    </section>
+
+    <!-- SLIDE 11: ESEMPIO SVOLTO (2/2) - IL FLOW CHART RISOLTO -->
+    <section class="slide" data-slide="11">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">ESEMPIO GUIDATO &bull; CITY BUILDER (2/2)</span>
+          <h2>Il Flow Chart Risolto &amp; Pseudocodice</h2>
+          <p class="section-lead">Come i blocchi geometrici disegnano visivamente la logica della costruzione.</p>
+        </div>
+
+        <div class="lim-split" style="gap: 20px; align-items: stretch;">
+          <!-- COLONNA FLOW CHART GRAFICO -->
+          <div class="fc-diagram-container" style="flex: 1.15; padding: 10px;">
+            <svg class="fc-flowchart-svg" viewBox="0 0 420 430" style="width: 100%; max-height: 360px; display: block;">
+              <defs>
+                <marker id="fc-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#475569" />
+                </marker>
+              </defs>
+
+              <!-- INIZIO -->
+              <rect x="150" y="5" width="120" height="28" rx="14" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+              <text x="210" y="23" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#3730a3">INIZIO</text>
+
+              <!-- Linea verso LEGGI -->
+              <line x1="210" y1="33" x2="210" y2="54" stroke="#475569" stroke-width="2" marker-end="url(#fc-arrow)"/>
+
+              <!-- LEGGI metallo (Parallelogramma) -->
+              <polygon points="135,55 295,55 275,87 115,87" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+              <text x="205" y="75" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#92400e">LEGGI metallo</text>
+
+              <!-- Linea verso ROMBO -->
+              <line x1="205" y1="87" x2="205" y2="110" stroke="#475569" stroke-width="2" marker-end="url(#fc-arrow)"/>
+
+              <!-- ROMBO CONDIZIONE -->
+              <polygon points="205,110 310,144 205,178 100,144" fill="#fff1f2" stroke="#be123c" stroke-width="2"/>
+              <text x="205" y="148" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#9f1239">metallo &gt;= 50 ?</text>
+
+              <!-- RAMO VERO (A Sinistra) -->
+              <path d="M 100,144 L 65,144 L 65,198" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#fc-arrow)"/>
+              <text x="60" y="136" font-family="'Outfit', sans-serif" font-weight="800" font-size="12" fill="#047857">SÌ (VERO)</text>
+
+              <!-- Azione 1: metallo = metallo - 50 -->
+              <rect x="5" y="200" width="130" height="30" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+              <text x="70" y="219" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="600" font-size="10.5" fill="#065f46">metallo = metallo - 50</text>
+
+              <!-- Linea verso Azione 2 -->
+              <line x1="70" y1="230" x2="70" y2="246" stroke="#475569" stroke-width="2" marker-end="url(#fc-arrow)"/>
+
+              <!-- Azione 2: messaggio = "Serra Fatta!" -->
+              <rect x="5" y="248" width="130" height="30" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+              <text x="70" y="267" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="600" font-size="10" fill="#065f46">msg = "Serra Costruita!"</text>
+
+              <!-- Chiusura ramo vero -->
+              <path d="M 70,278 L 70,315 L 200,315" fill="none" stroke="#475569" stroke-width="2"/>
+
+              <!-- RAMO FALSO (A Destra) -->
+              <path d="M 310,144 L 350,144 L 350,220" fill="none" stroke="#be123c" stroke-width="2" marker-end="url(#fc-arrow)"/>
+              <text x="315" y="136" font-family="'Outfit', sans-serif" font-weight="800" font-size="12" fill="#be123c">NO (FALSO)</text>
+
+              <!-- Azione 3: messaggio = "Metallo Insuff." -->
+              <rect x="285" y="222" width="130" height="32" rx="4" fill="#fff1f2" stroke="#e11d48" stroke-width="2"/>
+              <text x="350" y="242" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="600" font-size="10" fill="#9f1239">msg = "Metallo Insuff."</text>
+
+              <!-- Chiusura ramo falso -->
+              <path d="M 350,254 L 350,315 L 210,315" fill="none" stroke="#475569" stroke-width="2"/>
+
+              <!-- Punto di Riconnessione -->
+              <circle cx="205" cy="315" r="4" fill="#475569"/>
+              <line x1="205" y1="315" x2="205" y2="336" stroke="#475569" stroke-width="2" marker-end="url(#fc-arrow)"/>
+
+              <!-- SCRIVI msg, metallo (Parallelogramma) -->
+              <polygon points="120,338 290,338 270,370 100,370" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+              <text x="195" y="358" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="700" font-size="11" fill="#92400e">SCRIVI msg, metallo</text>
+
+              <!-- Linea verso FINE -->
+              <line x1="195" y1="370" x2="195" y2="390" stroke="#475569" stroke-width="2" marker-end="url(#fc-arrow)"/>
+
+              <!-- FINE -->
+              <rect x="140" y="392" width="110" height="28" rx="14" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+              <text x="195" y="410" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#3730a3">FINE</text>
+            </svg>
+          </div>
+
+          <!-- COLONNA PSEUDOCODICE AFFIANCATO -->
+          <div class="code-column" style="flex: 0.85; margin: 0;">
+            <div class="code-box-header">
+              <span class="material-symbols-outlined">code</span>
+              <span>CORRISPONDENZA IN CODICE</span>
+            </div>
+            <pre class="code-area" style="font-size: 0.82rem; padding: 12px;"><code><span class="comment">// 1. Parallelogramma Input</span>
+<span class="kw-cherry">LEGGI</span> metallo
+
+<span class="comment">// 2. Rombo Condizione</span>
+<span class="kw-cherry">SE</span> metallo &gt;= 50 <span class="kw-cherry">ALLORA</span>
+    <span class="comment">// Rettangoli Ramo SÌ</span>
+    metallo = metallo - 50
+    msg = <span class="str">"Serra Costruita!"</span>
+<span class="kw-cherry">ALTRIMENTI</span>
+    <span class="comment">// Rettangolo Ramo NO</span>
+    msg = <span class="str">"Metallo Insufficiente!"</span>
+<span class="kw-cherry">FINE SE</span>
+
+<span class="comment">// 3. Parallelogramma Output</span>
+<span class="kw-cherry">SCRIVI</span> msg, metallo</code></pre>
+            <div style="background: var(--paper-bg); padding: 8px 12px; border-radius: 8px; margin-top: 8px; font-size: 0.82rem; border-left: 3px solid var(--cherry-primary);">
+              I due rami del rombo si <strong>ricongiungono sempre</strong> prima del parallelogramma di output e del blocco <em>FINE</em>!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Far notare come ogni forma geometrica del diagramma corrisponda esattamente a un'istruzione dello pseudocodice.
+      </div>
+    </section>
+
+    <!-- SLIDE 12: ESERCIZIO 1 -->
+    <section class="slide" data-slide="12">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LABORATORIO SU CARTA &bull; SFIDA 1 DI 3</span>
+          <h2>Esercizio 1: Il Bilancio Energetico della Colonia</h2>
+          <p class="section-lead">Verifica della produzione solare contro il fabbisogno notturno.</p>
+        </div>
+
+        <div class="slide-split-with-img">
+          <div class="lim-focus-card" style="margin: 0;">
+            <p style="font-size: 0.98rem; line-height: 1.5; color: var(--text-primary); margin-bottom: 10px;">
+              Il sole rosso di Marte sta calando dietro i crateri di Tharsis. Nella sala di controllo suonano i monitor: i coloni rientrano nelle cupole e accendono i riscaldatori notturni. Come responsabile dell'energia della colonia, devi verificare se la carica accumulata dai pannelli solari basterà a coprire il consumo di tutti gli edifici della base:
+            </p>
+            <div style="background: var(--paper-bg); padding: 12px 14px; border-radius: 8px; margin-top: 8px; font-size: 0.93rem; line-height: 1.5;">
+              <strong>Cosa deve fare il gioco:</strong>
+              <p style="margin-top: 6px;">
+                Se la produzione di energia riesce a coprire o superare il consumo richiesto, la rete è stabile e la colonia trascorre la notte al sicuro. Se invece la produzione è inferiore alla richiesta, si rischia il blackout: occorre segnalare l'emergenza e disconnettere subito le fabbriche.
+              </p>
+              <p style="margin-top: 8px; font-weight: 600; color: var(--cherry-primary);">
+                Disegna il Flow Chart sul quaderno usando le forme corrette (parallelogramma per I/O, rombo per la scelta, rettangoli per lo stato).
+              </p>
+            </div>
+          </div>
+
+          <div class="pixel-art-card">
+            <div class="pixel-art-img-wrap">
+              <img src="immagini/pannelli_solari.jpeg" alt="Centrale Solare Marziana Pixel Art" class="pixel-art-img">
+            </div>
+            <div class="pixel-art-caption">
+              <span>Centrale Solare &bull; Rete Elettrica</span>
+              <span class="pixel-tag">IMPIANTO ENERGIA</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 12px;">
+          <button class="m3-btn m3-btn-outlined reveal-trigger-btn" data-target="soluzioneEs1">
+            <span class="material-symbols-outlined">visibility</span>
+            <span>Mostra Soluzione</span>
+          </button>
+          <div id="soluzioneEs1" class="reveal-content hidden"
+            style="margin-top: 8px; background: var(--paper-surface); border: 1px solid var(--cherry-primary); padding: 10px 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.85rem; max-width: 620px;">
+            <strong>Struttura Flow Chart:</strong><br>
+            1. <em>Ovale:</em> INIZIO<br>
+            2. <em>Parallelogramma:</em> LEGGI energia_prodotta, energia_richiesta<br>
+            3. <em>Rombo:</em> energia_prodotta &gt;= energia_richiesta ?<br>
+            &nbsp;&nbsp;&bull; <strong>SÌ:</strong> <em>Rettangolo</em> stato = "RETE STABILE: Energia sufficiente"<br>
+            &nbsp;&nbsp;&bull; <strong>NO:</strong> <em>Rettangolo</em> stato = "BLACKOUT: Stacca fabbriche!"<br>
+            4. <em>(I rami si uniscono)</em><br>
+            5. <em>Parallelogramma:</em> SCRIVI stato<br>
+            6. <em>Ovale:</em> FINE
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Verificare che gli studenti abbiano compreso il test di confronto tra due quantità variabili (produzione e
+        richiesta) anziché una variabile e un numero fisso.
+      </div>
+    </section>
+
+    <!-- SLIDE 13: ESERCIZIO 2 -->
+    <section class="slide" data-slide="13">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LABORATORIO SU CARTA &bull; SFIDA 2 DI 3</span>
+          <h2>Esercizio 2: Arrivo di Nuovi Coloni e Razioni di Cibo</h2>
+          <p class="section-lead">Controllo scorte alimentari e aggiornamento delle risorse in magazzino.</p>
+        </div>
+
+        <div class="slide-split-with-img">
+          <div class="lim-focus-card" style="margin: 0;">
+            <p style="font-size: 0.98rem; line-height: 1.5; color: var(--text-primary); margin-bottom: 10px;">
+              I retrorazzi della navetta Ares Shuttle sollevano polvere rossa sulla pista n&deg; 2: sono sbarcati nuovi coloni pronti a unirsi alla comunità. Prima di aprire i portelloni e assegnare gli alloggi, il responsabile del magazzino deve consultare il terminale dei silos idroponici, sapendo che ciascun colono consuma esattamente una cassa di cibo a turno:
+            </p>
+            <div style="background: var(--paper-bg); padding: 12px 14px; border-radius: 8px; font-size: 0.93rem; line-height: 1.5;">
+              <strong>Cosa deve fare il gioco:</strong>
+              <p style="margin-top: 6px;">
+                Se nel magazzino ci sono abbastanza provviste per sfamare tutti i coloni presenti, le razioni vengono distribuite, il magazzino viene scalato della quantità consumata e i coloni sono sazi. Se invece il cibo non basta per tutti, la distribuzione viene bloccata e scatta l'allarme carestia.
+              </p>
+              <p style="margin-top: 8px; font-weight: 600; color: var(--cherry-primary);">
+                Disegna il Flow Chart sul quaderno: ricorda il rettangolo per il calcolo delle scorte rimaste!
+              </p>
+            </div>
+          </div>
+
+          <div class="pixel-art-card">
+            <div class="pixel-art-img-wrap">
+              <img src="immagini/shuttle.jpeg" alt="Ares Shuttle e Silos Razioni Pixel Art" class="pixel-art-img">
+            </div>
+            <div class="pixel-art-caption">
+              <span>Ares Shuttle &bull; Piattaforma 02</span>
+              <span class="pixel-tag">LOGISTICA CIBO</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 12px;">
+          <button class="m3-btn m3-btn-outlined reveal-trigger-btn" data-target="soluzioneEs2">
+            <span class="material-symbols-outlined">visibility</span>
+            <span>Mostra Soluzione</span>
+          </button>
+          <div id="soluzioneEs2" class="reveal-content hidden"
+            style="margin-top: 8px; background: var(--paper-surface); border: 1px solid var(--cherry-primary); padding: 10px 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.85rem; max-width: 620px;">
+            <strong>Struttura Flow Chart:</strong><br>
+            1. <em>Ovale:</em> INIZIO<br>
+            2. <em>Parallelogramma:</em> LEGGI scorte_cibo, numero_coloni<br>
+            3. <em>Rombo:</em> scorte_cibo &gt;= numero_coloni ?<br>
+            &nbsp;&nbsp;&bull; <strong>SÌ:</strong> <em>Rettangolo</em> scorte = scorte - coloni &rarr; <em>Rettangolo</em> esito = "Coloni sazi!"<br>
+            &nbsp;&nbsp;&bull; <strong>NO:</strong> <em>Rettangolo</em> esito = "CARESTIA: Cibo insufficiente!"<br>
+            4. <em>(I rami si uniscono)</em><br>
+            5. <em>Parallelogramma:</em> SCRIVI esito, scorte_cibo<br>
+            6. <em>Ovale:</em> FINE
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Nel caso limite di scorte uguali ai coloni: il test >= risulta VERO, il cibo viene distribuito, le scorte
+        vanno a zero e i coloni sono sfamati.
+      </div>
+    </section>
+
+    <!-- SLIDE 14: ESERCIZIO 3 -->
+    <section class="slide" data-slide="14">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LABORATORIO SU CARTA &bull; SFIDA 3 DI 3</span>
+          <h2>Esercizio 3: L'Indice di Felicità della Colonia</h2>
+          <p class="section-lead">Gestione di tre scenari alternativi per la popolazione marziana.</p>
+        </div>
+
+        <div class="slide-split-with-img">
+          <div class="lim-focus-card" style="margin: 0;">
+            <p style="font-size: 0.98rem; line-height: 1.5; color: var(--text-primary); margin-bottom: 8px;">
+              È venerdì sera nella cupola centrale e si tiene l'assemblea cittadina. Vivere su Marte mette a dura prova la convivenza: i sensori sociali della colonia misurano l'indice di gradimento dei coloni con un punteggio da 0 a 100:
+            </p>
+            <div style="background: var(--paper-bg); padding: 10px 14px; border-radius: 8px; font-size: 0.91rem; line-height: 1.45;">
+              <strong>I Tre Scenari del Gestionale:</strong>
+              <ul style="margin-top: 4px; padding-left: 18px; line-height: 1.45;">
+                <li><strong>75 punti o superiore:</strong> coloni entusiasti e colonia fiorente (+50 crediti di bonus tasse).</li>
+                <li><strong>Sotto i 40 punti:</strong> scoppia una rivolta per il forte malcontento e la produzione si blocca.</li>
+                <li><strong>Tutti gli altri casi (tra 40 e 74):</strong> situazione regolare e colonia stabile.</li>
+              </ul>
+              <p style="margin-top: 6px; font-weight: 600; color: var(--cherry-primary);">
+                Disegna il Flow Chart a cascata: usa due rombi collegati sul ramo NO per gestire i 3 scenari!
+              </p>
+            </div>
+          </div>
+
+          <div class="pixel-art-card">
+            <div class="pixel-art-img-wrap">
+              <img src="immagini/municipio.jpeg" alt="Municipio e Ologramma Felicità Pixel Art" class="pixel-art-img">
+            </div>
+            <div class="pixel-art-caption">
+              <span>Cupola Centrale &bull; Piazza Assemblea</span>
+              <span class="pixel-tag">INDICE FELICITÀ</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 12px;">
+          <button class="m3-btn m3-btn-outlined reveal-trigger-btn" data-target="soluzioneEs3">
+            <span class="material-symbols-outlined">visibility</span>
+            <span>Mostra Soluzione</span>
+          </button>
+          <div id="soluzioneEs3" class="reveal-content hidden"
+            style="margin-top: 8px; background: var(--paper-surface); border: 1px solid var(--cherry-primary); padding: 10px 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.82rem; max-width: 620px;">
+            <strong>Struttura Flow Chart Annidato:</strong><br>
+            1. <em>Ovale:</em> INIZIO &rarr; <em>Parallelogramma:</em> LEGGI felicita<br>
+            2. <em>Rombo 1:</em> felicita &gt;= 75 ?<br>
+            &nbsp;&nbsp;&bull; <strong>SÌ:</strong> <em>Rettangolo</em> stato = "COLONIA FIORENTE (+50 Crediti)"<br>
+            &nbsp;&nbsp;&bull; <strong>NO:</strong> passa al <em>Rombo 2</em>: felicita &lt; 40 ?<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <strong>SÌ:</strong> <em>Rettangolo</em> stato = "RIVOLTA: Produzione bloccata!"<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <strong>NO:</strong> <em>Rettangolo</em> stato = "COLONIA STABILE: Regolare"<br>
+            3. <em>(Tutti i rami convergono)</em> &rarr; <em>Parallelogramma:</em> SCRIVI stato &rarr; <em>Ovale:</em> FINE
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Far notare l'annidamento. Spiegare che se la prima condizione (>= 75) è vera, il computer ignora tutti gli altri
+        controlli e vola direttamente alla fine.
+      </div>
+    </section>
+
+    <!-- SLIDE 15: I 3 ERRORI TIPICI NEI FLOW CHART -->
+    <section class="slide" data-slide="15">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">CHECKLIST DI CONTROLLO</span>
+          <h2>I 3 Errori Tipici nei Flow Chart &amp; Algoritmi</h2>
+          <p class="section-lead">Prima di consegnare il quaderno, verifica che il tuo diagramma non cada in queste trappole.</p>
+        </div>
+
+        <div class="lim-three-cols">
+          <div class="lim-box">
+            <div
+              style="width: 40px; height: 40px; border-radius: 50%; background: #ffe4e6; color: #be123c; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 10px;">
+              1
+            </div>
+            <h3 style="color: var(--cherry-primary); font-size: 1.1rem; margin-bottom: 6px;">Etichette SÌ/NO Mancanti</h3>
+            <p style="font-size: 0.9rem; line-height: 1.5;">
+              Disegnare le due frecce in uscita dal rombo senza scrivere chiaramente quale strada corrisponde al <strong>SÌ (VERO)</strong> e quale al <strong>NO (FALSO)</strong>.
+            </p>
+          </div>
+
+          <div class="lim-box">
+            <div
+              style="width: 40px; height: 40px; border-radius: 50%; background: #ffe4e6; color: #be123c; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 10px;">
+              2
+            </div>
+            <h3 style="color: var(--cherry-primary); font-size: 1.1rem; margin-bottom: 6px;">Invertire le Forme</h3>
+            <p style="font-size: 0.9rem; line-height: 1.5;">
+              Usare un rettangolo per leggere/scrivere dati a video (anziché il <strong>parallelogramma</strong>) o usare un parallelogramma per calcoli e decrementi di risorse.
+            </p>
+          </div>
+
+          <div class="lim-box">
+            <div
+              style="width: 40px; height: 40px; border-radius: 50%; background: #ffe4e6; color: #be123c; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 10px;">
+              3
+            </div>
+            <h3 style="color: var(--cherry-primary); font-size: 1.1rem; margin-bottom: 6px;">Frecce Aperte nel Vuoto</h3>
+            <p style="font-size: 0.9rem; line-height: 1.5;">
+              Non ricongiungere i rami del bivio prima del blocco di output finale. I percorsi dell'algoritmo non possono rimanere sospesi nell'aria: devono confluire verso <strong>FINE</strong>!
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Consigliare agli studenti di seguire il tracciato delle frecce con il dito per verificare che nessun ramo sia interrotto.
+      </div>
+    </section>
+
+    <!-- SLIDE 16: REGOLE DEL LABORATORIO -->
+    <section class="slide" data-slide="16">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">PRONTI ALLA PARTITA</span>
+          <h2>Regole del Laboratorio: Solo Algoritmi su Carta</h2>
+          <p class="section-lead">Quaderno di informatica, penna e righello: disegniamo i Flow Chart completi per il nostro gioco.</p>
+        </div>
+
+        <div class="lim-two-boxes">
+          <div class="lim-box" style="border-left: 5px solid #10b981;">
+            <h3 style="color: #047857; margin-bottom: 8px;">Modalità Operativa (Solo Flow Chart)</h3>
+            <ul class="lim-bullet-list">
+              <li>
+                <span class="material-symbols-outlined lim-bullet-icon" style="color: #10b981;">draw</span>
+                <span><strong>Forme corrette:</strong> usa parallelogrammi per input/output, rettangoli per operazioni e rombi per i bivi.</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined lim-bullet-icon" style="color: #10b981;">alt_route</span>
+                <span><strong>Etichette obbligatorie:</strong> scrivi sempre <em>SÌ</em> (o <em>VERO</em>) e <em>NO</em> (o <em>FALSO</em>) su ciascun ramo del rombo.</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined lim-bullet-icon" style="color: #10b981;">merge</span>
+                <span><strong>Chiudi sempre i percorsi:</strong> unisci le frecce prima del blocco comune di output e del blocco <em>FINE</em>.</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined lim-bullet-icon" style="color: #10b981;">terminal</span>
+                <span><strong>Niente computer né tabelle:</strong> oggi ci concentriamo solo ed esclusivamente sulla progettazione dell'algoritmo grafico!</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="lim-box" style="border-left: 5px solid var(--cherry-primary); background: var(--cherry-tint);">
+            <h3 style="color: var(--cherry-primary); margin-bottom: 8px;">Le Tre Sfide da Disegnare</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px; font-size: 0.95rem;">
+              <div
+                style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 4px;">
+                <span><strong>Sfida 1:</strong> Bilancio Energetico</span>
+                <span style="font-weight: 600; color: var(--cherry-primary);">Flow Chart con Bivio Semplice</span>
+              </div>
+              <div
+                style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 4px;">
+                <span><strong>Sfida 2:</strong> Nuovi Coloni &amp; Cibo</span>
+                <span style="font-weight: 600; color: var(--cherry-primary);">Flow Chart con Calcolo Risorse</span>
+              </div>
+              <div
+                style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 4px;">
+                <span><strong>Sfida 3:</strong> Indice di Felicità</span>
+                <span style="font-weight: 600; color: var(--cherry-primary);">Flow Chart a 3 Scenari a Cascata</span>
+              </div>
+            </div>
+            <p style="margin-top: 14px; font-size: 0.85rem; color: var(--cherry-text);">
+              <em>Il docente gira tra i banchi per correggere e validare i diagrammi a blocchi al volo!</em>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Dare il via al disegno dei Flow Chart su quaderno. Ricordare di usare il righello per mantenere i diagrammi leggibili e ordinati.
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Barra Inferiore di Navigazione -->
+  <footer class="m3-bottom-bar">
+    <div class="bottom-bar-left">
+      <button id="btnPrev" class="m3-btn m3-btn-outlined" title="Slide Precedente (&larr;)">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Indietro</span>
+      </button>
+      <button id="btnNext" class="m3-btn m3-btn-filled" title="Slide Successiva (&rarr; / Spazio)">
+        <span>Avanti</span>
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+    </div>
+
+    <div class="bottom-bar-center">
+      <div class="m3-counter-display">
+        Slide <span id="currentSlideNum">1</span> / <span id="totalSlidesNum">16</span>
+      </div>
+    </div>
+
+    <div class="bottom-bar-right">
+      <span class="shortcut-tip">Usa <kbd>&larr;</kbd> <kbd>&rarr;</kbd> o <kbd>Spazio</kbd> &bull; <kbd>O</kbd> Indice
+        &bull; <kbd>N</kbd> Note &bull; <kbd>P</kbd> Esporta PDF</span>
+    </div>
+  </footer>
+
+  <!-- Modale Panoramica (Indice delle Slide) -->
+  <div id="overviewModal" class="m3-modal-backdrop hidden">
+    <div class="m3-dialog">
+      <div class="dialog-header">
+        <div class="dialog-title-group">
+          <span class="material-symbols-outlined">grid_view</span>
+          <h3>Indice delle Diapositive</h3>
+        </div>
+        <div class="dialog-actions">
+          <button id="btnModalExportPdf" class="m3-btn m3-btn-outlined m3-btn-sm" title="Esporta tutte le slide in PDF">
+            <span class="material-symbols-outlined" style="font-size: 19px;">picture_as_pdf</span>
+            <span>Esporta in PDF</span>
+          </button>
+          <button id="btnCloseOverview" class="m3-icon-button" title="Chiudi">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div id="overviewGrid" class="overview-grid">
+        <!-- Generato dinamicamente da app.js -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
