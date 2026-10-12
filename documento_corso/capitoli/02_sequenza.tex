@@ -1,0 +1,169 @@
+\chapter{La Struttura Sequenziale}
+\label{chap:sequenza}
+
+\begin{quote}
+\itshape
+\small
+``Prima i muri, poi il tetto: in un algoritmo l'ordine dei passi non è un dettaglio, è la soluzione stessa.''
+\end{quote}
+\vspace{1em}
+
+\noindent\textbf{Riferimento Lezione:} 28 Settembre 2026 -- Seconda Lezione di Laboratorio\\
+\textbf{Competenze chiave:} Scomposizione di un problema nel modello Input--Elaborazione--Output, scrittura di sequenze lineari di istruzioni elementari, riconoscimento degli errori tipici di ordine e di ambiguità.
+
+\vspace{1.5em}
+
+% ------------------------------------------------------------------------------
+\section{Ripartiamo dalla Definizione}
+% ------------------------------------------------------------------------------
+
+Nel capitolo precedente abbiamo definito l'algoritmo come una sequenza \textbf{finita} e \textbf{ordinata} di istruzioni elementari, chiare e \textbf{non ambigue}. Rileggiamo la definizione mettendo l'accento su tre parole:
+
+\begin{itemize}
+  \item \textbf{Sequenza ordinata:} l'ordine cronologico dei passi è vincolante. Scambiare due istruzioni altera il risultato o blocca l'esecuzione.
+  \item \textbf{Istruzioni elementari:} passi atomici che l'esecutore (umano o macchina) sa compiere senza dubbi né interpretazioni soggettive.
+  \item \textbf{Problema e soluzione:} l'algoritmo parte da una condizione iniziale (\textbf{Input}) e produce un risultato concreto (\textbf{Output}).
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Il Modello Fondamentale I-P-O}
+% ------------------------------------------------------------------------------
+
+Ogni elaborazione informatica si fonda su tre momenti, che d'ora in poi chiameremo \textbf{schema I-P-O} (\emph{Input -- Process -- Output}):
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=white,colframe=PiazzaGray!40,width=0.88\textwidth,arc=2mm,halign=center]
+\textbf{\color{BoxBlue}INPUT} $\longrightarrow$
+\colorbox{PiazzaPrimary!10}{\textbf{\color{PiazzaPrimary}~ELABORAZIONE~}} $\longrightarrow$
+\textbf{\color{BoxGreen}OUTPUT}
+\end{tcolorbox}
+\end{center}
+
+\begin{enumerate}
+  \item \textbf{Input (dati in ingresso):} le informazioni fornite al sistema, come valori digitati dall'utente, misure o prezzi.
+  \item \textbf{Elaborazione (Process):} la serie ordinata di calcoli e trasformazioni eseguite dal calcolatore passo dopo passo.
+  \item \textbf{Output (dati in uscita):} il risultato restituito, come un testo a video, un totale stampato o un disegno completato.
+\end{enumerate}
+
+\begin{consiglio}[Le Quattro Proprietà, in Breve]
+Un algoritmo corretto è \textbf{finito} (termina sempre), \textbf{definito} (``aggiungi 5 grammi di zucchero'', non ``un po' di zucchero''), \textbf{generale} (risolve ogni problema della sua classe, non un solo caso con dati fissi) ed \textbf{efficiente}. In prima superiore la priorità è al 100\% sulla correttezza logica.
+\end{consiglio}
+
+% ------------------------------------------------------------------------------
+\section{La Sequenza Pura}
+% ------------------------------------------------------------------------------
+
+Nelle prime settimane di laboratorio lavoriamo esclusivamente sulla \textbf{sequenza lineare}, la più semplice delle strutture di controllo.
+
+\begin{concetto}[La Struttura Sequenziale]
+In una \textbf{sequenza} le istruzioni vengono eseguite rigidamente \textbf{dall'alto verso il basso}, una dietro l'altra:
+\begin{itemize}
+  \item non ci sono bivi né ripetizioni: ogni riga viene eseguita \textbf{esattamente una volta};
+  \item \textbf{l'ordine temporale è tassativo}: non si può usare o elaborare un dato prima di averlo letto o calcolato.
+\end{itemize}
+\end{concetto}
+
+% ------------------------------------------------------------------------------
+\section{Esempi Svolti}
+% ------------------------------------------------------------------------------
+
+\begin{esempio}[Costruire un Rifugio di Terra 3x3 in Minecraft]
+\textbf{Input (inventario):} 33 blocchi di terra, 1 porta di legno, 1 torcia, 1 letto, 1 fornace, 1 banco da lavoro.\\
+\textbf{Output:} rifugio $3 \times 3$ chiuso, illuminato e arredato per superare la notte.
+
+\begin{enumerate}
+  \item Posiziona il perimetro della base con 8 blocchi di terra, lasciando un vuoto per la porta.
+  \item Innalza il secondo livello dei muri (8 blocchi).
+  \item Innalza il terzo livello dei muri (8 blocchi).
+  \item Copri il soffitto con 9 blocchi di terra: il tetto $3 \times 3$ è chiuso.
+  \item Posiziona la porta di legno per sigillare l'ingresso.
+  \item Attacca la torcia su una parete interna (la luce impedisce la comparsa dei mostri).
+  \item Posiziona il letto in un angolo per impostare il punto di rinascita.
+  \item Posiziona la fornace.
+  \item Posiziona il banco da lavoro.
+  \item Chiudi la porta e dormi: notte superata!
+\end{enumerate}
+
+\textbf{Perché l'ordine è legge?} Se provi a piazzare la torcia o il tetto prima di aver innalzato i muri, non hai un supporto solido su cui posizionarli. Se metti il letto prima di chiudere i muri, un mostro ti elimina prima dell'alba.
+\end{esempio}
+
+\begin{esempio}[Preparare un Toast Farcito alla Piastra]
+\textbf{Input:} 2 fette di pane da toast, 2 fette di formaggio, 1 fetta di prosciutto cotto, piastra elettrica, 1 piatto.\\
+\textbf{Output:} toast caldo e dorato con formaggio fuso, pronto sul piatto.
+
+\begin{enumerate}
+  \item Appoggia le due fette di pane sul tagliere pulito.
+  \item Adagia la prima fetta di formaggio sulla fetta di pane inferiore.
+  \item Aggiungi la fetta di prosciutto cotto sopra il formaggio.
+  \item Adagia la seconda fetta di formaggio sopra il prosciutto.
+  \item Chiudi il toast sovrapponendo la seconda fetta di pane.
+  \item Accendi la piastra elettrica e attendi che sia calda.
+  \item Posiziona il toast sulla piastra e chiudi il coperchio.
+  \item Attendi 3 minuti per la tostatura.
+  \item Apri la piastra e preleva il toast con una paletta.
+  \item Adagia il toast sul piatto e servilo caldo.
+\end{enumerate}
+
+\textbf{Perché l'ordine è fondamentale?} Se metti il formaggio sulla piastra prima del pane, il formaggio brucia. Se provi a tostare il pane prima di accendere la piastra, resta crudo.
+\end{esempio}
+
+% ------------------------------------------------------------------------------
+\newpage
+\section{Esercizi di Laboratorio su Carta}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Esercizio 1: La Media di 3 Voti]
+Uno studente ha ottenuto 3 voti in informatica: \textbf{7}, \textbf{8} e \textbf{6}.\\
+Scrivi sul quaderno, in italiano chiaro, la sequenza lineare che calcola e restituisce la media esatta. Indica prima l'\textbf{Input}, poi i passi dell'elaborazione e infine l'\textbf{Output}.
+\end{esercizio}
+
+\begin{soluzione}[Esercizio 1: La Media di 3 Voti]
+\textbf{Input:} i tre voti (7, 8 e 6).
+\begin{enumerate}
+  \item Leggi il primo voto, il secondo voto e il terzo voto.
+  \item Calcola la somma dei tre voti: $7 + 8 + 6 = 21$.
+  \item Dividi la somma per il numero dei voti: $21 \div 3 = 7$.
+  \item Mostra la media ottenuta.
+\end{enumerate}
+\textbf{Output:} la media, cioè 7.
+
+\smallskip
+\noindent Per rispettare la \textbf{generalità} la sequenza deve funzionare con qualsiasi terna di voti: si scrive ``somma dei tre voti diviso 3'', non ``21 diviso 3''.
+\end{soluzione}
+
+\begin{esercizio}[Esercizio 2: Il Robot Disegnatore]
+Un robot su una lavagna digitale comprende solo due istruzioni:
+\begin{itemize}
+  \item \textbf{``Avanza di 100 passi tracciando una linea dritta''};
+  \item \textbf{``Gira a destra di 90 gradi''}.
+\end{itemize}
+Scrivi la sequenza esatta di 8 istruzioni che fa disegnare al robot un quadrato chiuso e lo fa tornare orientato come in partenza.
+\end{esercizio}
+
+\begin{soluzione}[Esercizio 2: Il Robot Disegnatore]
+\begin{enumerate}
+  \item Avanza di 100 passi tracciando una linea dritta.
+  \item Gira a destra di 90 gradi.
+  \item Avanza di 100 passi tracciando una linea dritta.
+  \item Gira a destra di 90 gradi.
+  \item Avanza di 100 passi tracciando una linea dritta.
+  \item Gira a destra di 90 gradi.
+  \item Avanza di 100 passi tracciando una linea dritta.
+  \item Gira a destra di 90 gradi.
+\end{enumerate}
+Le istruzioni 1--4 tracciano due lati; le 5--8 chiudono il quadrato. L'ultima rotazione (passo 8) non disegna nulla, ma riporta il robot nella direzione di partenza: senza di essa il quadrato sarebbe completo, ma la consegna no.
+\end{soluzione}
+
+% ------------------------------------------------------------------------------
+\section{I 4 Errori Tipici della Sequenza}
+% ------------------------------------------------------------------------------
+
+\begin{attenzione}[Gli Errori da Evitare]
+\begin{enumerate}
+  \item \textbf{Dare per scontato l'ovvio:} saltare un passaggio intermedio che per noi è banale ma per la macchina è indispensabile.
+  \item \textbf{Passi invertiti:} calcolare il totale prima di aver letto i dati in ingresso.
+  \item \textbf{Istruzioni ambigue:} usare termini vaghi come ``un po''' invece di numeri e misure esatte.
+  \item \textbf{Soluzioni cablate (\emph{hardcoded}):} scrivere il risultato già calcolato a mente anziché il procedimento generale.
+\end{enumerate}
+\end{attenzione}

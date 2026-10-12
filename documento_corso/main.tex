@@ -102,22 +102,29 @@ Il documento è provvisto di un \textbf{indice ipertestuale e cliccabile}. Clicc
 % Capitolo 1: Prima lezione del 21 Settembre 2026
 \input{capitoli/01_introduzione_algoritmi}
 
+% Capitolo 2: Lezione del 28 Settembre 2026 (la sequenza)
+\input{capitoli/02_sequenza}
+
+% Capitolo 3: Lezione del 5 Ottobre 2026 (condizioni e Flow Chart)
+\input{capitoli/03_condizioni}
+
+% Capitolo 4: Lezione del 12 Ottobre 2026 (comprensione del testo di un problema)
+\input{capitoli/04_comprensione_problema}
+
 % ------------------------------------------------------------------------------
 % SEZIONI FUTURE (Man mano che il corso prosegue, scommenta o aggiungi qui i file)
 % ------------------------------------------------------------------------------
-% \input{capitoli/02_diagrammi_di_flusso}
-% \input{capitoli/03_variabili_e_tipi}
+% \input{capitoli/05_variabili_e_tipi}
 
 % \part{Costrutti di Controllo e Flusso di Esecuzione}
-% \input{capitoli/04_strutture_condizionali}
-% \input{capitoli/05_cicli_e_iterazioni}
+% \input{capitoli/06_cicli_e_iterazioni}
 
 % \part{Modularità e Strutture Dati}
-% \input{capitoli/06_funzioni_e_procedure}
-% \input{capitoli/07_vettori_e_collezioni}
+% \input{capitoli/07_funzioni_e_procedure}
+% \input{capitoli/08_vettori_e_collezioni}
 
 % \part{Il Gioco Guida Annuale}
-% \input{capitoli/08_progetto_videogioco}
+% \input{capitoli/09_progetto_videogioco}
 
 % ==============================================================================
 % PARTE CONCLUSIVA (BACKMATTER)
@@ -126,5 +133,64 @@ Il documento è provvisto di un \textbf{indice ipertestuale e cliccabile}. Clicc
 
 \chapter{Guida Rapida alla Sintassi}
 \noindent In questa appendice finale verranno raccolti durante l'anno i promemoria di sintassi, le parole chiave e i comandi più utilizzati in laboratorio.
+
+\section*{Operatori di Confronto}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|l|}
+\hline
+\rowcolor{PiazzaPrimary!15}
+\textbf{Simbolo} & \textbf{Matematica} & \textbf{Significato} \\
+\hline
+\texttt{>}  & $>$    & strettamente maggiore \\
+\texttt{<}  & $<$    & strettamente minore \\
+\texttt{>=} & $\geq$ & maggiore o uguale \\
+\texttt{<=} & $\leq$ & minore o uguale \\
+\texttt{==} & $=$    & uguale a (confronto, non assegnazione!) \\
+\texttt{!=} & $\neq$ & diverso da \\
+\hline
+\end{tabular}
+\end{center}
+
+\section*{Forme del Flow Chart}
+\begin{itemize}
+  \item \textbf{Ovale:} \texttt{INIZIO} e \texttt{FINE}.
+  \item \textbf{Parallelogramma:} input e output (\texttt{LEGGI}, \texttt{SCRIVI}).
+  \item \textbf{Rettangolo:} calcoli e assegnazioni (\texttt{metallo = metallo - 50}).
+  \item \textbf{Rombo:} condizione con due uscite, \textbf{SÌ} e \textbf{NO}.
+\end{itemize}
+
+\section*{Il Kit dell'Evidenziatore}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor{PiazzaPrimary!15}
+\textbf{Cosa cerco} & \textbf{Come appare} & \textbf{Simbolo a mano} \\
+\hline
+Dato            & \dato{12 coloni}             & cerchio \\
+Richiesta       & \richiesta{cosa mostra?}     & doppia sottolineatura \\
+Regola          & \regola{se basta}            & onda \\
+Rumore          & \rumore{il tecnico Rossi}    & barrato \\
+Dato nascosto   & \nascosto{7 giorni}          & $\bigstar$ a margine \\
+Dato mancante   & \mancante{quanto metallo?}   & ? a margine \\
+\hline
+\end{tabular}
+\end{center}
+
+\section*{Parole che Diventano Confronti}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|l|c||l|c|}
+\hline
+\rowcolor{PiazzaPrimary!15}
+\textbf{Parola} & \textbf{Confronto} & \textbf{Parola} & \textbf{Confronto} \\
+\hline
+almeno, basta       & $\geq$ & più di, supera      & $>$ \\
+al massimo, fino a  & $\leq$ & meno di, sotto      & $<$ \\
+esattamente, pari a & $=$    & diverso da, tranne  & $\neq$ \\
+\hline
+\end{tabular}
+\end{center}
 
 \end{document}

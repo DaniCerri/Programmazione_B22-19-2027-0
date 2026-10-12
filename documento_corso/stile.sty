@@ -20,6 +20,9 @@
   footskip=1.2cm
 }
 
+% Pagine a lunghezza naturale: evita spazi vuoti stirati attorno ai box e ai diagrammi
+\raggedbottom
+
 % ==============================================================================
 % COLORI ISTITUZIONALI E TAVOLOZZA DIDATTICA
 % ==============================================================================
@@ -218,6 +221,66 @@
   left=4mm,
   right=4mm,
   shadow={1mm}{-1mm}{0mm}{black!8}
+}
+
+% ==============================================================================
+% TABELLE, IMMAGINI E SIMBOLI
+% ==============================================================================
+\RequirePackage{graphicx}
+\RequirePackage{amssymb}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{colortbl}
+\RequirePackage[normalem]{ulem}
+
+% Scheda I-P-O: tabella a due colonne con etichette colorate
+\newenvironment{scheda}{%
+  \par\smallskip\noindent
+  \renewcommand{\arraystretch}{1.45}%
+  \arrayrulecolor{PiazzaBorder}%
+  \tabularx{\linewidth}{|>{\columncolor{PiazzaPrimary!8}\leavevmode\color{PiazzaDark}\bfseries}p{2.9cm}|X|}\hline
+}{%
+  \endtabularx\arrayrulecolor{black}\par\smallskip
+}
+
+% ==============================================================================
+% KIT DELL'EVIDENZIATORE (colore + simbolo disegnabile a mano)
+% ==============================================================================
+% Dato (Input): cerchio blu intorno alla parola
+\newcommand{\dato}[1]{\tikz[baseline=(d.base)]\node[draw=BoxBlue, line width=0.9pt, fill=BoxBlue!8,
+  rounded corners=2mm, inner xsep=2.5pt, inner ysep=1.2pt] (d) {\strut #1};}
+% Richiesta (Output): doppia sottolineatura rossa
+\newcommand{\richiesta}{\bgroup\markoverwith{\textcolor{PiazzaPrimary}{%
+  \rlap{\rule[-0.45ex]{2pt}{0.6pt}}\rule[-0.85ex]{2pt}{0.6pt}}}\ULon}
+% Regola: sottolineatura a onda gialla
+\newcommand{\regola}{\bgroup\markoverwith{\lower3.5\p@\hbox{\sixly\textcolor{BoxAmber}{\char58}}}\ULon}
+% Rumore: testo barrato e sbiadito
+\newcommand{\rumore}[1]{{\color{PiazzaLightGray}\sout{#1}}}
+% Confronto associato a una regola (es. \confronto{$\geq$})
+\newcommand{\confronto}[1]{\,\colorbox{BoxAmber!18}{\scriptsize\bfseries\color{BoxAmber}#1}}
+% Calcolo intermedio suggerito dal testo
+\newcommand{\calcolo}[1]{\,\colorbox{BoxGreen!12}{\scriptsize\bfseries\color{BoxGreen}#1}}
+% Dato nascosto: stella + dato scritto a margine
+\newcommand{\nascosto}[1]{\,\fcolorbox{BoxBlue}{BoxBlue!8}{\scriptsize\bfseries\color{BoxBlue}$\bigstar$~#1}}
+% Dato mancante: punto di domanda + domanda da fare
+\newcommand{\mancante}[1]{\,\fcolorbox{BoxRed}{red!6}{\scriptsize\bfseries\color{BoxRed}?~#1}}
+
+% ==============================================================================
+% FLOW CHART (TIKZ)
+% ==============================================================================
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc}
+\tikzset{
+  fc/.style={draw=PiazzaDark, line width=0.9pt, font=\small, align=center,
+    minimum height=8mm, inner sep=2.2mm},
+  fc-term/.style={fc, ellipse, fill=PiazzaPrimary!12, minimum width=22mm, font=\small\bfseries},
+  fc-io/.style={fc, trapezium, trapezium left angle=70, trapezium right angle=110,
+    trapezium stretches body, fill=BoxBlue!10},
+  fc-op/.style={fc, rectangle, fill=BoxGreen!10},
+  fc-dec/.style={fc, diamond, aspect=2.2, inner sep=0.8mm, fill=BoxAmber!14},
+  fc-join/.style={circle, fill=PiazzaDark, inner sep=1.6pt},
+  fc-arrow/.style={-{Stealth[length=2.6mm]}, line width=0.9pt, draw=PiazzaDark},
+  fc-line/.style={line width=0.9pt, draw=PiazzaDark},
+  fc-label/.style={font=\scriptsize\bfseries, text=PiazzaPrimary, fill=white, inner sep=1pt},
 }
 
 % ==============================================================================

@@ -1,0 +1,347 @@
+\chapter[Le Condizioni e i Bivi nel City Builder Marziano]{Le Condizioni e i Bivi\\ nel City Builder Marziano}
+\label{chap:condizioni}
+
+\begin{quote}
+\itshape
+\small
+``Un gestionale diventa intelligente nel momento in cui impara a guardare il magazzino prima di spendere.''
+\end{quote}
+\vspace{1em}
+
+\noindent\textbf{Riferimento Lezione:} 5 Ottobre 2026 -- Terza Lezione di Laboratorio\\
+\textbf{Progetto Guida Annuale:} \textbf{\color{PiazzaPrimary}Mars City Builder (Lite)}\\
+\textbf{Competenze chiave:} Formulazione di condizioni booleane, uso degli operatori relazionali, struttura di selezione \texttt{SE \dots\ ALLORA \dots\ ALTRIMENTI}, disegno di Flow Chart con le forme standard.
+
+\vspace{1.5em}
+
+% ------------------------------------------------------------------------------
+\section{Perché un Gestionale ha Bisogno di Bivi?}
+% ------------------------------------------------------------------------------
+
+Con la \textbf{struttura sequenziale} (Capitolo~\ref{chap:sequenza}) le istruzioni vengono eseguite una dietro l'altra, senza mai deviare. Immaginiamo però di programmare il nostro \textbf{city builder su Marte} usando solo la sequenza.
+
+Il giocatore clicca sul pulsante \emph{``Costruisci Cupola Idroponica''}. Se il programma non controlla prima il magazzino, piazza l'edificio sulla mappa anche se il giocatore ha 0 unità di metallo: il bilancio scende a $-50$ e la partita si rompe.
+
+\begin{concetto}[La Selezione]
+Un programma diventa capace di reagire alla situazione quando sa \textbf{osservare lo stato delle risorse prima di agire}. Questa struttura logica si chiama \textbf{selezione} (o bivio condizionale): in base a una condizione, il programma sceglie quale strada percorrere.
+\end{concetto}
+
+% ------------------------------------------------------------------------------
+\section{Cos'è una Condizione? La Logica Booleana}
+% ------------------------------------------------------------------------------
+
+Una \textbf{condizione} è un'espressione di confronto che ammette solo \textbf{due} risultati possibili: \textbf{VERO} oppure \textbf{FALSO}. Non esistono vie di mezzo: o hai abbastanza metallo o non ce l'hai. Questa logica a due valori si chiama \textbf{logica booleana}, dal matematico George Boole.
+
+\begin{esempio}[Condizioni nel City Builder]
+\begin{itemize}
+  \item \texttt{metallo >= 50}: con metallo $= 70$ è \textbf{VERO}; con metallo $= 30$ è \textbf{FALSO}.
+  \item \texttt{energia\_prodotta >= energia\_richiesta}: con $100 \geq 80$ è \textbf{VERO}; con $60 \geq 80$ è \textbf{FALSO}.
+  \item \texttt{coloni == 0}: se i coloni sono 0 è \textbf{VERO} (colonia deserta); se sono 12 è \textbf{FALSO}.
+\end{itemize}
+\end{esempio}
+
+\begin{attenzione}[Frasi che NON Sono Condizioni]
+\begin{itemize}
+  \item \emph{``La colonia è bella?''}: è soggettiva, il computer non ha gusti.
+  \item \emph{``Costruisci qualche casa''}: è vaga, quante case esattamente?
+\end{itemize}
+\end{attenzione}
+
+% ------------------------------------------------------------------------------
+\section{Gli Operatori Relazionali}
+% ------------------------------------------------------------------------------
+
+Per confrontare risorse e parametri della colonia usiamo sei operatori relazionali. Nella tabella supponiamo che il giocatore abbia \texttt{crediti = 50}.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{|c|c|l|l|c|}
+\hline
+\rowcolor{PiazzaPrimary!15}
+\textbf{Simbolo} & \textbf{Matematica} & \textbf{Significato} & \textbf{Esempio} & \textbf{Risultato} \\
+\hline
+\texttt{>}  & $>$    & strettamente maggiore & \texttt{crediti > 20}  & \textbf{VERO} \\
+\texttt{<}  & $<$    & strettamente minore   & \texttt{crediti < 10}  & \textbf{FALSO} \\
+\texttt{>=} & $\geq$ & maggiore o uguale     & \texttt{crediti >= 50} & \textbf{VERO} \\
+\texttt{<=} & $\leq$ & minore o uguale       & \texttt{crediti <= 40} & \textbf{FALSO} \\
+\texttt{==} & $=$    & uguale a              & \texttt{crediti == 50} & \textbf{VERO} \\
+\texttt{!=} & $\neq$ & diverso da            & \texttt{crediti != 50} & \textbf{FALSO} \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{attenzione}[La Trappola Numero 1: \texttt{=} contro \texttt{==}]
+\begin{itemize}
+  \item \texttt{=} (\textbf{assegnazione}) è un ordine: prende un valore e lo memorizza nella variabile. \texttt{crediti = 100} deposita 100 crediti nel conto.
+  \item \texttt{==} (\textbf{confronto}) è una domanda: chiede se i due valori sono identici. \texttt{crediti == 100} restituisce VERO o FALSO senza toccare la memoria.
+\end{itemize}
+\end{attenzione}
+
+% ------------------------------------------------------------------------------
+\section{La Struttura SE \dots\ ALLORA \dots\ ALTRIMENTI}
+% ------------------------------------------------------------------------------
+
+La selezione divide il cammino del programma in due rami \textbf{mutuamente esclusivi}: si esegue il primo oppure il secondo, mai entrambi nello stesso turno. Alla fine i due rami si ricongiungono e il programma prosegue.
+
+\begin{lstlisting}
+SE <condizione> ALLORA
+    // ramo VERO
+    istruzione_A1
+    istruzione_A2
+ALTRIMENTI
+    // ramo FALSO
+    istruzione_B1
+FINE SE
+// il programma si ricongiunge qui
+\end{lstlisting}
+
+\begin{consiglio}[La Selezione a Una Via]
+Se nel caso FALSO non serve fare niente di speciale, il ramo \texttt{ALTRIMENTI} si può omettere. Esempio: un bonus di fine turno facoltativo.
+\begin{lstlisting}
+SE colonia_felice == VERO ALLORA
+    crediti = crediti + 20
+FINE SE
+salva_partita()
+\end{lstlisting}
+\end{consiglio}
+
+\subsection{Il Pattern del City Builder: Verifica e Spesa}
+
+Ogni volta che il giocatore ordina una costruzione, l'algoritmo segue sempre la stessa sequenza logica:
+\begin{enumerate}
+  \item \textbf{Verifica risorse:} le scorte coprono il costo? (\texttt{SE risorsa >= costo})
+  \item \textbf{Aggiornamento magazzino (se VERO):} piazza l'edificio e scala il costo (\texttt{risorsa = risorsa - costo}).
+  \item \textbf{Feedback a schermo:} mostra un messaggio chiaro, di conferma o di risorse insufficienti.
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+\section{Le Forme del Flow Chart}
+% ------------------------------------------------------------------------------
+
+Il \textbf{Flow Chart} (diagramma a blocchi) disegna la logica di un algoritmo. Ogni forma geometrica ha un significato standard:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|>{\centering\arraybackslash}m{3.4cm}|m{4.6cm}|m{4.6cm}|}
+\hline
+\rowcolor{PiazzaPrimary!15}
+\textbf{Forma} & \textbf{Funzione} & \textbf{Esempio} \\
+\hline
+\tikz\node[fc-term, minimum width=18mm, minimum height=6mm, font=\scriptsize\bfseries]{INIZIO};
+  & \textbf{Inizio e fine} del flusso & \texttt{INIZIO} / \texttt{FINE} \\
+\hline
+\tikz\node[fc-io, minimum height=6mm, font=\scriptsize]{LEGGI / SCRIVI};
+  & \textbf{Input e output}: lettura dei dati e stampa a video & \texttt{LEGGI metallo} \\
+\hline
+\tikz\node[fc-op, minimum height=6mm, font=\scriptsize]{calcolo};
+  & \textbf{Operazioni e calcoli}: assegnazioni e modifiche della memoria & \texttt{metallo = metallo - 50} \\
+\hline
+\tikz\node[fc-dec, font=\scriptsize]{condizione?};
+  & \textbf{Condizione e bivio}: due uscite obbligatorie, SÌ e NO & \texttt{metallo >= 50 ?} \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{concetto}[Le 3 Regole d'Oro del Flow Chart]
+\begin{enumerate}
+  \item \textbf{Frecce direzionali:} collegano i blocchi dall'alto verso il basso e non restano mai aperte.
+  \item \textbf{Etichette sul rombo:} ogni rombo ha due frecce uscenti, etichettate \textbf{SÌ} (VERO) e \textbf{NO} (FALSO).
+  \item \textbf{Punto di ricongiunzione:} i due rami si riuniscono prima dell'output finale e di \texttt{FINE}.
+\end{enumerate}
+\end{concetto}
+
+% ------------------------------------------------------------------------------
+\section{Esempio Svolto: la Cupola Idroponica}
+% ------------------------------------------------------------------------------
+
+\begin{esempio}[Il Testo del Problema]
+Ogni Cupola Idroponica costa \textbf{50 unità di metallo}. L'algoritmo legge il \texttt{metallo\_disponibile} nel magazzino centrale. Se il metallo è \textbf{pari o superiore a 50}, scala 50 unità dal magazzino e imposta il messaggio \emph{``Serra costruita con successo!''}; altrimenti non costruisce nulla e imposta il messaggio \emph{``Metallo insufficiente per la Serra!''}. Alla fine mostra il messaggio e il metallo rimasto.
+\end{esempio}
+
+\subsection{Passo 1: Lo Schema I-P-O}
+
+\begin{itemize}
+  \item \textbf{Input:} \texttt{metallo\_disponibile} (numero intero $\geq 0$).
+  \item \textbf{Elaborazione:} se \texttt{metallo\_disponibile >= 50} scala il costo e prepara il messaggio di successo; altrimenti prepara il messaggio di errore.
+  \item \textbf{Output:} il messaggio e il saldo aggiornato del metallo.
+\end{itemize}
+
+\subsection{Passo 2: Il Flow Chart}
+
+\begin{center}
+\begin{tikzpicture}
+  \node[fc-term] (start) at (0,0) {INIZIO};
+  \node[fc-io]   (in)    at (0,-1.3) {LEGGI metallo};
+  \node[fc-dec]  (dec)   at (0,-2.9) {metallo $\geq$ 50 ?};
+  \node[fc-op]   (y1)    at (-3.4,-4.6) {metallo = metallo $-$ 50};
+  \node[fc-op]   (y2)    at (-3.4,-5.9) {msg = ``Serra costruita!''};
+  \node[fc-op]   (n1)    at (3.4,-4.6) {msg = ``Metallo insufficiente!''};
+  \node[fc-join] (join)  at (0,-7.1) {};
+  \node[fc-io]   (out)   at (0,-8.2) {SCRIVI msg, metallo};
+  \node[fc-term] (end)   at (0,-9.5) {FINE};
+  \draw[fc-arrow] (start) -- (in);
+  \draw[fc-arrow] (in) -- (dec);
+  \draw[fc-arrow] (dec.west) -| node[fc-label, pos=0.25, above] {SÌ} (y1.north);
+  \draw[fc-arrow] (dec.east) -| node[fc-label, pos=0.25, above] {NO} (n1.north);
+  \draw[fc-arrow] (y1) -- (y2);
+  \draw[fc-arrow] (y2.south) |- (join);
+  \draw[fc-arrow] (n1.south) |- (join);
+  \draw[fc-arrow] (join) -- (out);
+  \draw[fc-arrow] (out) -- (end);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Passo 3: Lo Pseudocodice}
+
+\begin{lstlisting}
+// 1. Acquisizione del dato dal magazzino
+LEGGI metallo_disponibile
+
+// 2. Controllo di fattibilita' e spesa
+SE metallo_disponibile >= 50 ALLORA
+    metallo_disponibile = metallo_disponibile - 50
+    messaggio = "Serra costruita con successo!"
+ALTRIMENTI
+    messaggio = "Metallo insufficiente per la Serra!"
+FINE SE
+
+// 3. Notifica al giocatore
+SCRIVI messaggio
+SCRIVI "Metallo rimasto in magazzino: ", metallo_disponibile
+\end{lstlisting}
+
+% ------------------------------------------------------------------------------
+\newpage
+\section{Esercizi di Laboratorio: Disegna il Flow Chart}
+% ------------------------------------------------------------------------------
+
+Per ciascun esercizio disegna sul quaderno, con penna e righello, il \textbf{Flow Chart completo} rispettando le forme standard.
+
+\begin{esercizio}[Esercizio 1: Il Bilancio Energetico della Colonia]
+\emph{Il sole rosso di Marte sta calando dietro i crateri di Tharsis. I coloni rientrano nelle cupole, accendono i riscaldatori e i purificatori d'aria passano alla modalità notturna. Come responsabile dell'energia, devi verificare se la carica dei pannelli solari basterà per tutta la notte.}
+
+\begin{itemize}
+  \item Se l'energia prodotta copre o supera il fabbisogno della base, la rete è stabile e la colonia passa la notte in sicurezza.
+  \item Se la produzione è insufficiente, scatta l'allarme blackout: bisogna staccare macchinari e fabbriche.
+  \item Il programma mostra a schermo lo stato della rete.
+\end{itemize}
+\end{esercizio}
+
+\begin{esercizio}[Esercizio 2: Nuovi Coloni e Razioni di Cibo]
+\emph{I retrorazzi della navetta ``Ares Shuttle'' sollevano una nube di polvere rossa: sono sbarcati nuovi coloni. Prima di aprire i portelloni, l'amministratore consulta i silos, sapendo che ogni colono consuma esattamente una cassa di cibo a turno.}
+
+\begin{itemize}
+  \item Se le casse bastano (o avanzano) per tutti i coloni, il cibo viene distribuito e le scorte diminuiscono della quantità consumata.
+  \item Se le scorte non bastano per tutti, la distribuzione non avviene e scatta l'allarme carestia.
+  \item Il programma mostra l'esito e il saldo finale delle scorte.
+\end{itemize}
+\end{esercizio}
+
+\begin{esercizio}[Esercizio 3: L'Indice di Felicità della Colonia]
+\emph{È venerdì sera nella cupola centrale e si tiene l'assemblea cittadina. I sensori sociali registrano l'indice di gradimento della popolazione, da 0 a 100.}
+
+\begin{enumerate}
+  \item \textbf{Colonia fiorente:} se il gradimento raggiunge o supera 75, la colonia incassa un bonus di 50 crediti.
+  \item \textbf{Rivolta:} se il gradimento scende sotto 40, scatta lo sciopero e la produzione si blocca.
+  \item \textbf{Colonia stabile:} in tutti i casi intermedi (da 40 a 74) la vita prosegue regolarmente.
+\end{enumerate}
+Il programma comunica lo stato finale. \textbf{Suggerimento:} usa due rombi a cascata, il secondo sul ramo NO del primo.
+\end{esercizio}
+
+% ------------------------------------------------------------------------------
+\newpage
+\section{Soluzioni Commentate}
+% ------------------------------------------------------------------------------
+
+\begin{soluzione}[Esercizio 1: Il Bilancio Energetico]
+\begin{center}
+\begin{tikzpicture}[font=\small]
+  \node[fc-term] (start) at (0,0) {INIZIO};
+  \node[fc-io]   (in)    at (0,-1.3) {LEGGI prodotta, richiesta};
+  \node[fc-dec]  (dec)   at (0,-3.0) {prodotta $\geq$ richiesta ?};
+  \node[fc-op]   (y1)    at (-3.6,-4.8) {stato = ``RETE STABILE''};
+  \node[fc-op]   (n1)    at (3.6,-4.8) {stato = ``BLACKOUT: \\ stacca le fabbriche!''};
+  \node[fc-join] (join)  at (0,-6.2) {};
+  \node[fc-io]   (out)   at (0,-7.3) {SCRIVI stato};
+  \node[fc-term] (end)   at (0,-8.6) {FINE};
+  \draw[fc-arrow] (start) -- (in);
+  \draw[fc-arrow] (in) -- (dec);
+  \draw[fc-arrow] (dec.west) -| node[fc-label, pos=0.25, above] {SÌ} (y1.north);
+  \draw[fc-arrow] (dec.east) -| node[fc-label, pos=0.25, above] {NO} (n1.north);
+  \draw[fc-arrow] (y1.south) |- (join);
+  \draw[fc-arrow] (n1.south) |- (join);
+  \draw[fc-arrow] (join) -- (out);
+  \draw[fc-arrow] (out) -- (end);
+\end{tikzpicture}
+\end{center}
+``Copre o supera'' diventa $\geq$: con produzione esattamente uguale al fabbisogno la rete è stabile.
+\end{soluzione}
+
+\begin{soluzione}[Esercizio 2: Nuovi Coloni e Razioni]
+\begin{center}
+\begin{tikzpicture}[font=\small]
+  \node[fc-term] (start) at (0,0) {INIZIO};
+  \node[fc-io]   (in)    at (0,-1.3) {LEGGI scorte, coloni};
+  \node[fc-dec]  (dec)   at (0,-2.9) {scorte $\geq$ coloni ?};
+  \node[fc-op]   (y1)    at (-3.6,-4.6) {scorte = scorte $-$ coloni};
+  \node[fc-op]   (y2)    at (-3.6,-5.9) {esito = ``Coloni sazi!''};
+  \node[fc-op]   (n1)    at (3.6,-4.6) {esito = ``CARESTIA!''};
+  \node[fc-join] (join)  at (0,-7.1) {};
+  \node[fc-io]   (out)   at (0,-8.2) {SCRIVI esito, scorte};
+  \node[fc-term] (end)   at (0,-9.5) {FINE};
+  \draw[fc-arrow] (start) -- (in);
+  \draw[fc-arrow] (in) -- (dec);
+  \draw[fc-arrow] (dec.west) -| node[fc-label, pos=0.25, above] {SÌ} (y1.north);
+  \draw[fc-arrow] (dec.east) -| node[fc-label, pos=0.25, above] {NO} (n1.north);
+  \draw[fc-arrow] (y1) -- (y2);
+  \draw[fc-arrow] (y2.south) |- (join);
+  \draw[fc-arrow] (n1.south) |- (join);
+  \draw[fc-arrow] (join) -- (out);
+  \draw[fc-arrow] (out) -- (end);
+\end{tikzpicture}
+\end{center}
+La sottrazione delle scorte sta \textbf{solo} nel ramo SÌ: se il cibo non basta, il silos resta com'era.
+\end{soluzione}
+
+\begin{soluzione}[Esercizio 3: L'Indice di Felicità]
+\begin{center}
+\begin{tikzpicture}[font=\small]
+  \node[fc-term] (start) at (0,0) {INIZIO};
+  \node[fc-io]   (in)    at (0,-1.3) {LEGGI felicità};
+  \node[fc-dec]  (dec1)  at (0,-2.9) {felicità $\geq$ 75 ?};
+  \node[fc-op]   (y1)    at (-3.7,-4.6) {stato = ``FIORENTE \\ (+50 crediti)''};
+  \node[fc-dec]  (dec2)  at (2.9,-4.6) {felicità $<$ 40 ?};
+  \node[fc-op]   (y2)    at (0.6,-6.4) {stato = ``RIVOLTA''};
+  \node[fc-op]   (n2)    at (5.2,-6.4) {stato = ``STABILE''};
+  \node[fc-join] (join)  at (0,-7.8) {};
+  \node[fc-io]   (out)   at (0,-8.9) {SCRIVI stato};
+  \node[fc-term] (end)   at (0,-10.2) {FINE};
+  \draw[fc-arrow] (start) -- (in);
+  \draw[fc-arrow] (in) -- (dec1);
+  \draw[fc-arrow] (dec1.west) -| node[fc-label, pos=0.25, above] {SÌ} (y1.north);
+  \draw[fc-arrow] (dec1.east) -| node[fc-label, pos=0.25, above] {NO} (dec2.north);
+  \draw[fc-arrow] (dec2.west) -| node[fc-label, pos=0.3, above] {SÌ} (y2.north);
+  \draw[fc-arrow] (dec2.east) -| node[fc-label, pos=0.3, above] {NO} (n2.north);
+  \draw[fc-arrow] (y1.south) |- (join);
+  \draw[fc-arrow] (y2.south) |- (join);
+  \draw[fc-arrow] (n2.south) |- (join);
+  \draw[fc-arrow] (join) -- (out);
+  \draw[fc-arrow] (out) -- (end);
+\end{tikzpicture}
+\end{center}
+Il secondo rombo viene raggiunto solo quando la felicità è sotto 75: per questo il ramo NO finale copre esattamente l'intervallo da 40 a 74, senza bisogno di un terzo confronto.
+\end{soluzione}
+
+% ------------------------------------------------------------------------------
+\section{Checklist del Flow Chart}
+% ------------------------------------------------------------------------------
+
+\begin{consiglio}[Prima di Consegnare il Disegno]
+\begin{itemize}
+  \item[$\square$] Ho usato i \textbf{parallelogrammi} per ogni \texttt{LEGGI} e \texttt{SCRIVI}?
+  \item[$\square$] Ho usato i \textbf{rettangoli} per calcoli e assegnazioni?
+  \item[$\square$] Ogni \textbf{rombo} ha due frecce uscenti con le etichette \textbf{SÌ} e \textbf{NO}?
+  \item[$\square$] I rami di ogni bivio si \textbf{ricongiungono} prima dell'output finale?
+  \item[$\square$] Il diagramma ha un solo \textbf{INIZIO} e una sola \textbf{FINE}?
+\end{itemize}
+\end{consiglio}

@@ -15,7 +15,10 @@ documento_corso/
 ├── Makefile          # Makefile per compilare da terminale (make / make clean)
 ├── README.md         # Questa guida
 └── capitoli/         # I singoli capitoli del libro (uno per argomento o blocco di lezioni)
-    └── 01_introduzione_algoritmi.tex
+    ├── 01_introduzione_algoritmi.tex   # 21/09: algoritmi e pensiero computazionale
+    ├── 02_sequenza.tex                 # 28/09: modello I-P-O e struttura sequenziale
+    ├── 03_condizioni.tex               # 05/10: condizioni, operatori relazionali, Flow Chart (TikZ)
+    └── 04_comprensione_problema.tex    # 12/10: leggere il testo di un problema, kit evidenziatore
 ```
 
 ---
@@ -49,7 +52,7 @@ make clean
 
 1. **Crea un nuovo file `.tex`** all'interno della cartella `capitoli/`, ad esempio:
    ```text
-   capitoli/02_diagrammi_di_flusso.tex
+   capitoli/05_variabili_e_tipi.tex
    ```
 2. **Scrivi il contenuto** iniziando con il comando del capitolo:
    ```latex
@@ -61,7 +64,7 @@ make clean
    ```
 3. **Includi il file in `main.tex`** aggiungendo la riga nella posizione desiderata:
    ```latex
-   \input{capitoli/02_diagrammi_di_flusso}
+   \input{capitoli/05_variabili_e_tipi}
    ```
 4. **Ricompila** con `./compile.sh` o `make`. L'indice generale verrà aggiornato automaticamente e conterrà il link cliccabile al nuovo capitolo!
 
@@ -107,6 +110,19 @@ Nel file `stile.sty` sono stati configurati ambienti pronti all'uso per rendere 
   Suggerimento pratico di programmazione...
   \end{consiglio}
   ```
+* **Kit dell'Evidenziatore** (testi annotati, capitoli sulla comprensione):
+  ```latex
+  \rumore{saluti} \dato{40 unità} \richiesta{cosa mostra?}
+  \regola{se basta}\confronto{$\geq$} \nascosto{7 giorni} \mancante{quanto metallo?}
+  ```
+* **Scheda I-P-O:**
+  ```latex
+  \begin{scheda}
+  Riformulo & Devo capire se... \\ \hline
+  Input & ... \\ \hline
+  \end{scheda}
+  ```
+* **Flow Chart (TikZ):** stili `fc-term`, `fc-io`, `fc-op`, `fc-dec`, `fc-join`, `fc-arrow`, `fc-label` (esempi in `capitoli/03_condizioni.tex` della prima).
 * **Blocchi di Codice:**
   ```latex
   \begin{lstlisting}[language=Python]
