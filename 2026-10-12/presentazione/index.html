@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capire il Problema | Corso di Programmazione 1 - Piazza dei Mestieri</title>
+
+  <!-- Tipografia: Outfit (Testo) & Bricolage Grotesque (Titoli e Accenti) & Roboto Mono (Simboli) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Google Material Symbols Outlined -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="m3-paper" data-course="Corso di Programmazione 1">
+
+  <!-- Progress Bar Superiore -->
+  <div class="m3-progress-container">
+    <div id="progressBar" class="m3-progress-bar"></div>
+  </div>
+
+  <!-- Barra Superiore Istituzionale -->
+  <header class="m3-top-app-bar">
+    <div class="app-bar-leading">
+      <span class="material-symbols-outlined icon-main">apartment</span>
+      <div class="app-bar-title-group">
+        <span class="app-bar-title">Corso di Programmazione 1</span>
+        <span class="app-bar-subtitle">Operatore Informatico &bull; Lezione 04: Capire il Problema &bull; Piazza dei
+          Mestieri</span>
+      </div>
+    </div>
+
+    <div class="app-bar-actions">
+      <button id="btnOverview" class="m3-icon-button" title="Indice delle slide (O)">
+        <span class="material-symbols-outlined">grid_view</span>
+      </button>
+      <button id="btnNotes" class="m3-icon-button" title="Note Docente (N)">
+        <span class="material-symbols-outlined">notes</span>
+      </button>
+      <button id="btnExportPdf" class="m3-icon-button" title="Esporta slide in PDF (P)">
+        <span class="material-symbols-outlined">picture_as_pdf</span>
+      </button>
+      <button id="btnFullscreen" class="m3-icon-button" title="Schermo intero (F)">
+        <span class="material-symbols-outlined">fullscreen</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Slide Deck Main Container -->
+  <main class="deck-container">
+
+    <!-- SLIDE 1: COPERTINA -->
+    <section class="slide active" data-slide="1" data-title="Copertina: Capire il Problema">
+      <div class="slide-content">
+        <div class="cover-grid">
+          <div>
+            <div class="cover-pill">
+              <span class="material-symbols-outlined" style="font-size: 18px;">domain</span>
+              <span>PROGRAMMAZIONE 1 &bull; PRIMA SUPERIORE</span>
+            </div>
+            <h1 class="main-title">
+              Capire il <span class="cherry-text">Problema</span>:<br>Leggere da Programmatore
+            </h1>
+            <p class="main-lead">
+              Prima di risolvere bisogna capire. Oggi impariamo a smontare il testo di un problema del nostro
+              gestionale su Marte: troviamo i dati, la richiesta, le regole&hellip; e buttiamo via il rumore.
+            </p>
+
+            <div class="cover-specs-row">
+              <div class="spec-cell">
+                <span class="spec-label">LEZIONE</span>
+                <span class="spec-value">04 &bull; 12 Ottobre 2026</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">DOCENTE</span>
+                <span class="spec-value">Daniele Cerrina</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">PROGETTO ANNUALE</span>
+                <span class="spec-value cherry">Mars City Builder (Lite)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pixel-art-card cover-art">
+            <div class="pixel-art-img-wrap" data-file="immagini/copertina.jpeg">
+              <img src="immagini/copertina.jpeg" alt="Colono programmatore che analizza un terminale" class="pixel-art-img">
+            </div>
+            <div class="pixel-art-caption">
+              <span>Sala Controllo &bull; Colonia Alpha-1</span>
+              <span class="pixel-tag">16-BIT RETRO SIM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [0'&ndash;3'] Benvenuti alla quarta lezione. Oggi non risolviamo problemi nuovi: impariamo a LEGGERLI. È la
+        competenza che separa chi tira a indovinare da chi progetta. Niente codice, niente pseudocodice: solo testo,
+        evidenziatori (o penna) e ragionamento.
+      </div>
+    </section>
+
+    <!-- SLIDE 2: AGGANCIO - IL BUG NATO DA DUE PAROLE -->
+    <section class="slide" data-slide="2" data-title="Il Bug Nato da Due Parole">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">UNA STORIA VERA (QUASI)</span>
+          <h2>Il Bug Nato da Due Parole</h2>
+          <p class="section-lead">Il programma era scritto benissimo. Peccato che il programmatore avesse letto male.</p>
+        </div>
+
+        <div class="bug-compare">
+          <div class="bug-side">
+            <div class="bug-side-label">
+              <span class="material-symbols-outlined">description</span>
+              Il testo del progetto dice
+            </div>
+            <p class="bug-quote">&ldquo;L'allarme deve suonare quando nel serbatoio restano <mark>al massimo 10</mark>
+              unità di ossigeno.&rdquo;</p>
+            <p class="bug-test">Con <strong>esattamente 10 unità</strong>: 10 è &ldquo;al massimo 10&rdquo;? <strong>Sì</strong>
+              &rarr; l'allarme <strong>suona</strong>.</p>
+          </div>
+
+          <div class="bug-arrow">
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </div>
+
+          <div class="bug-side wrong">
+            <div class="bug-side-label">
+              <span class="material-symbols-outlined">bug_report</span>
+              Il programmatore frettoloso ha capito
+            </div>
+            <p class="bug-quote">&ldquo;L'allarme suona quando restano <mark>meno di 10</mark> unità di ossigeno.&rdquo;
+            </p>
+            <p class="bug-test">Con <strong>esattamente 10 unità</strong>: 10 è &ldquo;meno di 10&rdquo;? <strong>No</strong>
+              &rarr; l'allarme <strong>tace</strong>. I coloni restano senza avviso!</p>
+          </div>
+        </div>
+
+        <div class="lim-banner-big">
+          Il computer fa <strong>esattamente</strong> quello che gli diciamo. Se leggiamo male il problema, il bug nasce
+          <strong>prima ancora</strong> di scrivere una sola riga.
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [3'&ndash;10'] Far leggere ad alta voce le due frasi. Chiedere: "Sono uguali?". Molti diranno di sì. Provare
+        con 9, 10 e 11 unità: le due versioni danno lo stesso risultato tranne che con 10. È il primo assaggio del
+        CASO LIMITE, che ritroveremo in tutte le sfide.
+      </div>
+    </section>
+
+    <!-- SLIDE 3: I-P-O COME FILTRO -->
+    <section class="slide" data-slide="3" data-title="Lo Schema I-P-O: Il Filtro per Leggere">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LO STRUMENTO DEL PROGRAMMATORE</span>
+          <h2>Lo Schema I-P-O: Il Filtro per Leggere un Problema</h2>
+          <p class="section-lead">Ogni programma prende dati, li trasforma con delle regole e restituisce un risultato.
+            Usiamolo per leggere!</p>
+        </div>
+
+        <div class="ipo-filter">
+          <div class="filter-box f-in">
+            <span class="material-symbols-outlined filter-icon">input</span>
+            <h3>INPUT</h3>
+            <span class="filter-question">Cosa mi DAI?</span>
+            <p>I dati noti: numeri, quantità, misure che il testo ci fornisce.</p>
+            <p><em>&ldquo;40 unità di ossigeno, 12 coloni&rdquo;</em></p>
+          </div>
+          <div class="filter-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
+          <div class="filter-box f-proc">
+            <span class="material-symbols-outlined filter-icon">settings</span>
+            <h3>ELABORAZIONE</h3>
+            <span class="filter-question">Quali REGOLE?</span>
+            <p>I calcoli e le condizioni che collegano i dati al risultato.</p>
+            <p><em>&ldquo;ogni colono consuma 3 unità&hellip; se basta&hellip;&rdquo;</em></p>
+          </div>
+          <div class="filter-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
+          <div class="filter-box f-out">
+            <span class="material-symbols-outlined filter-icon">output</span>
+            <h3>OUTPUT</h3>
+            <span class="filter-question">Cosa mi CHIEDI?</span>
+            <p>Il risultato da trovare o il messaggio da mostrare al giocatore.</p>
+            <p><em>&ldquo;Allarme rosso: sì o no?&rdquo;</em></p>
+          </div>
+        </div>
+
+        <div class="trash-strip">
+          <span class="material-symbols-outlined">delete</span>
+          <span>Tutto quello che non entra in nessuna casella è <strong>RUMORE</strong>: nomi, orari, colori, emozioni.
+            Rendono bella la storia, ma il computer non li usa.</span>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [10'&ndash;15'] Collegare all'I-P-O della lezione del 28/09. Novità: lo usiamo al contrario, come filtro di
+        lettura. Le tre domande (cosa mi dai? quali regole? cosa mi chiedi?) vanno ripetute in ogni sfida.
+      </div>
+    </section>
+
+    <!-- SLIDE 4: IL METODO IN 5 PASSI -->
+    <section class="slide" data-slide="4" data-title="Il Metodo del Programmatore in 5 Passi">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">IL METODO</span>
+          <h2>Il Metodo del Programmatore in 5 Passi</h2>
+          <p class="section-lead">Sempre nello stesso ordine, per ogni problema. Anche quando sembra facile.</p>
+        </div>
+
+        <div class="method-row">
+          <div class="method-card">
+            <span class="method-num">1</span>
+            <span class="material-symbols-outlined">menu_book</span>
+            <h3>Leggi due volte</h3>
+            <p>1ª volta: capisci la storia.<br>2ª volta: vai a caccia di dati.</p>
+          </div>
+          <div class="method-card">
+            <span class="method-num">2</span>
+            <span class="material-symbols-outlined">ink_highlighter</span>
+            <h3>Evidenzia</h3>
+            <p>Con i colori o con i simboli: dati, richiesta, regole, rumore.</p>
+          </div>
+          <div class="method-card">
+            <span class="method-num">3</span>
+            <span class="material-symbols-outlined">record_voice_over</span>
+            <h3>Riformula</h3>
+            <p>Una sola frase con parole tue:<br><em>&ldquo;Devo capire se&hellip;&rdquo;</em></p>
+          </div>
+          <div class="method-card">
+            <span class="method-num">4</span>
+            <span class="material-symbols-outlined">table_view</span>
+            <h3>Scheda I-P-O</h3>
+            <p>Sul quaderno: Input, Elaborazione e Output, in ordine.</p>
+          </div>
+          <div class="method-card">
+            <span class="method-num">5</span>
+            <span class="material-symbols-outlined">calculate</span>
+            <h3>Prova a mano</h3>
+            <p>Usa i numeri del testo. Poi prova il <strong>caso limite</strong>.</p>
+          </div>
+        </div>
+
+        <div class="lim-banner-big">
+          Regola d'oro: <strong>nessuna soluzione</strong> finché non hai completato i 5 passi.
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [15'&ndash;19'] Insistere sul passo 1: la prima lettura è per la storia, la seconda per i dati. Il passo 3
+        (riformulare) è quello che gli studenti saltano più spesso: pretendere sempre la frase "Devo capire se...".
+      </div>
+    </section>
+
+    <!-- SLIDE 5: IL KIT DELL'EVIDENZIATORE -->
+    <section class="slide" data-slide="5" data-title="Il Kit dell'Evidenziatore: Colori e Simboli">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">IL KIT DEL PROGRAMMATORE</span>
+          <h2>Il Kit dell'Evidenziatore: Colori e Simboli</h2>
+          <p class="section-lead">Non hai gli evidenziatori? Nessun problema: basta una penna e questi simboli.</p>
+        </div>
+
+        <div class="kit-table">
+          <div class="kit-head">Cosa cerco</div>
+          <div class="kit-head"><span class="material-symbols-outlined" style="font-size: 18px;">palette</span>Con i colori</div>
+          <div class="kit-head"><span class="material-symbols-outlined" style="font-size: 18px;">edit</span>Solo penna</div>
+          <div class="kit-head">Come ricordarlo</div>
+
+          <div class="kit-cat" style="color: var(--in-color);"><span class="material-symbols-outlined">input</span>Dato (Input)</div>
+          <div><span><span class="hl hl-in on">40 unità</span></span></div>
+          <div><span><span class="sym sym-in">40 unità</span>&nbsp;cerchio</span></div>
+          <div class="kit-hint"><span>Il cerchio <strong>cattura</strong> il dato.</span></div>
+
+          <div class="kit-cat" style="color: var(--out-color);"><span class="material-symbols-outlined">output</span>Richiesta (Output)</div>
+          <div><span><span class="hl hl-out on">serve l'allarme?</span></span></div>
+          <div><span><span class="sym sym-out">serve l'allarme?</span></span></div>
+          <div class="kit-hint"><span>Doppia riga = <strong>il risultato</strong>, come in matematica.</span></div>
+
+          <div class="kit-cat" style="color: var(--rule-color);"><span class="material-symbols-outlined">alt_route</span>Regola</div>
+          <div><span><span class="hl hl-rule on">se basta</span></span></div>
+          <div><span><span class="sym sym-rule">se basta</span>&nbsp;onda</span></div>
+          <div class="kit-hint"><span>L'onda è il <strong>bivio</strong>: la strada cambia.</span></div>
+
+          <div class="kit-cat" style="color: var(--noise-line);"><span class="material-symbols-outlined">delete</span>Rumore</div>
+          <div><span><span class="hl hl-noise on">il tecnico Rossi</span></span></div>
+          <div><span><span class="sym sym-noise">il tecnico Rossi</span></span></div>
+          <div class="kit-hint"><span>Una riga sopra: <strong>lo butto</strong>.</span></div>
+
+          <div class="kit-cat" style="color: var(--in-color);"><span class="material-symbols-outlined">star</span>Dato nascosto</div>
+          <div><span><span class="hl-tag tag-hidden on">★ 1 settimana = 7 giorni</span></span></div>
+          <div><span><span class="sym-mark">★</span>&nbsp;+ scrivi il dato a margine</span></div>
+          <div class="kit-hint"><span>La stella è un <strong>tesoro nascosto</strong>: il testo non lo scrive, ma tu lo sai.</span></div>
+
+          <div class="kit-cat kit-last" style="color: var(--miss-color);"><span class="material-symbols-outlined">help</span>Dato mancante</div>
+          <div class="kit-last"><span><span class="hl-tag tag-miss on">? quanto metallo c'è</span></span></div>
+          <div class="kit-last"><span><span class="sym-mark">?</span>&nbsp;+ scrivi la domanda a margine</span></div>
+          <div class="kit-hint kit-last"><span>Non lo inventi: <strong>lo chiedi</strong>.</span></div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [19'&ndash;23'] Far copiare la legenda sul quaderno (prima pagina della lezione). Chi ha i colori usa colori E
+        simboli insieme: così il quaderno resta leggibile anche in fotocopia in bianco e nero.
+      </div>
+    </section>
+
+    <!-- SLIDE 6: DIZIONARIO PAROLE -> CONFRONTI -->
+    <section class="slide" data-slide="6" data-title="Il Dizionario: Parole che Diventano Confronti">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LE PAROLE DELLE REGOLE</span>
+          <h2>Il Dizionario: Parole che Diventano Confronti</h2>
+          <p class="section-lead">Ogni regola nasconde un confronto matematico. Impariamo a tradurlo.</p>
+        </div>
+
+        <div class="dict-grid">
+          <div class="dict-card">
+            <div class="dict-top"><span class="dict-word">almeno</span><span class="dict-symbol">≥</span></div>
+            <p class="dict-example">&ldquo;almeno 50 di metallo&rdquo;: con 50 <strong>va bene</strong>.</p>
+          </div>
+          <div class="dict-card">
+            <div class="dict-top"><span class="dict-word">al massimo</span><span class="dict-symbol">≤</span></div>
+            <p class="dict-example">&ldquo;al massimo 6 coloni&rdquo;: 6 sì, 7 no.</p>
+          </div>
+          <div class="dict-card">
+            <div class="dict-top"><span class="dict-word">più di / supera</span><span class="dict-symbol">&gt;</span></div>
+            <p class="dict-example">&ldquo;supera 120 km/h&rdquo;: con 120 <strong>non</strong> supera.</p>
+          </div>
+          <div class="dict-card">
+            <div class="dict-top"><span class="dict-word">meno di / sotto</span><span class="dict-symbol">&lt;</span></div>
+            <p class="dict-example">&ldquo;meno di 40 punti&rdquo;: il 40 è escluso.</p>
+          </div>
+          <div class="dict-card">
+            <div class="dict-top"><span class="dict-word">fino a</span><span class="dict-symbol">≤</span></div>
+            <p class="dict-example">&ldquo;resiste fino a 120 km/h&rdquo;: il 120 è compreso.</p>
+          </div>
+          <div class="dict-card">
+            <div class="dict-top"><span class="dict-word">basta / è sufficiente</span><span class="dict-symbol">≥</span></div>
+            <p class="dict-example">&ldquo;il cibo basta&rdquo;: scorte ≥ fabbisogno.</p>
+          </div>
+          <div class="dict-card">
+            <div class="dict-top"><span class="dict-word">esattamente</span><span class="dict-symbol">=</span></div>
+            <p class="dict-example">&ldquo;esattamente 10 coloni&rdquo;: né 9 né 11.</p>
+          </div>
+          <div class="dict-card">
+            <div class="dict-top"><span class="dict-word">diverso da / tranne</span><span class="dict-symbol">≠</span></div>
+            <p class="dict-example">&ldquo;tutti i rover tranne il n° 2&rdquo;.</p>
+          </div>
+        </div>
+
+        <div class="lim-banner-big">
+          Il <strong>caso limite</strong>: prova sempre con il numero <strong>esatto</strong> della soglia (50, 120, 10&hellip;).
+          È lì che si nasconde il bug!
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [23'&ndash;28'] Nessun codice: i simboli sono quelli di matematica. Per ogni parola chiedere alla classe:
+        "Il numero della soglia è compreso o escluso?". Collegamento diretto con la lezione sulle condizioni del 05/10.
+      </div>
+    </section>
+
+    <!-- SLIDE 7: LE 4 TRAPPOLE DEL TESTO -->
+    <section class="slide" data-slide="7" data-title="Le 4 Trappole del Testo">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">ATTENZIONE</span>
+          <h2>Le 4 Trappole del Testo</h2>
+          <p class="section-lead">Chi scrive un problema non lo fa per ingannarti&hellip; ma il testo è pieno di tranelli.</p>
+        </div>
+
+        <div class="traps-grid">
+          <div class="trap-card">
+            <div class="trap-icon"><span class="material-symbols-outlined">volume_up</span></div>
+            <div>
+              <h3>1. Il Rumore</h3>
+              <p>Nomi, orari, colori e perfino numeri che non servono a niente.</p>
+              <p class="trap-example">&ldquo;La serra ha perso il 40% delle piante&rdquo; &rarr; può essere solo decorazione!</p>
+            </div>
+          </div>
+          <div class="trap-card">
+            <div class="trap-icon"><span class="material-symbols-outlined">star</span></div>
+            <div>
+              <h3>2. Il Dato Nascosto</h3>
+              <p>Il testo non lo scrive, ma serve: lo devi tirare fuori tu.</p>
+              <p class="trap-example">&ldquo;per una settimana&rdquo; &rarr; ★ 7 giorni</p>
+            </div>
+          </div>
+          <div class="trap-card">
+            <div class="trap-icon"><span class="material-symbols-outlined">compare_arrows</span></div>
+            <div>
+              <h3>3. Le Parole-Trappola</h3>
+              <p>&ldquo;Almeno&rdquo; e &ldquo;più di&rdquo; sembrano uguali, ma il caso limite cambia tutto.</p>
+              <p class="trap-example">almeno 50 &rarr; 50 ≥ 50 VERO &nbsp;|&nbsp; più di 50 &rarr; 50 &gt; 50 FALSO</p>
+            </div>
+          </div>
+          <div class="trap-card">
+            <div class="trap-icon"><span class="material-symbols-outlined">help</span></div>
+            <div>
+              <h3>4. Il Dato Mancante</h3>
+              <p>A volte un'informazione indispensabile non c'è proprio.</p>
+              <p class="trap-example">Non inventarla! Scrivi <strong>?</strong> e la domanda da fare.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [28'&ndash;30'] Presentare velocemente: ogni trappola sarà protagonista di una sfida (Sfida 1 = rumore, 2 = dato
+        nascosto, 3 = parole-trappola, 4 = dato mancante, 5 = tutte insieme).
+      </div>
+    </section>
+
+    <!-- SLIDE 8: ESEMPIO SVOLTO - TESTO -->
+    <section class="slide" data-slide="8" data-title="Esempio Svolto: Il Turno dell'Ossigeno (Testo)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">ESEMPIO GUIDATO &bull; IL TESTO</span>
+          <h2>Esempio Svolto: Il Turno dell'Ossigeno</h2>
+        </div>
+
+        <div class="problem-layout">
+          <div class="problem-card">
+            <div class="problem-card-label"><span class="material-symbols-outlined">description</span>Testo del problema</div>
+            <div class="problem-text">
+              <p>Sono le 6:40 del mattino nella Colonia Alpha-1 e la sirena del cambio turno ha appena suonato. Il
+                tecnico Rossi, arrivato su Marte da appena tre settimane, controlla il pannello del generatore. Ogni
+                colono consuma 3 unità di ossigeno al giorno. Il serbatoio contiene 40 unità e nella colonia vivono 12
+                coloni. Se l'ossigeno del serbatoio basta per tutta la giornata, il pannello deve mostrare
+                &ldquo;Respirate tranquilli&rdquo;; altrimenti deve far scattare l'allarme rosso. Cosa deve mostrare
+                il pannello oggi?</p>
+            </div>
+            <div class="legend-mini">
+              <span><span class="sym sym-in">dato</span></span>
+              <span><span class="sym sym-out">richiesta</span></span>
+              <span><span class="sym sym-rule">regola</span></span>
+              <span><span class="sym sym-noise">rumore</span></span>
+              <span><span class="sym-mark">★</span> nascosto</span>
+              <span><span class="sym-mark">?</span> mancante</span>
+            </div>
+          </div>
+
+          <div class="problem-side">
+            <div class="pixel-art-card">
+              <div class="pixel-art-img-wrap" data-file="immagini/ossigeno.jpeg">
+                <img src="immagini/ossigeno.jpeg" alt="Generatore di ossigeno della colonia" class="pixel-art-img">
+              </div>
+              <div class="pixel-art-caption">
+                <span>Generatore O₂ &bull; Serbatoio</span>
+                <span class="pixel-tag">SUPPORTO VITALE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [30'&ndash;33'] Far leggere a due studenti diversi. Prima di passare alla slide successiva, chiedere alla classe
+        di dettare: "Cosa barro? Cosa cerchio?". Annotare alla LIM o a voce, poi confrontare con la slide annotata.
+      </div>
+    </section>
+
+    <!-- SLIDE 9: ESEMPIO SVOLTO - ANNOTATO -->
+    <section class="slide" data-slide="9" data-steps="6" data-title="Esempio Svolto: Il Turno dell'Ossigeno (Annotato)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">ESEMPIO GUIDATO &bull; PASSO PASSO</span>
+          <h2>Il Turno dell'Ossigeno: Smontiamo il Testo</h2>
+        </div>
+
+        <div class="step-bar"></div>
+
+        <div class="annot-layout">
+          <div class="problem-card">
+            <div class="problem-text">
+              <p><span class="hl hl-noise" data-step="1">Sono le 6:40 del mattino nella Colonia Alpha-1 e la sirena del
+                  cambio turno ha appena suonato.</span> <span class="hl hl-noise" data-step="1">Il tecnico Rossi,
+                  arrivato su Marte da appena tre settimane,</span> controlla il pannello del generatore. Ogni colono
+                consuma <span class="hl hl-in" data-step="2">3 unità di ossigeno al giorno</span>. Il serbatoio contiene
+                <span class="hl hl-in" data-step="2">40 unità</span> e nella colonia vivono <span class="hl hl-in"
+                  data-step="2">12 coloni</span>. <span class="hl hl-rule" data-step="4">Se l'ossigeno del serbatoio
+                  basta</span><span class="hl-tag tag-rule" data-step="4">≥</span> per tutta la giornata, il pannello
+                deve mostrare <span class="hl hl-out" data-step="3">&ldquo;Respirate tranquilli&rdquo;</span>;
+                <span class="hl hl-rule" data-step="4">altrimenti</span> deve far scattare <span class="hl hl-out"
+                  data-step="3">l'allarme rosso</span>. <span class="hl hl-out" data-step="3">Cosa deve mostrare il
+                  pannello oggi?</span></p>
+            </div>
+          </div>
+
+          <div class="ipo-card">
+            <div class="ipo-card-title"><span class="material-symbols-outlined">table_view</span>Scheda I-P-O</div>
+            <div class="ipo-row row-say" data-step="5">
+              <span class="ipo-label">Riformulo</span>
+              <span class="ipo-val"><em>&ldquo;Devo capire se l'ossigeno basta per tutti i coloni di oggi.&rdquo;</em></span>
+            </div>
+            <div class="ipo-row row-in" data-step="5">
+              <span class="ipo-label">Input</span>
+              <span class="ipo-val">ossigeno nel serbatoio = <strong>40</strong><br>coloni = <strong>12</strong> &bull;
+                consumo a testa = <strong>3</strong></span>
+            </div>
+            <div class="ipo-row row-proc" data-step="5">
+              <span class="ipo-label">Elaborazione</span>
+              <span class="ipo-val">fabbisogno = coloni &times; 3<br>basta? &rarr; <span class="math">serbatoio ≥ fabbisogno</span></span>
+            </div>
+            <div class="ipo-row row-out" data-step="5">
+              <span class="ipo-label">Output</span>
+              <span class="ipo-val">&ldquo;Respirate tranquilli&rdquo; <strong>oppure</strong> allarme rosso</span>
+            </div>
+            <div class="ipo-row row-test" data-step="6">
+              <span class="ipo-label">Prova a mano</span>
+              <span class="ipo-val">12 &times; 3 = 36 &rarr; 40 ≥ 36 <strong>VERO</strong> &rarr; &ldquo;Respirate tranquilli&rdquo;<br>
+                Caso limite: serbatoio = 36 &rarr; 36 ≥ 36 &rarr; basta ancora!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [33'&ndash;45'] Usare &rarr; o Spazio per rivelare un passo alla volta. A ogni passo chiedere PRIMA alla classe e
+        POI rivelare. Sottolineare: "basta" diventa ≥ (se il serbatoio è esattamente uguale al fabbisogno, basta!).
+        Tasti: A = mostra tutto, Z = azzera.
+      </div>
+    </section>
+
+    <!-- SLIDE 10: COME LAVORIAMO -->
+    <section class="slide" data-slide="10" data-title="Laboratorio: Come Lavoriamo">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LABORATORIO SU CARTA</span>
+          <h2>Ora Tocca a Voi: 5 Sfide da Programmatore</h2>
+          <p class="section-lead">A coppie, con il foglio dei testi, il quaderno e gli evidenziatori (o una penna).</p>
+        </div>
+
+        <div class="lim-two-boxes">
+          <div class="lim-box" style="border-left: 5px solid var(--ok-color);">
+            <h3 style="color: var(--ok-color);">Come si lavora</h3>
+            <ul class="lim-bullet-list">
+              <li><span class="material-symbols-outlined lim-bullet-icon" style="color: var(--ok-color);">ink_highlighter</span>
+                <span><strong>Sul foglio dei testi:</strong> evidenzia con colori o simboli.</span></li>
+              <li><span class="material-symbols-outlined lim-bullet-icon" style="color: var(--ok-color);">edit_note</span>
+                <span><strong>Sul quaderno:</strong> la frase &ldquo;Devo capire se&hellip;&rdquo; e la scheda I-P-O.</span></li>
+              <li><span class="material-symbols-outlined lim-bullet-icon" style="color: var(--ok-color);">calculate</span>
+                <span><strong>Prova a mano:</strong> con i numeri del testo e con il caso limite.</span></li>
+              <li><span class="material-symbols-outlined lim-bullet-icon" style="color: var(--ok-color);">block</span>
+                <span><strong>Niente soluzioni:</strong> oggi ci interessa solo capire il problema.</span></li>
+            </ul>
+          </div>
+
+          <div class="lim-box" style="border-left: 5px solid var(--cherry-primary); background: var(--cherry-tint);">
+            <h3 style="color: var(--cherry-primary);">Le 5 sfide (6 minuti l'una)</h3>
+            <ul class="lim-bullet-list">
+              <li><span class="material-symbols-outlined lim-bullet-icon">storm</span><span><strong>1. Tempesta di Sabbia</strong> &rarr; caccia al rumore</span></li>
+              <li><span class="material-symbols-outlined lim-bullet-icon">inventory_2</span><span><strong>2. Razioni per la Settimana</strong> &rarr; il dato nascosto</span></li>
+              <li><span class="material-symbols-outlined lim-bullet-icon">factory</span><span><strong>3. La Fabbrica di Mattoni</strong> &rarr; parole-trappola</span></li>
+              <li><span class="material-symbols-outlined lim-bullet-icon">home_work</span><span><strong>4. Il Nuovo Quartiere</strong> &rarr; il dato mancante</span></li>
+              <li><span class="material-symbols-outlined lim-bullet-icon">crisis_alert</span><span><strong>5. Il Meteorite</strong> &rarr; tutte insieme!</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [45'&ndash;47'] Distribuire il foglio con i testi (sezione "Foglio dello studente" di comprensione.md). Ogni
+        sfida: 5-6 minuti di lavoro sulla slide del testo, poi 1-2 minuti di correzione sulla slide annotata. Se il
+        tempo stringe, la Sfida 5 diventa compito per casa.
+      </div>
+    </section>
+
+    <!-- SLIDE 11: SFIDA 1 - TESTO -->
+    <section class="slide" data-slide="11" data-title="Sfida 1: Tempesta di Sabbia (Testo)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LABORATORIO &bull; SFIDA 1 DI 5 &bull; IL TESTO</span>
+          <h2>Sfida 1: La Tempesta di Sabbia</h2>
+        </div>
+
+        <div class="problem-layout">
+          <div class="problem-card">
+            <div class="problem-card-label"><span class="material-symbols-outlined">description</span>Testo della sfida</div>
+            <div class="problem-text">
+              <p>Il radar meteo della base Tharsis segnala una tempesta di sabbia in arrivo da nord-ovest, a 380
+                chilometri di distanza. Le raffiche sollevano la polvere rossa fino a 2 chilometri di altezza. La
+                comandante Okafor, al suo secondo anno di missione, posa il caffè liofilizzato e ordina di controllare
+                gli scudi. Gli scudi della cupola resistono a venti fino a 120 km/h; il radar stima che la tempesta
+                soffierà a 135 km/h. Se il vento supera la resistenza degli scudi, i coloni devono rifugiarsi nel
+                bunker; altrimenti possono restare nelle cupole. Dove devono andare i coloni?</p>
+            </div>
+            <div class="legend-mini">
+              <span><span class="sym sym-in">dato</span></span>
+              <span><span class="sym sym-out">richiesta</span></span>
+              <span><span class="sym sym-rule">regola</span></span>
+              <span><span class="sym sym-noise">rumore</span></span>
+              <span><span class="sym-mark">★</span> nascosto</span>
+              <span><span class="sym-mark">?</span> mancante</span>
+            </div>
+          </div>
+
+          <div class="problem-side">
+            <div class="pixel-art-card">
+              <div class="pixel-art-img-wrap" data-file="immagini/tempesta.jpeg">
+                <img src="immagini/tempesta.jpeg" alt="Tempesta di sabbia che si avvicina alla colonia" class="pixel-art-img">
+              </div>
+              <div class="pixel-art-caption">
+                <span>Radar Meteo &bull; Base Tharsis</span>
+                <span class="pixel-tag">EVENTO METEO</span>
+              </div>
+            </div>
+            <div class="task-card">
+              <h3><span class="material-symbols-outlined">assignment</span>La tua consegna</h3>
+              <ol>
+                <li>Evidenzia (colori o simboli).</li>
+                <li>Riformula: &ldquo;Devo capire se&hellip;&rdquo;</li>
+                <li>Scheda I-P-O + prova a mano.</li>
+              </ol>
+              <p class="task-focus">Occhio a: tanti numeri&hellip; ma quali servono davvero?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [47'&ndash;53'] Sfida sul RUMORE: 380 km e 2 km sono numeri esca. Lasciare lavorare 5 minuti, girare tra i banchi
+        e verificare chi ha cerchiato tutti i numeri.
+      </div>
+    </section>
+
+    <!-- SLIDE 12: SFIDA 1 - ANNOTATA -->
+    <section class="slide" data-slide="12" data-steps="6" data-title="Sfida 1: Tempesta di Sabbia (Soluzione)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">SFIDA 1 &bull; SOLUZIONE PASSO PASSO</span>
+          <h2>La Tempesta di Sabbia: Smontiamo il Testo</h2>
+        </div>
+
+        <div class="step-bar"></div>
+
+        <div class="annot-layout">
+          <div class="problem-card">
+            <div class="problem-text">
+              <p><span class="hl hl-noise" data-step="1">Il radar meteo della base Tharsis segnala una tempesta di sabbia
+                  in arrivo da nord-ovest, a 380 chilometri di distanza. Le raffiche sollevano la polvere rossa fino a 2
+                  chilometri di altezza. La comandante Okafor, al suo secondo anno di missione, posa il caffè
+                  liofilizzato e</span> ordina di controllare gli scudi. Gli scudi della cupola resistono a venti
+                <span class="hl hl-rule" data-step="4">fino a</span><span class="hl-tag tag-rule" data-step="4">≤</span>
+                <span class="hl hl-in" data-step="2">120 km/h</span>; il radar stima che la tempesta soffierà a
+                <span class="hl hl-in" data-step="2">135 km/h</span>. <span class="hl hl-rule" data-step="4">Se il vento
+                  supera la resistenza degli scudi</span><span class="hl-tag tag-rule" data-step="4">&gt;</span>, i
+                coloni devono rifugiarsi <span class="hl hl-out" data-step="3">nel bunker</span>; <span class="hl hl-rule"
+                  data-step="4">altrimenti</span> possono restare <span class="hl hl-out" data-step="3">nelle
+                  cupole</span>. <span class="hl hl-out" data-step="3">Dove devono andare i coloni?</span></p>
+            </div>
+          </div>
+
+          <div class="ipo-card">
+            <div class="ipo-card-title"><span class="material-symbols-outlined">table_view</span>Scheda I-P-O</div>
+            <div class="ipo-row row-say" data-step="5">
+              <span class="ipo-label">Riformulo</span>
+              <span class="ipo-val"><em>&ldquo;Devo capire se il vento è più forte di quanto reggono gli scudi.&rdquo;</em></span>
+            </div>
+            <div class="ipo-row row-in" data-step="5">
+              <span class="ipo-label">Input</span>
+              <span class="ipo-val">resistenza scudi = <strong>120 km/h</strong><br>velocità del vento = <strong>135 km/h</strong></span>
+            </div>
+            <div class="ipo-row row-proc" data-step="5">
+              <span class="ipo-label">Elaborazione</span>
+              <span class="ipo-val">&ldquo;supera&rdquo; &rarr; <span class="math">vento &gt; resistenza</span></span>
+            </div>
+            <div class="ipo-row row-out" data-step="5">
+              <span class="ipo-label">Output</span>
+              <span class="ipo-val">&ldquo;Tutti nel bunker&rdquo; <strong>oppure</strong> &ldquo;Restate nelle cupole&rdquo;</span>
+            </div>
+            <div class="ipo-row row-test" data-step="6">
+              <span class="ipo-label">Prova a mano</span>
+              <span class="ipo-val">135 &gt; 120 <strong>VERO</strong> &rarr; tutti nel bunker!<br>
+                Caso limite: vento = 120 &rarr; 120 &gt; 120 FALSO &rarr; gli scudi reggono (&ldquo;fino a&rdquo;).</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Far notare: 380 km e 2 km sono NUMERI ma sono rumore. Non tutti i numeri sono dati! Il caso limite (vento
+        esattamente 120) si risolve grazie a "fino a" = compreso.
+      </div>
+    </section>
+
+    <!-- SLIDE 13: SFIDA 2 - TESTO -->
+    <section class="slide" data-slide="13" data-title="Sfida 2: Razioni per la Settimana (Testo)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LABORATORIO &bull; SFIDA 2 DI 5 &bull; IL TESTO</span>
+          <h2>Sfida 2: Razioni per la Settimana</h2>
+        </div>
+
+        <div class="problem-layout">
+          <div class="problem-card">
+            <div class="problem-card-label"><span class="material-symbols-outlined">description</span>Testo della sfida</div>
+            <div class="problem-text">
+              <p>La navetta cargo Ares-3 è atterrata ieri sera sulla pista n° 2, ma il comandante vuole sapere se il
+                cibo in magazzino basta per una settimana intera, senza aspettare il prossimo rifornimento. Nella
+                colonia vivono 10 coloni e ognuno mangia 2 razioni al giorno. Nel magazzino ci sono 150 razioni. Le
+                razioni preferite dai coloni sono quelle alla soia affumicata. Se il cibo non basta, bisogna ordinare
+                un rifornimento urgente dalla Terra. Serve il rifornimento?</p>
+            </div>
+            <div class="legend-mini">
+              <span><span class="sym sym-in">dato</span></span>
+              <span><span class="sym sym-out">richiesta</span></span>
+              <span><span class="sym sym-rule">regola</span></span>
+              <span><span class="sym sym-noise">rumore</span></span>
+              <span><span class="sym-mark">★</span> nascosto</span>
+              <span><span class="sym-mark">?</span> mancante</span>
+            </div>
+          </div>
+
+          <div class="problem-side">
+            <div class="pixel-art-card">
+              <div class="pixel-art-img-wrap" data-file="immagini/razioni.jpeg">
+                <img src="immagini/razioni.jpeg" alt="Magazzino con casse di razioni e navetta cargo" class="pixel-art-img">
+              </div>
+              <div class="pixel-art-caption">
+                <span>Magazzino Centrale &bull; Pista 2</span>
+                <span class="pixel-tag">SCORTE CIBO</span>
+              </div>
+            </div>
+            <div class="task-card">
+              <h3><span class="material-symbols-outlined">assignment</span>La tua consegna</h3>
+              <ol>
+                <li>Evidenzia (colori o simboli).</li>
+                <li>Riformula: &ldquo;Devo capire se&hellip;&rdquo;</li>
+                <li>Scheda I-P-O + prova a mano.</li>
+              </ol>
+              <p class="task-focus">Occhio a: c'è un numero che il testo non scrive&hellip;</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [53'&ndash;59'] Sfida sul DATO NASCOSTO: "una settimana" = 7 giorni. Chi lo dimentica calcola 10 × 2 = 20 razioni e
+        conclude che il cibo avanza tantissimo.
+      </div>
+    </section>
+
+    <!-- SLIDE 14: SFIDA 2 - ANNOTATA -->
+    <section class="slide" data-slide="14" data-steps="6" data-title="Sfida 2: Razioni per la Settimana (Soluzione)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">SFIDA 2 &bull; SOLUZIONE PASSO PASSO</span>
+          <h2>Razioni per la Settimana: Smontiamo il Testo</h2>
+        </div>
+
+        <div class="step-bar"></div>
+
+        <div class="annot-layout">
+          <div class="problem-card">
+            <div class="problem-text">
+              <p><span class="hl hl-noise" data-step="1">La navetta cargo Ares-3 è atterrata ieri sera sulla pista n°
+                  2,</span> ma il comandante vuole sapere se il cibo in magazzino <span class="hl hl-rule"
+                  data-step="4">basta</span><span class="hl-tag tag-rule" data-step="4">≥</span> per <span
+                  class="hl hl-in" data-step="2">una settimana intera</span><span class="hl-tag tag-hidden"
+                  data-step="2">★ 7 giorni</span>, senza aspettare il prossimo rifornimento. Nella colonia vivono
+                <span class="hl hl-in" data-step="2">10 coloni</span> e ognuno mangia <span class="hl hl-in"
+                  data-step="2">2 razioni al giorno</span>. Nel magazzino ci sono <span class="hl hl-in"
+                  data-step="2">150 razioni</span>. <span class="hl hl-noise" data-step="1">Le razioni preferite dai
+                  coloni sono quelle alla soia affumicata.</span> <span class="hl hl-rule" data-step="4">Se il cibo non
+                  basta</span><span class="hl-tag tag-rule" data-step="4">&lt;</span>, bisogna <span class="hl hl-out"
+                  data-step="3">ordinare un rifornimento urgente dalla Terra</span>. <span class="hl hl-out"
+                  data-step="3">Serve il rifornimento?</span></p>
+            </div>
+          </div>
+
+          <div class="ipo-card">
+            <div class="ipo-card-title"><span class="material-symbols-outlined">table_view</span>Scheda I-P-O</div>
+            <div class="ipo-row row-say" data-step="5">
+              <span class="ipo-label">Riformulo</span>
+              <span class="ipo-val"><em>&ldquo;Devo capire se 150 razioni coprono 7 giorni per tutti i coloni.&rdquo;</em></span>
+            </div>
+            <div class="ipo-row row-in" data-step="5">
+              <span class="ipo-label">Input</span>
+              <span class="ipo-val">razioni = <strong>150</strong> &bull; coloni = <strong>10</strong><br>razioni a testa al
+                giorno = <strong>2</strong> &bull; ★ giorni = <strong>7</strong></span>
+            </div>
+            <div class="ipo-row row-proc" data-step="5">
+              <span class="ipo-label">Elaborazione</span>
+              <span class="ipo-val">fabbisogno = coloni &times; 2 &times; 7<br>basta? &rarr; <span class="math">razioni ≥ fabbisogno</span></span>
+            </div>
+            <div class="ipo-row row-out" data-step="5">
+              <span class="ipo-label">Output</span>
+              <span class="ipo-val">&ldquo;Nessun rifornimento&rdquo; <strong>oppure</strong> &ldquo;Rifornimento urgente!&rdquo;</span>
+            </div>
+            <div class="ipo-row row-test" data-step="6">
+              <span class="ipo-label">Prova a mano</span>
+              <span class="ipo-val">10 &times; 2 &times; 7 = 140 &rarr; 150 ≥ 140 <strong>VERO</strong> &rarr; nessun rifornimento.<br>
+                Senza il ★: 10 &times; 2 = 20 &rarr; risposta giusta per caso, ragionamento sbagliato!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Punto chiave: senza i 7 giorni si arriva alla stessa risposta ma per il motivo sbagliato. Provare con 130
+        razioni: con il ★ serve il rifornimento (130 &lt; 140), senza il ★ no. Ecco perché il dato nascosto conta.
+      </div>
+    </section>
+
+    <!-- SLIDE 15: SFIDA 3 - TESTO -->
+    <section class="slide" data-slide="15" data-title="Sfida 3: La Fabbrica di Mattoni (Testo)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LABORATORIO &bull; SFIDA 3 DI 5 &bull; IL TESTO</span>
+          <h2>Sfida 3: La Fabbrica di Mattoni</h2>
+        </div>
+
+        <div class="problem-layout">
+          <div class="problem-card">
+            <div class="problem-card-label"><span class="material-symbols-outlined">description</span>Testo della sfida</div>
+            <div class="problem-text">
+              <p>Il consiglio della colonia ha votato all'unanimità: è arrivato il momento di accendere la nuova
+                fabbrica di mattoni. Per partire, la fabbrica ha bisogno di almeno 50 unità di energia libera. La
+                centrale solare produce 200 unità, mentre gli edifici già accesi ne consumano 150. Se l'energia libera
+                è meno di 50, la fabbrica resta spenta e i muratori tornano a giocare a carte nella mensa; altrimenti
+                la fabbrica si accende. La fabbrica si accende?</p>
+            </div>
+            <div class="legend-mini">
+              <span><span class="sym sym-in">dato</span></span>
+              <span><span class="sym sym-out">richiesta</span></span>
+              <span><span class="sym sym-rule">regola</span></span>
+              <span><span class="sym sym-noise">rumore</span></span>
+              <span><span class="sym-mark">★</span> nascosto</span>
+              <span><span class="sym-mark">?</span> mancante</span>
+            </div>
+          </div>
+
+          <div class="problem-side">
+            <div class="pixel-art-card">
+              <div class="pixel-art-img-wrap" data-file="immagini/fabbrica.jpeg">
+                <img src="immagini/fabbrica.jpeg" alt="Fabbrica di mattoni collegata alla centrale solare" class="pixel-art-img">
+              </div>
+              <div class="pixel-art-caption">
+                <span>Fabbrica di Mattoni &bull; Rete</span>
+                <span class="pixel-tag">PRODUZIONE</span>
+              </div>
+            </div>
+            <div class="task-card">
+              <h3><span class="material-symbols-outlined">assignment</span>La tua consegna</h3>
+              <ol>
+                <li>Evidenzia (colori o simboli).</li>
+                <li>Riformula: &ldquo;Devo capire se&hellip;&rdquo;</li>
+                <li>Scheda I-P-O + prova a mano.</li>
+              </ol>
+              <p class="task-focus">Occhio a: &ldquo;almeno&rdquo; e &ldquo;meno di&rdquo;. E se viene esattamente 50?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [59'&ndash;65'] Sfida sulle PAROLE-TRAPPOLA: l'energia libera (200 &minus; 150) è ESATTAMENTE 50, cioè il caso
+        limite. Chi traduce "almeno" con "più di" lascia la fabbrica spenta.
+      </div>
+    </section>
+
+    <!-- SLIDE 16: SFIDA 3 - ANNOTATA -->
+    <section class="slide" data-slide="16" data-steps="6" data-title="Sfida 3: La Fabbrica di Mattoni (Soluzione)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">SFIDA 3 &bull; SOLUZIONE PASSO PASSO</span>
+          <h2>La Fabbrica di Mattoni: Smontiamo il Testo</h2>
+        </div>
+
+        <div class="step-bar"></div>
+
+        <div class="annot-layout">
+          <div class="problem-card">
+            <div class="problem-text">
+              <p><span class="hl hl-noise" data-step="1">Il consiglio della colonia ha votato all'unanimità: è arrivato
+                  il momento di</span> accendere la nuova fabbrica di mattoni. Per partire, la fabbrica ha bisogno di
+                <span class="hl hl-rule" data-step="4">almeno</span><span class="hl-tag tag-rule" data-step="4">≥</span>
+                <span class="hl hl-in" data-step="2">50 unità</span> di energia libera. La centrale solare produce
+                <span class="hl hl-in" data-step="2">200 unità</span>, mentre gli edifici già accesi ne consumano
+                <span class="hl hl-in" data-step="2">150</span><span class="hl-tag tag-calc" data-step="2">libera = 200 &minus; 150</span>.
+                <span class="hl hl-rule" data-step="4">Se l'energia libera è meno di</span><span class="hl-tag tag-rule"
+                  data-step="4">&lt;</span> 50, la fabbrica <span class="hl hl-out" data-step="3">resta spenta</span>
+                <span class="hl hl-noise" data-step="1">e i muratori tornano a giocare a carte nella mensa</span>;
+                <span class="hl hl-rule" data-step="4">altrimenti</span> la fabbrica <span class="hl hl-out"
+                  data-step="3">si accende</span>. <span class="hl hl-out" data-step="3">La fabbrica si accende?</span></p>
+            </div>
+          </div>
+
+          <div class="ipo-card">
+            <div class="ipo-card-title"><span class="material-symbols-outlined">table_view</span>Scheda I-P-O</div>
+            <div class="ipo-row row-say" data-step="5">
+              <span class="ipo-label">Riformulo</span>
+              <span class="ipo-val"><em>&ldquo;Devo capire se l'energia che avanza arriva ad almeno 50.&rdquo;</em></span>
+            </div>
+            <div class="ipo-row row-in" data-step="5">
+              <span class="ipo-label">Input</span>
+              <span class="ipo-val">produzione = <strong>200</strong> &bull; consumo = <strong>150</strong><br>soglia = <strong>50</strong></span>
+            </div>
+            <div class="ipo-row row-proc" data-step="5">
+              <span class="ipo-label">Elaborazione</span>
+              <span class="ipo-val">energia libera = produzione &minus; consumo<br>&ldquo;almeno&rdquo; &rarr; <span class="math">libera ≥ 50</span>
+                (il contrario: <span class="math">libera &lt; 50</span>)</span>
+            </div>
+            <div class="ipo-row row-out" data-step="5">
+              <span class="ipo-label">Output</span>
+              <span class="ipo-val">&ldquo;Fabbrica accesa&rdquo; <strong>oppure</strong> &ldquo;Fabbrica spenta&rdquo;</span>
+            </div>
+            <div class="ipo-row row-test" data-step="6">
+              <span class="ipo-label">Prova a mano</span>
+              <span class="ipo-val">200 &minus; 150 = 50 &rarr; 50 ≥ 50 <strong>VERO</strong> &rarr; si accende!<br>
+                Chi ha letto &ldquo;più di 50&rdquo;: 50 &gt; 50 FALSO &rarr; fabbrica spenta. Bug!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        "Almeno" e "meno di" sono due facce della stessa regola: una dice quando si accende, l'altra quando resta
+        spenta. Il testo dà entrambe: verificare che siano coerenti (50 sta da una parte sola).
+      </div>
+    </section>
+
+    <!-- SLIDE 17: SFIDA 4 - TESTO -->
+    <section class="slide" data-slide="17" data-title="Sfida 4: Il Nuovo Quartiere (Testo)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LABORATORIO &bull; SFIDA 4 DI 5 &bull; IL TESTO</span>
+          <h2>Sfida 4: Il Nuovo Quartiere</h2>
+        </div>
+
+        <div class="problem-layout">
+          <div class="problem-card">
+            <div class="problem-card-label"><span class="material-symbols-outlined">description</span>Testo della sfida</div>
+            <div class="problem-text">
+              <p>Con l'ultima navetta sono arrivati 9 nuovi coloni che non hanno ancora un letto. Il sindaco Hernández,
+                che ama i nomi poetici, ha già deciso di chiamare il nuovo quartiere &ldquo;Valle dell'Alba&rdquo;.
+                Ogni modulo abitativo ospita al massimo 6 coloni e costa 80 unità di metallo. Se il metallo in
+                magazzino basta, si costruiscono tutti i moduli necessari; altrimenti i nuovi coloni dormono nella
+                palestra della base. Quanti moduli servono? Si possono costruire?</p>
+            </div>
+            <div class="legend-mini">
+              <span><span class="sym sym-in">dato</span></span>
+              <span><span class="sym sym-out">richiesta</span></span>
+              <span><span class="sym sym-rule">regola</span></span>
+              <span><span class="sym sym-noise">rumore</span></span>
+              <span><span class="sym-mark">★</span> nascosto</span>
+              <span><span class="sym-mark">?</span> mancante</span>
+            </div>
+          </div>
+
+          <div class="problem-side">
+            <div class="pixel-art-card">
+              <div class="pixel-art-img-wrap" data-file="immagini/quartiere.jpeg">
+                <img src="immagini/quartiere.jpeg" alt="Cantiere di moduli abitativi su Marte" class="pixel-art-img">
+              </div>
+              <div class="pixel-art-caption">
+                <span>Quartiere &ldquo;Valle dell'Alba&rdquo;</span>
+                <span class="pixel-tag">CANTIERE</span>
+              </div>
+            </div>
+            <div class="task-card">
+              <h3><span class="material-symbols-outlined">assignment</span>La tua consegna</h3>
+              <ol>
+                <li>Evidenzia (colori o simboli).</li>
+                <li>Riformula: &ldquo;Devo capire se&hellip;&rdquo;</li>
+                <li>Scheda I-P-O + prova a mano.</li>
+              </ol>
+              <p class="task-focus">Occhio a: riesci davvero a rispondere? Cosa ti manca?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [65'&ndash;71'] Sfida sul DATO MANCANTE: il testo non dice quanto metallo c'è in magazzino. Premiare chi scrive
+        "?" e la domanda invece di inventarsi un numero. Secondo punto: 9 coloni con 6 posti a modulo &rarr; servono 2
+        moduli (1 non basta).
+      </div>
+    </section>
+
+    <!-- SLIDE 18: SFIDA 4 - ANNOTATA -->
+    <section class="slide" data-slide="18" data-steps="6" data-title="Sfida 4: Il Nuovo Quartiere (Soluzione)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">SFIDA 4 &bull; SOLUZIONE PASSO PASSO</span>
+          <h2>Il Nuovo Quartiere: Smontiamo il Testo</h2>
+        </div>
+
+        <div class="step-bar" data-last-label="Domanda da fare"></div>
+
+        <div class="annot-layout">
+          <div class="problem-card">
+            <div class="problem-text">
+              <p>Con l'ultima navetta sono arrivati <span class="hl hl-in" data-step="2">9 nuovi coloni</span> che non
+                hanno ancora un letto. <span class="hl hl-noise" data-step="1">Il sindaco Hernández, che ama i nomi
+                  poetici, ha già deciso di chiamare il nuovo quartiere &ldquo;Valle dell'Alba&rdquo;.</span> Ogni
+                modulo abitativo <span class="hl hl-rule" data-step="4">ospita al massimo</span><span
+                  class="hl-tag tag-rule" data-step="4">≤</span> <span class="hl hl-in" data-step="2">6 coloni</span> e
+                costa <span class="hl hl-in" data-step="2">80 unità di metallo</span>. <span class="hl hl-rule"
+                  data-step="4">Se il metallo in magazzino basta</span><span class="hl-tag tag-rule"
+                  data-step="4">≥</span><span class="hl-tag tag-miss" data-step="2">? quanto metallo c'è</span>, si
+                costruiscono <span class="hl hl-out" data-step="3">tutti i moduli necessari</span>; <span
+                  class="hl hl-rule" data-step="4">altrimenti</span> i nuovi coloni <span class="hl hl-out"
+                  data-step="3">dormono nella palestra della base</span>. <span class="hl hl-out" data-step="3">Quanti
+                  moduli servono? Si possono costruire?</span></p>
+            </div>
+          </div>
+
+          <div class="ipo-card">
+            <div class="ipo-card-title"><span class="material-symbols-outlined">table_view</span>Scheda I-P-O</div>
+            <div class="ipo-row row-say" data-step="5">
+              <span class="ipo-label">Riformulo</span>
+              <span class="ipo-val"><em>&ldquo;Devo capire quanti moduli servono per 9 coloni e se ho il metallo per costruirli.&rdquo;</em></span>
+            </div>
+            <div class="ipo-row row-in" data-step="5">
+              <span class="ipo-label">Input</span>
+              <span class="ipo-val">coloni = <strong>9</strong> &bull; posti a modulo = <strong>6</strong> &bull; costo = <strong>80</strong><br>
+                metallo in magazzino = <strong>? MANCA</strong></span>
+            </div>
+            <div class="ipo-row row-proc" data-step="5">
+              <span class="ipo-label">Elaborazione</span>
+              <span class="ipo-val">1 modulo = 6 posti (non basta) &rarr; servono <strong>2 moduli</strong><br>
+                costo = 2 &times; 80 = 160 &rarr; <span class="math">metallo ≥ 160</span></span>
+            </div>
+            <div class="ipo-row row-out" data-step="5">
+              <span class="ipo-label">Output</span>
+              <span class="ipo-val">numero di moduli (2) + &ldquo;Costruiti&rdquo; <strong>oppure</strong> &ldquo;Tutti in palestra&rdquo;</span>
+            </div>
+            <div class="ipo-row row-ask" data-step="6">
+              <span class="ipo-label">Domanda da fare</span>
+              <span class="ipo-val">Non posso rispondere! Chiedo al sindaco: <strong>quanto metallo c'è in magazzino?</strong><br>
+                Se fossero 200 &rarr; 200 ≥ 160 &rarr; 2 moduli costruiti.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        "Non lo so, mi manca un dato" è una risposta CORRETTA e professionale. Inventarsi un numero no. Nella vita reale
+        il programmatore torna dal cliente e chiede.
+      </div>
+    </section>
+
+    <!-- SLIDE 19: SFIDA 5 - TESTO -->
+    <section class="slide" data-slide="19" data-title="Sfida 5: Il Meteorite (Testo)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">LABORATORIO &bull; SFIDA 5 DI 5 &bull; IL TESTO</span>
+          <h2>Sfida Finale: Il Meteorite sulla Serra</h2>
+        </div>
+
+        <div class="problem-layout">
+          <div class="problem-card">
+            <div class="problem-card-label"><span class="material-symbols-outlined">description</span>Testo della sfida</div>
+            <div class="problem-text">
+              <p>Durante la lunga notte marziana, mentre la colonia dorme, un piccolo meteorite colpisce la serra
+                idroponica. L'ingegnera capo Lindqvist, svegliata dall'allarme, corre a controllare in tuta
+                pressurizzata: la serra ha perso il 40% delle piante e 4 pannelli di vetro sono in frantumi. Riparare
+                un pannello costa 30 unità di metallo. Se il metallo in magazzino è almeno pari al costo della
+                riparazione, la serra viene riparata subito; se invece non basta, la serra resta chiusa fino al
+                prossimo rifornimento. In magazzino ci sono 100 unità di metallo. La serra verrà riparata?</p>
+            </div>
+            <div class="legend-mini">
+              <span><span class="sym sym-in">dato</span></span>
+              <span><span class="sym sym-out">richiesta</span></span>
+              <span><span class="sym sym-rule">regola</span></span>
+              <span><span class="sym sym-noise">rumore</span></span>
+              <span><span class="sym-mark">★</span> nascosto</span>
+              <span><span class="sym-mark">?</span> mancante</span>
+            </div>
+          </div>
+
+          <div class="problem-side">
+            <div class="pixel-art-card">
+              <div class="pixel-art-img-wrap" data-file="immagini/meteorite.jpeg">
+                <img src="immagini/meteorite.jpeg" alt="Serra colpita da un meteorite" class="pixel-art-img">
+              </div>
+              <div class="pixel-art-caption">
+                <span>Serra Idroponica &bull; Danni</span>
+                <span class="pixel-tag">EVENTO CASUALE</span>
+              </div>
+            </div>
+            <div class="task-card">
+              <h3><span class="material-symbols-outlined">assignment</span>La tua consegna</h3>
+              <ol>
+                <li>Evidenzia (colori o simboli).</li>
+                <li>Riformula: &ldquo;Devo capire se&hellip;&rdquo;</li>
+                <li>Scheda I-P-O + prova a mano.</li>
+              </ol>
+              <p class="task-focus">Occhio a: qui le trappole sono tutte insieme!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [71'&ndash;78'] Sfida riassuntiva. Il 40% è un numero esca (rumore). Il costo totale va calcolato (4 &times; 30). Se il
+        tempo è finito, assegnarla per casa e correggerla all'inizio della prossima lezione.
+      </div>
+    </section>
+
+    <!-- SLIDE 20: SFIDA 5 - ANNOTATA -->
+    <section class="slide" data-slide="20" data-steps="6" data-title="Sfida 5: Il Meteorite (Soluzione)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">SFIDA 5 &bull; SOLUZIONE PASSO PASSO</span>
+          <h2>Il Meteorite sulla Serra: Smontiamo il Testo</h2>
+        </div>
+
+        <div class="step-bar"></div>
+
+        <div class="annot-layout">
+          <div class="problem-card">
+            <div class="problem-text">
+              <p><span class="hl hl-noise" data-step="1">Durante la lunga notte marziana, mentre la colonia dorme,</span>
+                un piccolo meteorite colpisce la serra idroponica. <span class="hl hl-noise" data-step="1">L'ingegnera
+                  capo Lindqvist, svegliata dall'allarme, corre a controllare in tuta pressurizzata: la serra ha perso
+                  il 40% delle piante</span> e <span class="hl hl-in" data-step="2">4 pannelli</span> di vetro sono in
+                frantumi. Riparare un pannello costa <span class="hl hl-in" data-step="2">30 unità di metallo</span><span
+                  class="hl-tag tag-calc" data-step="2">costo = 4 &times; 30</span>. <span class="hl hl-rule"
+                  data-step="4">Se il metallo in magazzino è almeno pari</span><span class="hl-tag tag-rule"
+                  data-step="4">≥</span> al costo della riparazione, la serra <span class="hl hl-out"
+                  data-step="3">viene riparata subito</span>; <span class="hl hl-rule" data-step="4">se invece non
+                  basta</span><span class="hl-tag tag-rule" data-step="4">&lt;</span>, la serra <span
+                  class="hl hl-out" data-step="3">resta chiusa</span> fino al prossimo rifornimento. In magazzino ci
+                sono <span class="hl hl-in" data-step="2">100 unità di metallo</span>. <span class="hl hl-out"
+                  data-step="3">La serra verrà riparata?</span></p>
+            </div>
+          </div>
+
+          <div class="ipo-card">
+            <div class="ipo-card-title"><span class="material-symbols-outlined">table_view</span>Scheda I-P-O</div>
+            <div class="ipo-row row-say" data-step="5">
+              <span class="ipo-label">Riformulo</span>
+              <span class="ipo-val"><em>&ldquo;Devo capire se il metallo basta per riparare tutti i pannelli rotti.&rdquo;</em></span>
+            </div>
+            <div class="ipo-row row-in" data-step="5">
+              <span class="ipo-label">Input</span>
+              <span class="ipo-val">pannelli rotti = <strong>4</strong> &bull; costo a pannello = <strong>30</strong><br>
+                metallo in magazzino = <strong>100</strong></span>
+            </div>
+            <div class="ipo-row row-proc" data-step="5">
+              <span class="ipo-label">Elaborazione</span>
+              <span class="ipo-val">costo riparazione = pannelli &times; 30<br>&ldquo;almeno pari&rdquo; &rarr; <span class="math">metallo ≥ costo</span></span>
+            </div>
+            <div class="ipo-row row-out" data-step="5">
+              <span class="ipo-label">Output</span>
+              <span class="ipo-val">&ldquo;Serra riparata&rdquo; <strong>oppure</strong> &ldquo;Serra chiusa&rdquo;</span>
+            </div>
+            <div class="ipo-row row-test" data-step="6">
+              <span class="ipo-label">Prova a mano</span>
+              <span class="ipo-val">4 &times; 30 = 120 &rarr; 100 ≥ 120 <strong>FALSO</strong> &rarr; serra chiusa.<br>
+                Caso limite: metallo = 120 &rarr; 120 ≥ 120 &rarr; riparata!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        Verificare chi ha usato il 40% in un calcolo: è la trappola principale. Domanda bonus per i più veloci: "Quanto
+        metallo manca per riparare la serra?" (120 &minus; 100 = 20).
+      </div>
+    </section>
+
+    <!-- SLIDE 21: ERRORI TIPICI & CHECKLIST -->
+    <section class="slide" data-slide="21" data-title="Errori Tipici e Checklist del Programmatore">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">RIEPILOGO</span>
+          <h2>Errori Tipici e Checklist del Programmatore</h2>
+          <p class="section-lead">Prima di dire &ldquo;ho capito&rdquo;, controlla con il compagno di banco.</p>
+        </div>
+
+        <div class="lim-two-boxes">
+          <div class="lim-box" style="border-left: 5px solid var(--cherry-primary);">
+            <h3 style="color: var(--cherry-primary);">Gli errori più comuni</h3>
+            <ul class="check-list error-list">
+              <li><span class="material-symbols-outlined">close</span><span>Partire a risolvere dopo una sola lettura.</span></li>
+              <li><span class="material-symbols-outlined">close</span><span>Cerchiare <strong>tutti</strong> i numeri (anche il 40% e i 380 km).</span></li>
+              <li><span class="material-symbols-outlined">close</span><span>Dimenticare il dato nascosto (i 7 giorni).</span></li>
+              <li><span class="material-symbols-outlined">close</span><span>Leggere &ldquo;almeno&rdquo; come &ldquo;più di&rdquo;.</span></li>
+              <li><span class="material-symbols-outlined">close</span><span>Inventare un dato mancante invece di chiederlo.</span></li>
+            </ul>
+          </div>
+
+          <div class="lim-box" style="border-left: 5px solid var(--ok-color);">
+            <h3 style="color: var(--ok-color);">La checklist</h3>
+            <ul class="check-list">
+              <li><span class="material-symbols-outlined">check_box</span><span>Ho letto il testo <strong>due volte</strong>?</span></li>
+              <li><span class="material-symbols-outlined">check_box</span><span>Ho <strong>barrato</strong> il rumore?</span></li>
+              <li><span class="material-symbols-outlined">check_box</span><span>Ogni dato ha un <strong>nome</strong> e un <strong>valore</strong>?</span></li>
+              <li><span class="material-symbols-outlined">check_box</span><span>Ho trovato la <strong>richiesta</strong> (doppia riga)?</span></li>
+              <li><span class="material-symbols-outlined">check_box</span><span>Ho tradotto le regole in <strong>confronti</strong> (≥, &lt;&hellip;)?</span></li>
+              <li><span class="material-symbols-outlined">check_box</span><span>Ho provato con i numeri e con il <strong>caso limite</strong>?</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [78'&ndash;83'] Ripassare gli errori visti girando tra i banchi durante le sfide. Far incollare o copiare la checklist
+        sul quaderno: la useremo in tutte le prossime lezioni prima di disegnare un Flow Chart.
+      </div>
+    </section>
+
+    <!-- SLIDE 22: BIGLIETTO D'USCITA - TESTO -->
+    <section class="slide" data-slide="22" data-title="Biglietto d'Uscita: Il Rover (Testo)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">BIGLIETTO D'USCITA &bull; 3 MINUTI &bull; DA SOLI</span>
+          <h2>Ultima Prova: Il Rover Esploratore</h2>
+        </div>
+
+        <div class="problem-layout">
+          <div class="problem-card">
+            <div class="problem-card-label"><span class="material-symbols-outlined">description</span>Testo</div>
+            <div class="problem-text" style="font-size: 1.3rem;">
+              <p>Il rover Curiosity-2, verniciato di arancione, consuma 5 unità di energia per ogni uscita e ha la
+                batteria carica a 18 unità. Il comandante vuole sapere se il rover può fare almeno 3 uscite prima di
+                ricaricarsi.</p>
+            </div>
+            <div class="legend-mini">
+              <span><span class="sym sym-in">dato</span></span>
+              <span><span class="sym sym-out">richiesta</span></span>
+              <span><span class="sym sym-rule">regola</span></span>
+              <span><span class="sym sym-noise">rumore</span></span>
+              <span><span class="sym-mark">★</span> nascosto</span>
+              <span><span class="sym-mark">?</span> mancante</span>
+            </div>
+          </div>
+
+          <div class="problem-side">
+            <div class="pixel-art-card">
+              <div class="pixel-art-img-wrap" data-file="immagini/rover.jpeg">
+                <img src="immagini/rover.jpeg" alt="Rover esploratore arancione su Marte" class="pixel-art-img">
+              </div>
+              <div class="pixel-art-caption">
+                <span>Rover Curiosity-2</span>
+                <span class="pixel-tag">ESPLORAZIONE</span>
+              </div>
+            </div>
+            <div class="task-card">
+              <h3><span class="material-symbols-outlined">confirmation_number</span>Su un foglietto</h3>
+              <ol>
+                <li>Riscrivi i dati con nome e valore.</li>
+                <li>Scrivi la richiesta.</li>
+                <li>Rispondi con la prova a mano.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [83'&ndash;88'] Lavoro individuale, 3 minuti, su un foglietto da consegnare uscendo. Serve al docente per capire
+        chi ha bisogno di rinforzo nella prossima lezione.
+      </div>
+    </section>
+
+    <!-- SLIDE 23: BIGLIETTO D'USCITA - ANNOTATO -->
+    <section class="slide" data-slide="23" data-steps="6" data-title="Biglietto d'Uscita: Il Rover (Soluzione)">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-kicker">BIGLIETTO D'USCITA &bull; SOLUZIONE</span>
+          <h2>Il Rover Esploratore: Smontiamo il Testo</h2>
+        </div>
+
+        <div class="step-bar"></div>
+
+        <div class="annot-layout">
+          <div class="problem-card">
+            <div class="problem-text" style="font-size: 1.25rem;">
+              <p>Il rover <span class="hl hl-noise" data-step="1">Curiosity-2, verniciato di arancione,</span> consuma
+                <span class="hl hl-in" data-step="2">5 unità di energia per ogni uscita</span> e ha la batteria carica
+                a <span class="hl hl-in" data-step="2">18 unità</span>. Il comandante vuole sapere <span
+                  class="hl hl-out" data-step="3">se il rover può fare</span> <span class="hl hl-rule"
+                  data-step="4">almeno</span><span class="hl-tag tag-rule" data-step="4">≥</span> <span
+                  class="hl hl-in" data-step="2">3 uscite</span> <span class="hl hl-out" data-step="3">prima di
+                  ricaricarsi</span>.</p>
+            </div>
+          </div>
+
+          <div class="ipo-card">
+            <div class="ipo-card-title"><span class="material-symbols-outlined">table_view</span>Scheda I-P-O</div>
+            <div class="ipo-row row-say" data-step="5">
+              <span class="ipo-label">Riformulo</span>
+              <span class="ipo-val"><em>&ldquo;Devo capire se 18 unità bastano per 3 uscite.&rdquo;</em></span>
+            </div>
+            <div class="ipo-row row-in" data-step="5">
+              <span class="ipo-label">Input</span>
+              <span class="ipo-val">batteria = <strong>18</strong> &bull; consumo a uscita = <strong>5</strong> &bull; uscite = <strong>3</strong></span>
+            </div>
+            <div class="ipo-row row-proc" data-step="5">
+              <span class="ipo-label">Elaborazione</span>
+              <span class="ipo-val">energia necessaria = uscite &times; 5 &rarr; <span class="math">batteria ≥ necessaria</span></span>
+            </div>
+            <div class="ipo-row row-out" data-step="5">
+              <span class="ipo-label">Output</span>
+              <span class="ipo-val">&ldquo;Sì, può partire&rdquo; <strong>oppure</strong> &ldquo;No, prima ricarica&rdquo;</span>
+            </div>
+            <div class="ipo-row row-test" data-step="6">
+              <span class="ipo-label">Prova a mano</span>
+              <span class="ipo-val">3 &times; 5 = 15 &rarr; 18 ≥ 15 <strong>VERO</strong> &rarr; sì, può fare 3 uscite.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        [88'&ndash;90'] Correggere insieme dopo aver ritirato i foglietti. Chiusura: "Da oggi, prima di ogni Flow Chart,
+        si passa dalla scheda I-P-O".
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Barra Inferiore di Navigazione -->
+  <footer class="m3-bottom-bar">
+    <div class="bottom-bar-left">
+      <button id="btnPrev" class="m3-btn m3-btn-outlined" title="Indietro (&larr;)">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Indietro</span>
+      </button>
+      <button id="btnNext" class="m3-btn m3-btn-filled" title="Avanti (&rarr; / Spazio)">
+        <span>Avanti</span>
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+    </div>
+
+    <div class="bottom-bar-center">
+      <div class="m3-counter-display">
+        Slide <span id="currentSlideNum">1</span> / <span id="totalSlidesNum">23</span>
+      </div>
+    </div>
+
+    <div class="bottom-bar-right">
+      <span class="shortcut-tip"><kbd>&rarr;</kbd> passo/slide &bull; <kbd>A</kbd> tutto &bull; <kbd>Z</kbd> azzera
+        &bull; <kbd>O</kbd> indice &bull; <kbd>N</kbd> note &bull; <kbd>P</kbd> PDF</span>
+    </div>
+  </footer>
+
+  <!-- Modale Panoramica (Indice delle Slide) -->
+  <div id="overviewModal" class="m3-modal-backdrop hidden">
+    <div class="m3-dialog">
+      <div class="dialog-header">
+        <div class="dialog-title-group">
+          <span class="material-symbols-outlined">grid_view</span>
+          <h3>Indice delle Diapositive</h3>
+        </div>
+        <div class="dialog-actions">
+          <button id="btnModalExportPdf" class="m3-btn m3-btn-outlined m3-btn-sm" title="Esporta tutte le slide in PDF">
+            <span class="material-symbols-outlined">picture_as_pdf</span>
+            <span>Esporta in PDF</span>
+          </button>
+          <button id="btnCloseOverview" class="m3-icon-button" title="Chiudi">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div id="overviewGrid" class="overview-grid">
+        <!-- Generato dinamicamente da app.js -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
